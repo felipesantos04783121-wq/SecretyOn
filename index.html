@@ -187,6 +187,7 @@ body.light .app-shell,body.light .feed-area,body.light .sidebar,body.light .righ
 
 <div class="modal hidden" id="messageModal"><div class="modal-box" style="padding:0;overflow:hidden"><button class="close" data-close="messageModal" style="z-index:2">×</button><div class="message-header"><div class="avatar" id="messageAvatar">U</div><div><strong id="messageTitle">Mensagem</strong><small>Conversa privada</small></div></div><div id="chatHistory" class="chat-box"><div class="empty-note">Carregando conversa...</div></div><div style="padding:14px;background:#0e0a12;border-top:1px solid #24142d"><div id="messageMsg" class="msg hidden"></div><div class="field" style="margin-bottom:9px"><textarea id="messageText" style="min-height:72px" placeholder="Escreva sua mensagem..."></textarea></div><button class="btn primary full" id="sendMessage">Enviar mensagem</button></div></div></div>
 
+<div class="modal hidden" id="subscriptionModal"><div class="modal-box"><button class="close" data-close="subscriptionModal">×</button><div class="modal-kicker">SECRETYON · ASSINATURA</div><h2 id="subscriptionTitle">Assinar criador</h2><p class="sub" id="creatorBioPreview">Acesse o conteúdo exclusivo deste criador.</p><div class="plans"><button class="plan" type="button" data-sub-plan="weekly"><span>Plano semanal</span><strong id="weeklyPrice">R$ 19,99</strong><small>Renovação semanal</small></button><button class="plan custom" type="button" data-sub-plan="monthly"><span>Plano mensal</span><strong id="monthlyPrice">R$ 39,90</strong><small>Renovação mensal</small></button></div><div id="paymentStep" class="hidden"><div class="box"><strong>Forma de pagamento</strong><p class="muted">Escolha como deseja pagar. O pagamento real será confirmado pelo gateway antes da assinatura ser liberada.</p><div class="payment-options"><button type="button" data-pay="pix">💜 Pagar com Pix</button><button type="button" data-pay="card">💳 Pagar com cartão</button></div><div id="paymentMsg" class="msg hidden"></div></div></div></div></div>
 <div class="modal hidden" id="withdrawModal"><div class="modal-box"><button class="close" data-close="withdrawModal">×</button><h2>Solicitar saque</h2><p class="sub">Informe o valor e a chave Pix para receber seu saldo.</p><div id="withdrawMsg" class="msg hidden"></div><div class="field"><label>Valor</label><input id="withdrawAmount" type="number" min="1" step="0.01" placeholder="0,00"></div><div class="field"><label>Chave Pix</label><input id="withdrawPix" placeholder="CPF, e-mail, telefone ou chave aleatória"></div><button class="btn primary full" id="sendWithdraw">Solicitar saque</button></div></div>
 
 <section id="painel" class="hidden">
@@ -232,7 +233,7 @@ body.light .app-shell,body.light .feed-area,body.light .sidebar,body.light .righ
 
  <div class="app-page" id="app-assinaturas"><h2>Assinaturas</h2><p class="muted">Defina seus planos como criador ou veja suas assinaturas.</p><div class="plans"><div class="plan"><span>Plano semanal</span><strong id="myWeeklyPrice">R$ 19,99</strong><small>valor inicial</small><button class="btn secondary full" id="editWeekly">Alterar valor</button></div><div class="plan custom"><span>Plano mensal</span><strong id="myMonthlyPrice">R$ 39,90</strong><small>valor inicial</small><button class="btn primary full" id="editMonthly">Alterar valor</button></div></div><div class="box"><strong>Pagamento</strong><p class="muted">A plataforma está preparada para Pix e cartão. A cobrança real precisa de um gateway/backend com webhook para confirmar pagamentos e liberar assinaturas automaticamente.</p><div class="payment-options"><button id="payPixInfo">💜 Pix</button><button id="payCardInfo">💳 Cartão</button></div></div><div id="mySubscriptions" style="margin-top:20px"></div></div>
 
- <div class="app-page" id="app-carteira"><h2>Carteira</h2><p class="muted">Área do criador para acompanhar saldo e solicitar retirada.</p><div class="wallet"><small>Saldo disponível</small><strong id="walletBalance">R$ 0,00</strong><button class="btn primary" id="withdrawBtn">Solicitar saque</button></div><div class="box"><strong>Histórico de saques</strong><div id="withdrawHistory"><p class="muted">Nenhum saque registrado.</p></div></div></div>
+ <div class="app-page" id="app-carteira"><h2>Carteira</h2><p class="muted">Acompanhe seus ganhos, valores pendentes e solicitações de saque.</p><div class="wallet"><small>Saldo disponível</small><strong id="walletBalance">R$ 0,00</strong><p class="muted" style="margin:0 0 14px">Saldo liberado para saque após a confirmação dos pagamentos.</p><button class="btn primary" id="withdrawBtn">Solicitar saque</button></div><div class="plans" style="margin-top:15px"><div class="box"><small class="muted">Saldo pendente</small><strong id="walletPending" style="font-size:24px;display:block;margin-top:5px">R$ 0,00</strong></div><div class="box"><small class="muted">Total gerado</small><strong id="walletTotal" style="font-size:24px;display:block;margin-top:5px">R$ 0,00</strong></div></div><div class="box"><strong>Histórico financeiro</strong><div id="walletHistory"><p class="muted">Nenhuma movimentação registrada.</p></div></div><div class="box" style="margin-top:15px"><strong>Histórico de saques</strong><div id="withdrawHistory"><p class="muted">Nenhum saque registrado.</p></div></div></div>
 
  <div class="app-page" id="app-config"><h2>Configurações</h2><p class="muted">Controle sua conta e preferências.</p><div class="settings-list">
   <button data-setting="notifications"><span>🔔</span><div><strong>Notificações</strong><small>Receber avisos de novas assinaturas e atividades</small></div><span class="toggle" id="notifToggle"></span></button>
@@ -532,25 +533,21 @@ function setPlanPrice(type){
 function updatePlanUI(){$("myWeeklyPrice").textContent=getPlanPrice(currentUser.id,"weekly");$("myMonthlyPrice").textContent=getPlanPrice(currentUser.id,"monthly")}
 function selectPlan(type){selectedPlan=type;$("paymentStep").classList.remove("hidden");}
 async function choosePayment(method){
- if(!selectedCreator||!selectedPlan)return;
- msg("paymentMsg",`Pagamento por ${method==="pix"?"Pix":"cartão"} selecionado. No modo de teste, a assinatura fica ativa para você experimentar a plataforma.`,"success");
- // Registro local para a experiência do protótipo.
- const k="secretyon_subscriptions_"+currentUser.id,a=JSON.parse(localStorage.getItem(k)||"[]");a.unshift({creatorId:selectedCreator.id,creatorName:selectedCreator.nome,plan:selectedPlan,method,status:"ativa (modo teste)",date:new Date().toISOString()});localStorage.setItem(k,JSON.stringify(a));
- localStorage.setItem("secretyon_following_"+currentUser.id+"_"+selectedCreator.id,"1");
- const mk="secretyon_messages_"+currentUser.id,ma=JSON.parse(localStorage.getItem(mk)||"[]");ma.unshift({creatorId:selectedCreator.id,creatorName:selectedCreator.nome,text:"Olá! Obrigado por assinar meu conteúdo 💜 Aproveite seu acesso e fique de olho nas próximas publicações!",date:new Date().toISOString(),system:true,mine:false});localStorage.setItem(mk,JSON.stringify(ma));
- const creatorKey="secretyon_notifications_"+selectedCreator.id;
- let creatorNotices=JSON.parse(localStorage.getItem(creatorKey)||"[]");
- creatorNotices.unshift({id:crypto.randomUUID(),kind:"subscription",icon:"💜",title:"Nova assinatura",text:publicProfileName(currentUser)+" assinou seu conteúdo.",time:new Date().toISOString(),read:false});
- localStorage.setItem(creatorKey,JSON.stringify(creatorNotices));
- // Persistência real entre dispositivos, quando as tabelas do Supabase estiverem criadas.
+ if(!selectedCreator||!selectedPlan||!currentUser)return;
+ const raw=selectedPlan==="weekly"?getPlanPrice(selectedCreator.id,"weekly"):getPlanPrice(selectedCreator.id,"monthly");
+ const price=Number(String(raw).replace(/[^0-9,]/g,"").replace(",","."));
+ msg("paymentMsg",`Forma escolhida: ${method==="pix"?"Pix":"cartão"}. Esta versão registra a intenção de assinatura; o gateway precisa confirmar o pagamento para liberar o acesso em produção.`,"success");
+ const k="secretyon_subscriptions_"+currentUser.id,a=JSON.parse(localStorage.getItem(k)||"[]");
+ a.unshift({creatorId:selectedCreator.id,creatorName:selectedCreator.nome,plan:selectedPlan,method,status:"aguardando pagamento",price,date:new Date().toISOString()});
+ localStorage.setItem(k,JSON.stringify(a));
  if(initSupabase()){
-   try{await sb.from("subscriptions").insert({subscriber_id:currentUser.id,creator_id:selectedCreator.id,plan:selectedPlan,price:Number((selectedPlan==="weekly"?getPlanPrice(selectedCreator.id,"weekly"):getPlanPrice(selectedCreator.id,"monthly")).replace(/[^0-9,]/g,"").replace(",",".")),method,status:"active"})}catch(e){console.warn("Assinatura remota ainda não configurada",e)}
-   try{await sb.from("notifications").insert({user_id:selectedCreator.id,type:"subscription",title:"Nova assinatura",text:publicProfileName(currentUser)+" assinou seu conteúdo.",data:{subscriber_id:currentUser.id}})}catch(e){console.warn("Notificação remota ainda não configurada",e)}
-   try{await sb.from("messages").insert({sender_id:selectedCreator.id,receiver_id:currentUser.id,content:"Olá! Obrigado por assinar meu conteúdo 💜 Aproveite seu acesso e fique de olho nas próximas publicações!",is_system:true})}catch(e){console.warn("Mensagem remota ainda não configurada",e)}
+   try{await sb.from("subscriptions").insert({subscriber_id:currentUser.id,creator_id:selectedCreator.id,plan:selectedPlan,price,method,status:"pending"})}catch(e){console.warn("Tabela subscriptions ainda não configurada",e)}
  }
- loadSubscriptions();await loadMessages();renderSuggestions(currentCreators);setTimeout(()=>{closeModal("subscriptionModal");openCreator(selectedCreator.id)},900)
+ loadSubscriptions();
+ setTimeout(()=>closeModal("subscriptionModal"),1000);
 }
-function loadSubscriptions(){const box=$("mySubscriptions");if(!box)return;const a=JSON.parse(localStorage.getItem("secretyon_subscriptions_"+currentUser.id)||"[]");box.innerHTML='<h3>Minhas assinaturas</h3>'+(a.length?a.map(s=>`<div class="box" style="margin:10px 0"><strong>${escapeHtml(s.creatorName)}</strong><p class="muted">${s.plan==="weekly"?"Semanal":"Mensal"} · ${escapeHtml(s.method==="pix"?"Pix":"Cartão")} · ${escapeHtml(s.status)}</p><button class="btn secondary" data-msg-creator="${escapeAttr(s.creatorId)}">Mensagem</button></div>`).join(""):'<div class="box"><p class="muted">Nenhuma assinatura ainda.</p></div>');box.querySelectorAll("[data-msg-creator]").forEach(b=>b.onclick=()=>{const c=currentCreators.find(x=>x.id===b.dataset.msgCreator);if(c)openConversation(c.id,c.nome,c.avatar_url)})}
+
+function loadSubscriptions(){const box=$("mySubscriptions");if(!box)return;const a=JSON.parse(localStorage.getItem("secretyon_subscriptions_"+currentUser.id)||"[]");box.innerHTML='<h3>Minhas assinaturas</h3>'+(a.length?a.map(s=>`<div class="box" style="margin:10px 0"><strong>${escapeHtml(s.creatorName)}</strong><p class="muted">${s.plan==="weekly"?"Semanal":"Mensal"} · ${escapeHtml(s.method==="pix"?"Pix":"Cartão")} · ${escapeHtml(s.status||"ativa")}</p><button class="btn secondary" data-msg-creator="${escapeAttr(s.creatorId)}">Mensagem</button></div>`).join(""):'<div class="box"><p class="muted">Nenhuma assinatura ainda.</p></div>');box.querySelectorAll("[data-msg-creator]").forEach(b=>b.onclick=()=>{const c=currentCreators.find(x=>x.id===b.dataset.msgCreator);if(c)openConversation(c.id,c.nome,c.avatar_url)})}
 
 
 async function publishStory(){
@@ -818,14 +815,31 @@ async function loadMessages(){
  right?.querySelectorAll("[data-chat-user]").forEach(row=>row.onclick=()=>openConversation(row.dataset.chatUser,row.dataset.chatName,row.dataset.chatAvatar));
 }
 
-function loadWallet(){const balance=Number(localStorage.getItem("secretyon_balance_"+currentUser.id)||0);$("walletBalance").textContent="R$ "+balance.toFixed(2).replace(".",",");const a=JSON.parse(localStorage.getItem("secretyon_withdraw_"+currentUser.id)||"[]");$("withdrawHistory").innerHTML=a.length?a.map(x=>`<div class="notice" style="cursor:default"><span>💸</span><div><strong>R$ ${Number(x.amount).toFixed(2).replace(".",",")}</strong><p>${escapeHtml(x.pix)} · ${escapeHtml(x.status)}</p></div></div>`).join(""):'<p class="muted">Nenhum saque registrado.</p>'}
-function requestWithdraw(){openModal("withdrawModal");clearMsg("withdrawMsg")}
-function sendWithdraw(){
+async function loadWallet(){
+ if(!currentUser)return;
+ let available=Number(localStorage.getItem("secretyon_balance_"+currentUser.id)||0),pending=Number(localStorage.getItem("secretyon_pending_"+currentUser.id)||0),total=available+pending;
+ if(initSupabase()){
+   try{
+    const r=await sb.from("wallet_transactions").select("amount,status,type,created_at,description").eq("user_id",currentUser.id).order("created_at",{ascending:false}).limit(100);
+    if(!r.error&&r.data){available=0;pending=0;total=0;r.data.forEach(x=>{const n=Number(x.amount)||0;total+=n;if(x.status==="available")available+=n;else if(x.status==="pending")pending+=n;});}
+   }catch(e){console.warn("Carteira remota ainda não configurada",e)}
+ }
+ $("walletBalance").textContent="R$ "+available.toFixed(2).replace(".",",");
+ if($("walletPending"))$("walletPending").textContent="R$ "+pending.toFixed(2).replace(".",",");
+ if($("walletTotal"))$("walletTotal").textContent="R$ "+total.toFixed(2).replace(".",",");
+ const a=JSON.parse(localStorage.getItem("secretyon_withdraw_"+currentUser.id)||"[]");
+ $("withdrawHistory").innerHTML=a.length?a.map(x=>`<div class="notice" style="cursor:default"><span>💸</span><div><strong>R$ ${Number(x.amount).toFixed(2).replace(".",",")}</strong><p>${escapeHtml(x.pix)} · ${escapeHtml(x.status)}</p></div><small>${formatNoticeTime(x.date)}</small></div>`).join(""):'<p class="muted">Nenhum saque registrado.</p>';
+}
+function requestWithdraw(){openModal("withdrawModal");clearMsg("withdrawMsg");$("withdrawPix").value=currentUser?.user_metadata?.pix||""}
+async function sendWithdraw(){
  const amount=Number($("withdrawAmount").value),pix=$("withdrawPix").value.trim(),balance=Number(localStorage.getItem("secretyon_balance_"+currentUser.id)||0);
  if(!amount||amount<=0||!pix){msg("withdrawMsg","Informe valor e chave Pix.","error");return}
  if(amount>balance){msg("withdrawMsg","O valor é maior que seu saldo disponível.","error");return}
- const k="secretyon_withdraw_"+currentUser.id,a=JSON.parse(localStorage.getItem(k)||"[]");a.unshift({amount,pix,status:"solicitação criada",date:new Date().toISOString()});localStorage.setItem(k,JSON.stringify(a));localStorage.setItem("secretyon_balance_"+currentUser.id,String(balance-amount));loadWallet();msg("withdrawMsg","Solicitação registrada. O processamento real depende da integração financeira.","success");setTimeout(()=>closeModal("withdrawModal"),800)
+ const k="secretyon_withdraw_"+currentUser.id,a=JSON.parse(localStorage.getItem(k)||"[]");a.unshift({amount,pix,status:"aguardando processamento",date:new Date().toISOString()});localStorage.setItem(k,JSON.stringify(a));localStorage.setItem("secretyon_balance_"+currentUser.id,String(balance-amount));
+ if(initSupabase()){try{await sb.from("withdrawals").insert({user_id:currentUser.id,amount,pix_key:pix,status:"pending"})}catch(e){console.warn("Saque remoto ainda não configurado",e)}}
+ await loadWallet();msg("withdrawMsg","Solicitação registrada. O pagamento do saque será processado após a integração financeira e as validações da plataforma.","success");setTimeout(()=>closeModal("withdrawModal"),1200)
 }
+
 function setSettingsDetail(type){
  const box=$("settingsDetail");if(!box)return;box.classList.remove("hidden");
  if(type==="notifications"){

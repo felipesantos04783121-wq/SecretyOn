@@ -58,6 +58,10 @@ button,input,textarea,select{font:inherit}button{cursor:pointer}a{text-decoratio
 .notice.unread{border-color:#542067;background:#110b16}
 .notice>span{font-size:20px}.notice>div{flex:1}.notice p{margin:3px 0 0;color:#928798;font-size:12px}.notice>small{color:#756b7b;font-size:10px}
 @media(max-width:700px){
+ #mobileMenu{position:relative;z-index:130;pointer-events:auto;cursor:pointer;min-width:52px;min-height:52px;display:flex;align-items:center;justify-content:center;border:1px solid #3b2445!important;border-radius:18px!important;background:#100b15!important;color:#fff!important;font-size:28px!important;}
+ .sidebar{display:flex!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;}
+ .sidebar.open{left:0!important;transform:none!important;}
+ .sidebar-overlay.show{display:block!important;pointer-events:auto!important;}
  .modal{padding:8px}
  .modal-box{max-height:94vh;border-radius:20px;padding:20px}
  .choice-row{grid-template-columns:repeat(2,1fr)}
@@ -798,7 +802,7 @@ function updateNotificationToggle(){const x=$("notifToggle");if(!x||!currentUser
 function toggleTheme(){theme=document.body.classList.contains("light")?"dark":"light";document.body.classList.toggle("light",theme==="light");localStorage.setItem("secretyon_theme",theme);$("themeToggle").textContent=theme==="light"?"☀":"☾";$("themeToggle").title=theme==="light"?"Modo noturno":"Modo claro";$("themeLabel").textContent=theme==="light"?"Claro":"Noturno"}
 function loadTheme(){theme=localStorage.getItem("secretyon_theme")||"dark";document.body.classList.toggle("light",theme==="light");if($("themeToggle"))$("themeToggle").textContent=theme==="light"?"☀":"☾";if($("themeToggle"))$("themeToggle").title=theme==="light"?"Modo noturno":"Modo claro";if($("themeLabel"))$("themeLabel").textContent=theme==="light"?"Claro":"Noturno"}
 function closeSidebar(){$("sidebar")?.classList.remove("open");$("sidebarOverlay")?.classList.remove("show");document.body.classList.remove("menu-open")}
-function openSidebar(){if(window.innerWidth>700)return;$("sidebar")?.classList.add("open");$("sidebarOverlay")?.classList.add("show");document.body.classList.add("menu-open")}
+function openSidebar(){$("sidebar")?.classList.add("open");$("sidebarOverlay")?.classList.add("show");document.body.classList.add("menu-open")}
 
 document.addEventListener("DOMContentLoaded",()=>{
  // Navegação pública: botões Entrar/Criar conta/Explorar funcionam também no celular.
@@ -868,6 +872,24 @@ document.addEventListener("DOMContentLoaded",()=>{
   sb.auth.getSession().then(async({data})=>{if(data?.session){currentUser=data.session.user;await loadUser();showPanel()}});
  }
 });
+</script>
+
+<script>
+// Correção robusta do menu mobile: funciona por toque/click mesmo se outro handler falhar.
+(function(){
+  function bindMobileMenu(){
+    const btn=document.getElementById("mobileMenu");
+    const sidebar=document.getElementById("sidebar");
+    const overlay=document.getElementById("sidebarOverlay");
+    if(!btn||!sidebar)return;
+    const open=function(e){if(e){e.preventDefault();e.stopPropagation();} sidebar.classList.add("open"); if(overlay)overlay.classList.add("show"); document.body.classList.add("menu-open");};
+    btn.addEventListener("click",open,true);
+    btn.addEventListener("pointerup",open,true);
+    btn.addEventListener("touchend",open,{capture:true,passive:false});
+    btn.onclick=open;
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",bindMobileMenu,{once:true}); else bindMobileMenu();
+})();
 </script>
 </body>
 </html>

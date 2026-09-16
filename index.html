@@ -137,29 +137,57 @@
     </div>
   </div>
 
-  <script>
-    function abrirLogin() {
-      document.getElementById("modal").style.display = "flex";
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  const SUPABASE_URL = "https://xcxvwlbiubauwjxhjkyj.supabase.co";
+  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_KFDSA_GITFGL0GXnQVBaPw_fk3fSQhs";
+
+  const { createClient } = supabase;
+
+  const supabaseClient = createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+  function abrirLogin() {
+    document.getElementById("modal").style.display = "flex";
+  }
+
+  function fecharLogin() {
+    document.getElementById("modal").style.display = "none";
+  }
+
+  async function entrar() {
+    const email = document.getElementById("email").value.trim();
+    const senha = document.getElementById("senha").value;
+    const mensagem = document.getElementById("mensagem");
+
+    if (!email || !senha) {
+      mensagem.innerText = "Preencha seu e-mail e sua senha.";
+      return;
     }
 
-    function fecharLogin() {
-      document.getElementById("modal").style.display = "none";
+    mensagem.innerText = "Entrando...";
+
+    const { error } = await supabaseClient.auth.signInWithPassword({
+      email: email,
+      password: senha
+    });
+
+    if (error) {
+      mensagem.innerText = "E-mail ou senha incorretos.";
+      console.error(error);
+      return;
     }
 
-    function entrar() {
-      const email = document.getElementById("email").value;
-      const senha = document.getElementById("senha").value;
+    mensagem.innerText = "Login realizado com sucesso!";
 
-      if (!email || !senha) {
-        document.getElementById("mensagem").innerText =
-          "Preencha seu e-mail e sua senha.";
-        return;
-      }
-
-      document.getElementById("mensagem").innerText =
-        "Login será conectado ao Supabase na próxima etapa.";
-    }
-  </script>
+    setTimeout(() => {
+      fecharLogin();
+    }, 1000);
+  }
+</script>
 
 </body>
 </html>

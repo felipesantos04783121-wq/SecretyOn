@@ -16,6 +16,7 @@
       font-family: Arial, sans-serif;
       background: #0b0b0f;
       color: white;
+      min-height: 100vh;
     }
 
     header {
@@ -31,13 +32,14 @@
       font-weight: bold;
     }
 
-    .login {
+    button {
       background: white;
       color: black;
-      padding: 10px 18px;
+      border: 0;
+      padding: 11px 20px;
       border-radius: 8px;
-      text-decoration: none;
       font-weight: bold;
+      cursor: pointer;
     }
 
     main {
@@ -58,14 +60,47 @@
       margin-bottom: 35px;
     }
 
-    .button {
-      display: inline-block;
-      background: white;
-      color: black;
-      padding: 15px 28px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.8);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .box {
+      width: 100%;
+      max-width: 400px;
+      background: #17171d;
+      padding: 30px;
+      border-radius: 15px;
+    }
+
+    .box h2 {
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      margin-bottom: 12px;
+      border: 1px solid #333;
+      border-radius: 8px;
+      background: #0b0b0f;
+      color: white;
+    }
+
+    .close {
+      background: #333;
+      color: white;
+      margin-left: 8px;
+    }
+
+    .message {
+      margin-top: 15px;
+      font-size: 14px;
     }
   </style>
 </head>
@@ -74,7 +109,7 @@
 
   <header>
     <div class="logo">Secretyon</div>
-    <a class="login" href="#">Entrar</a>
+    <button onclick="abrirLogin()">Entrar</button>
   </header>
 
   <main>
@@ -85,8 +120,46 @@
       conteúdo exclusivo com seus assinantes.
     </p>
 
-    <a class="button" href="#">Começar agora</a>
+    <button onclick="abrirLogin()">Começar agora</button>
   </main>
+
+  <div class="modal" id="modal">
+    <div class="box">
+      <h2>Entrar no Secretyon</h2>
+
+      <input type="email" id="email" placeholder="Seu e-mail">
+      <input type="password" id="senha" placeholder="Sua senha">
+
+      <button onclick="entrar()">Entrar</button>
+      <button class="close" onclick="fecharLogin()">Fechar</button>
+
+      <div class="message" id="mensagem"></div>
+    </div>
+  </div>
+
+  <script>
+    function abrirLogin() {
+      document.getElementById("modal").style.display = "flex";
+    }
+
+    function fecharLogin() {
+      document.getElementById("modal").style.display = "none";
+    }
+
+    function entrar() {
+      const email = document.getElementById("email").value;
+      const senha = document.getElementById("senha").value;
+
+      if (!email || !senha) {
+        document.getElementById("mensagem").innerText =
+          "Preencha seu e-mail e sua senha.";
+        return;
+      }
+
+      document.getElementById("mensagem").innerText =
+        "Login será conectado ao Supabase na próxima etapa.";
+    }
+  </script>
 
 </body>
 </html>

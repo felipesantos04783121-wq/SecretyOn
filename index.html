@@ -6,41 +6,112 @@
 <meta name="description" content="Secretyon — sua plataforma de conteúdo exclusivo.">
 <title>Secretyon</title>
 <style>
-*{box-sizing:border-box}html,body{margin:0;padding:0;font-family:Arial,sans-serif;background:#09090b;color:#fff}
-button,input,textarea{font:inherit}button{cursor:pointer}
-header{height:70px;padding:0 6%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #24242a;background:#0d0d10}
-.logo{font-size:27px;font-weight:800}.logo span{color:#b78cff}
-.actions{display:flex;gap:10px}.btn{border:0;border-radius:10px;padding:12px 18px;font-weight:700}
-.primary{background:#b78cff;color:#09090b}.secondary{background:#1b1b20;color:#fff;border:1px solid #33333b}
-.hero{min-height:calc(100vh - 70px);display:flex;align-items:center;justify-content:center;text-align:center;padding:50px 20px;background:radial-gradient(circle at 50% 10%,#291b40,#09090b 55%)}
-.hero-inner{max-width:760px}.badge{display:inline-block;border:1px solid #4b3b60;background:#17121e;color:#dbc9f5;padding:7px 13px;border-radius:30px;font-size:13px;margin-bottom:20px}
-h1{font-size:clamp(44px,8vw,76px);line-height:1;letter-spacing:-3px;margin:0 0 20px}.purple{color:#b78cff}
-.hero p{color:#b5b5be;font-size:18px;line-height:1.6;margin-bottom:28px}.hero-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
-.features{padding:65px 6%;background:#101014}.features h2{text-align:center;margin:0 0 32px;font-size:32px}
-.cards{max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:#17171c;border:1px solid #2a2a31;border-radius:16px;padding:23px}.card p{color:#aaaab3}
-footer{text-align:center;padding:30px;color:#777;border-top:1px solid #25252b}
+:root{--blue:#4c9eea;--blue2:#378fe0;--text:#20252d;--muted:#8793a3;--border:#cbd2da;--bg:#fff;--soft:#f6f8fa}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+body{min-height:100vh}button,input,textarea{font:inherit}button{cursor:pointer}a{text-decoration:none}
 .hidden{display:none!important}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px}
-.modal-box{width:100%;max-width:440px;background:#151519;border:1px solid #34343c;border-radius:18px;padding:26px;position:relative;box-shadow:0 20px 80px #000}
-.close{position:absolute;right:13px;top:9px;background:none;border:0;color:#aaa;font-size:28px}
-.modal h2{margin:0 0 5px}.sub{color:#9999a3;font-size:14px;margin:0 0 20px}
-.field{margin-bottom:14px}.field label{display:block;color:#bbb;font-size:13px;margin-bottom:6px}
-.field input,.field textarea{width:100%;background:#0d0d10;color:#fff;border:1px solid #383840;border-radius:10px;padding:12px;outline:0}
-.field textarea{min-height:100px}.field input:focus,.field textarea:focus{border-color:#b78cff}
-.full{width:100%}.switch{text-align:center;margin-top:14px;color:#999;font-size:14px}.link{background:none;border:0;color:#c8a6ff;font-weight:700;padding:0}
-.msg{padding:10px;border-radius:9px;background:#202027;color:#ddd;font-size:14px;margin-bottom:14px}.success{border:1px solid #315d43}.error{border:1px solid #733636}
-#painel{min-height:100vh;background:#0b0b0d}.panel-head{padding:35px 6% 20px;background:#101014;border-bottom:1px solid #25252b}.panel-head h2{margin:0}.panel-head p{color:#999}
-.nav{display:flex;gap:8px;overflow:auto;padding:14px 6%;background:#101014;border-bottom:1px solid #25252b}.nav button{white-space:nowrap;background:#1a1a20;color:#ccc;border:1px solid #303039;padding:10px 14px;border-radius:9px}
-.body{max-width:1100px;margin:auto;padding:30px 6%}.section{display:none}.section.active{display:block}
-.box{background:#151519;border:1px solid #292930;border-radius:16px;padding:22px;max-width:700px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.content{background:#16161b;border:1px solid #292930;border-radius:14px;overflow:hidden}.media{height:180px;background:#0d0d10;display:flex;align-items:center;justify-content:center}.media img,.media video{width:100%;height:100%;object-fit:cover}.info{padding:14px}.info p{color:#999;font-size:13px}
-@media(max-width:800px){.cards,.grid{grid-template-columns:1fr}header{padding:0 4%}.body,.nav,.panel-head{padding-left:4%;padding-right:4%}}
+
+header{
+  height:78px;padding:0 5%;display:flex;align-items:center;justify-content:center;
+  border-bottom:1px solid #eef0f3;background:#fff;position:relative;z-index:20
+}
+.logo{font-size:34px;font-weight:900;letter-spacing:-2px;color:var(--blue)}
+.logo span{color:var(--blue)}
+
+.actions{position:absolute;right:5%;display:flex;gap:9px}
+.btn{border:0;border-radius:12px;padding:12px 20px;font-weight:800;transition:.18s}
+.btn:hover{filter:brightness(.98);transform:translateY(-1px)}
+.primary{background:var(--blue);color:#fff;box-shadow:0 5px 15px rgba(76,158,234,.18)}
+.secondary{background:#fff;color:var(--blue);border:1px solid #b9c3ce}
+
+.hero{
+  min-height:calc(100vh - 78px);display:flex;justify-content:center;
+  padding:58px 20px 75px;background:#fff
+}
+.hero-inner{width:100%;max-width:760px;text-align:center}
+.hero h1{
+  font-size:clamp(42px,6vw,66px);font-weight:500;line-height:1.12;
+  letter-spacing:-2px;color:#252a31;margin:32px auto 38px;max-width:720px
+}
+.login-card{max-width:650px;margin:auto;text-align:left}
+.login-card h2{font-size:20px;margin:0 0 13px;font-weight:700}
+.email-row{display:flex;gap:0}
+.email-row input{
+  width:100%;height:62px;border:1px solid var(--border);border-radius:10px 10px 0 0;
+  padding:0 18px;font-size:19px;color:#27303a;outline:none;background:#fff
+}
+.email-row input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(76,158,234,.1)}
+.next-btn{
+  width:100%;height:62px;border:0;border-radius:0 0 10px 10px;
+  background:#dce1e7;color:#fff;font-size:17px;font-weight:800
+}
+.next-btn.ready{background:var(--blue)}
+.legal{
+  color:#8b96a5;font-size:14px;line-height:1.55;margin:18px 20px 0
+}
+.legal a{color:var(--blue)}
+.signup-link{
+  display:inline-block;margin:42px 0 28px;color:var(--blue);font-size:19px;font-weight:500
+}
+.social{
+  width:100%;height:58px;border:0;border-radius:30px;margin:0 0 14px;
+  color:#fff;font-size:16px;font-weight:800;position:relative
+}
+.social-x{background:#111}.social-google{background:#4f86df}
+.social .icon{position:absolute;left:20px;top:50%;transform:translateY(-50%);font-size:24px}
+.disclaimer{margin-top:30px;color:#a0a8b2;font-size:12px}
+
+.features{padding:60px 5%;background:var(--soft);border-top:1px solid #edf0f3}
+.features h2{text-align:center;font-size:30px;font-weight:600;margin:0 0 30px}
+.cards{max-width:1050px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:#fff;border:1px solid #e5e8ec;border-radius:16px;padding:22px;box-shadow:0 5px 18px rgba(20,30,40,.04)}
+.card h3{margin:0 0 7px}.card p{margin:0;color:#7f8995;font-size:14px}
+
+footer{text-align:center;padding:25px;color:#89929d;background:#f7f8fa;border-top:1px solid #e5e8ec;font-size:12px}
+
+.modal{position:fixed;inset:0;background:rgba(19,27,35,.55);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal-box{
+ width:100%;max-width:440px;background:#fff;border:1px solid #e1e5e9;border-radius:18px;
+ padding:27px;position:relative;box-shadow:0 25px 80px rgba(0,0,0,.2);color:#222
+}
+.close{position:absolute;right:13px;top:9px;background:none;border:0;color:#7d8792;font-size:28px}
+.modal h2{margin:0 0 5px}.sub{color:#8a95a2;font-size:14px;margin:0 0 20px}
+.field{margin-bottom:14px}.field label{display:block;color:#606b77;font-size:13px;margin-bottom:6px;font-weight:700}
+.field input,.field textarea{width:100%;background:#fff;color:#222;border:1px solid #cbd2da;border-radius:10px;padding:13px;outline:0}
+.field input:focus,.field textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(76,158,234,.1)}
+.field textarea{min-height:105px}.full{width:100%}.switch{text-align:center;margin-top:14px;color:#8a95a2;font-size:14px}
+.link{background:none;border:0;color:var(--blue);font-weight:800;padding:0}
+.msg{padding:11px;border-radius:10px;background:#f1f4f7;color:#4f5964;font-size:14px;margin-bottom:14px}
+.success{border:1px solid #8bc7a2;background:#f0faf4}.error{border:1px solid #e0a0a0;background:#fff3f3}
+
+#painel{min-height:100vh;background:#f7f8fa;color:#20252d}
+.panel-head{padding:35px 5% 22px;background:#fff;border-bottom:1px solid #e5e8ec}
+.panel-head h2{margin:0;font-size:30px}.panel-head p{color:#87919d;margin:6px 0 0}
+.nav{display:flex;gap:8px;overflow:auto;padding:13px 5%;background:#fff;border-bottom:1px solid #e5e8ec}
+.nav button{white-space:nowrap;background:#fff;color:#5e6874;border:1px solid #d5dbe1;padding:10px 14px;border-radius:10px;font-weight:700}
+.nav button:hover{color:var(--blue);border-color:#a8c5e1}
+.body{max-width:1150px;margin:auto;padding:30px 5% 70px}
+.section{display:none}.section.active{display:block}
+.box{background:#fff;border:1px solid #e1e5e9;border-radius:16px;padding:24px;max-width:720px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+.content{background:#fff;border:1px solid #e1e5e9;border-radius:16px;overflow:hidden}
+.media{height:190px;background:#eef1f4;display:flex;align-items:center;justify-content:center;color:#89929d}
+.media img,.media video{width:100%;height:100%;object-fit:cover}
+.info{padding:15px}.info h3{margin:0 0 5px}.info p{color:#7f8995;font-size:13px;margin:0}
+
+@media(max-width:800px){
+  header{height:70px}.logo{font-size:31px}.actions{right:4%}.actions .secondary{display:none}
+  .hero{padding:42px 18px 55px}.hero h1{font-size:43px;letter-spacing:-1.5px;margin:28px auto 35px}
+  .cards,.grid{grid-template-columns:1fr}.features{padding-left:18px;padding-right:18px}
+  .body,.nav,.panel-head{padding-left:4%;padding-right:4%}
+}
 </style>
 </head>
 <body>
 
 <header id="header">
-  <div class="logo">Secrety<span>on</span></div>
+  <div class="logo">Secretyon</div>
   <div class="actions">
     <button type="button" class="btn secondary" id="btnCadastroTopo">Criar conta</button>
     <button type="button" class="btn primary" id="btnLoginTopo">Entrar</button>
@@ -49,26 +120,47 @@ footer{text-align:center;padding:30px;color:#777;border-top:1px solid #25252b}
 
 <main id="home">
 <section class="hero">
-<div class="hero-inner">
-<div class="badge">Sua área exclusiva começa aqui</div>
-<h1>Crie. Publique.<br><span class="purple">Conecte-se.</span></h1>
-<p>Compartilhe seus conteúdos, organize seu perfil e construa sua comunidade dentro do Secretyon.</p>
-<div class="hero-actions">
-<button type="button" class="btn primary" id="btnComecar">Começar agora</button>
-<button type="button" class="btn secondary" id="btnEntrarHero">Já tenho uma conta</button>
-</div>
-</div>
+  <div class="hero-inner">
+    <div style="color:#8b96a5;font-size:13px;font-weight:700">Uma plataforma para criadores e comunidades</div>
+    <h1>Inscreva-se para acompanhar seus criadores favoritos</h1>
+
+    <div class="login-card">
+      <h2>Faça login</h2>
+      <div class="email-row">
+        <input id="quickEmail" type="email" placeholder="E-mail" autocomplete="email">
+      </div>
+      <button type="button" class="next-btn" id="quickNext">PRÓXIMO</button>
+
+      <p class="legal">
+        Ao fazer login e usar o Secretyon, você concorda com nossos
+        <a href="#" onclick="return false">Termos de Serviço</a> e
+        <a href="#" onclick="return false">Política de Privacidade</a>
+        e confirma que tem pelo menos 18 anos de idade.
+      </p>
+
+      <div style="text-align:center">
+        <button type="button" class="signup-link" id="quickSignup">Inscreva-se no Secretyon</button>
+      </div>
+
+      <button type="button" class="social social-x" id="socialX"><span class="icon">𝕏</span>ENTRAR COM X</button>
+      <button type="button" class="social social-google" id="socialGoogle"><span class="icon">G</span>INICIAR SESSÃO COM O GOOGLE</button>
+
+      <div class="disclaimer">Secretyon é destinado exclusivamente a maiores de 18 anos.</div>
+    </div>
+  </div>
 </section>
+
 <section class="features">
-<h2>Tudo em um só lugar</h2>
-<div class="cards">
-<div class="card"><h3>📸 Conteúdo exclusivo</h3><p>Publique fotos, vídeos e materiais para sua comunidade.</p></div>
-<div class="card"><h3>👤 Seu perfil</h3><p>Organize suas informações e mantenha seu espaço personalizado.</p></div>
-<div class="card"><h3>🔐 Área protegida</h3><p>Login e recuperação de senha integrados ao Supabase.</p></div>
-</div>
+  <h2>Por que usar o Secretyon?</h2>
+  <div class="cards">
+    <div class="card"><h3>🔒 Conteúdo exclusivo</h3><p>Acompanhe criadores e tenha uma área organizada para conteúdos exclusivos.</p></div>
+    <div class="card"><h3>💙 Perfil próprio</h3><p>Crie seu perfil e construa sua comunidade dentro da plataforma.</p></div>
+    <div class="card"><h3>📱 Experiência simples</h3><p>Interface limpa e adaptada para celular, tablet e computador.</p></div>
+  </div>
 </section>
 </main>
-<footer id="footer">© 2026 Secretyon. Todos os direitos reservados.</footer>
+
+<footer id="footer">© 2026 Secretyon · Plataforma destinada a maiores de 18 anos.</footer>
 
 <div class="modal hidden" id="loginModal">
 <div class="modal-box">
@@ -301,7 +393,32 @@ async function logout(){if(sb)await sb.auth.signOut();currentUser=null;showHome(
 function escapeHtml(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
 function escapeAttr(v){return escapeHtml(v)}
 
+
+function quickLogin(){
+  const email = document.getElementById("quickEmail").value.trim();
+  if(!email){ document.getElementById("quickEmail").focus(); return; }
+  document.getElementById("loginEmail").value = email;
+  openLogin();
+}
+
 document.addEventListener("DOMContentLoaded",()=>{
+
+  const quickEmail = el("quickEmail");
+  const quickNext = el("quickNext");
+  if(quickEmail && quickNext){
+    quickEmail.addEventListener("input",()=>{
+      quickNext.classList.toggle("ready",quickEmail.value.trim().length>0);
+    });
+    quickNext.onclick=quickLogin;
+    quickEmail.addEventListener("keydown",e=>{if(e.key==="Enter")quickLogin()});
+  }
+  const quickSignup=el("quickSignup");
+  if(quickSignup) quickSignup.onclick=openCadastro;
+  const socialX=el("socialX");
+  if(socialX) socialX.onclick=()=>alert("Login com X será conectado quando a autenticação social for configurada.");
+  const socialGoogle=el("socialGoogle");
+  if(socialGoogle) socialGoogle.onclick=()=>alert("Login com Google será conectado quando a autenticação social for configurada.");
+
  // Button events are attached directly and do NOT depend on Supabase.
  el("btnCadastroTopo").onclick=openCadastro;
  el("btnLoginTopo").onclick=openLogin;

@@ -261,6 +261,25 @@ async function cadastrar() {
   document.getElementById("cadastroEmail").value = "";
   document.getElementById("cadastroSenha").value = "";
   document.getElementById("cadastroSenhaConfirmacao").value = "";
+}function abrirAdicionarConteudo() {
+  document.getElementById("adicionarConteudoModal").style.display = "flex";
+}
+
+function fecharAdicionarConteudo() {
+  document.getElementById("adicionarConteudoModal").style.display = "none";
+}
+
+function publicarConteudo() {
+  const titulo = document.getElementById("tituloConteudo").value.trim();
+  const arquivo = document.getElementById("arquivoConteudo").files[0];
+  const mensagem = document.getElementById("mensagemConteudo");
+
+  if (!titulo || !arquivo) {
+    mensagem.innerText = "Coloque um título e escolha uma foto ou vídeo.";
+    return;
+  }
+
+  mensagem.innerText = "Conteúdo pronto para publicação!";
 }</script>
 <div id="painelSecretyon" style="display:none; min-height:100vh; padding:30px; box-sizing:border-box; background:#111; color:white; font-family:Arial,sans-serif;">
   <div style="max-width:900px; margin:auto;">
@@ -278,9 +297,9 @@ async function cadastrar() {
         📁 Meu conteúdo
       </button>
 
-      <button style="padding:18px; font-size:18px; border:0; border-radius:12px;">
-        ➕ Adicionar conteúdo
-      </button>
+      <button onclick="abrirAdicionarConteudo()" style="padding:18px; font-size:18px; border:0; border-radius:12px;">
+  ➕ Adicionar conteúdo
+</button>
 
       <button style="padding:18px; font-size:18px; border:0; border-radius:12px;">
         💰 Assinaturas
@@ -297,5 +316,32 @@ async function cadastrar() {
     </div>
   </div>
 </div>
-</body>
+<div id="adicionarConteudoModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.75); align-items:center; justify-content:center; padding:20px; box-sizing:border-box; z-index:9999;">
+  <div style="background:#222; color:white; width:100%; max-width:500px; padding:25px; border-radius:18px; box-sizing:border-box;">
+    
+    <h2>Adicionar conteúdo</h2>
+
+    <input type="text" id="tituloConteudo" placeholder="Título do conteúdo"
+      style="width:100%; padding:14px; margin:10px 0; box-sizing:border-box; border-radius:10px; border:0;">
+
+    <textarea id="descricaoConteudo" placeholder="Descrição do conteúdo"
+      style="width:100%; height:100px; padding:14px; margin:10px 0; box-sizing:border-box; border-radius:10px; border:0;"></textarea>
+
+    <input type="file" id="arquivoConteudo" accept="image/*,video/*"
+      style="width:100%; margin:15px 0;">
+
+    <button onclick="publicarConteudo()"
+      style="width:100%; padding:15px; border:0; border-radius:10px; font-size:17px;">
+      📤 Publicar
+    </button>
+
+    <button onclick="fecharAdicionarConteudo()"
+      style="width:100%; padding:15px; margin-top:10px; border:0; border-radius:10px; font-size:17px;">
+      Fechar
+    </button>
+
+    <div id="mensagemConteudo" style="margin-top:15px;"></div>
+
+  </div>
+</div></body>
 </html>

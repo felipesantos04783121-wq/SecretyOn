@@ -170,7 +170,14 @@
     SUPABASE_PUBLISHABLE_KEY
   );
 
-  function abrirLogin() {
+  
+  function abrirCadastro() {
+  document.getElementById("cadastroModal").style.display = "flex";
+}
+
+function fecharCadastro() {
+  document.getElementById("cadastroModal").style.display = "none";
+}function abrirLogin() {
     document.getElementById("modal").style.display = "flex";
   }
 

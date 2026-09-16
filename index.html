@@ -28,6 +28,43 @@ button,input,textarea,select{font:inherit}button{cursor:pointer}a{text-decoratio
 .art-badge{position:absolute;top:22px;left:22px;background:rgba(4,2,7,.72);border:1px solid #5b2a74;border-radius:12px;padding:10px 13px;font-size:12px}.art-badge b{color:#d07aff}.art-copy{position:absolute;left:28px;bottom:28px}.art-copy small{color:#c88ae9;font-weight:800}.art-copy h2{font-size:30px;margin:7px 0}.art-copy p{font-size:13px;color:#988d9e}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.86);z-index:9999;display:flex;align-items:center;justify-content:center;padding:18px}.modal-box{width:min(480px,100%);max-height:92vh;overflow:auto;background:#0e0b12;border:1px solid #67218a;border-radius:22px;padding:26px;position:relative;box-shadow:0 30px 100px #000}.close{position:absolute;right:14px;top:9px;border:0;background:none;color:#aaa;font-size:28px}.modal h2{margin:0 0 5px;font-size:28px}.modal .sub{margin:0 0 20px;color:#988e9f;font-size:14px}.field{margin:0 0 14px}.field label{display:block;font-size:13px;font-weight:800;color:#ddd5e2;margin-bottom:7px}.field input,.field textarea,.field select{width:100%;background:#08070b;color:#fff;border:1px solid #4c3c56;border-radius:11px;padding:13px;outline:0}.field textarea{min-height:105px;resize:vertical}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(165,0,255,.11)}
 .choice-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:15px}.choice-row button{min-height:48px}.choice-row button{padding:11px;border-radius:10px;background:#110d15;border:1px solid #3b2445;color:#aaa}.choice-row button.active{border-color:var(--purple);color:#fff;background:#1b0d24}
+.compose-intro{padding:14px 15px;border:1px solid #2d1a39;border-radius:14px;background:linear-gradient(135deg,#130d18,#0a080d);margin:0 0 16px;color:#a99caf;font-size:13px}
+.compose-intro strong{display:block;color:#fff;font-size:14px;margin-bottom:3px}
+.compose-type{display:flex;gap:8px;margin:0 0 16px;overflow:auto;padding-bottom:2px}
+.compose-type button{flex:1;min-width:95px;padding:11px 12px;border-radius:12px;background:#0d0a11;border:1px solid #33203e;color:#a99caf;font-weight:800}
+.compose-type button.active{background:#1b0d24;border-color:var(--purple);color:#fff;box-shadow:0 0 0 2px rgba(165,0,255,.08)}
+.compose-preview{display:none;margin:0 0 16px;border:1px solid #2f1b3b;border-radius:14px;overflow:hidden;background:#07060a}
+.compose-preview.show{display:block}
+.compose-preview img,.compose-preview video{display:block;width:100%;max-height:320px;object-fit:cover}
+.compose-preview .preview-caption{padding:10px 12px;color:#cfc5d4;font-size:12px}
+.compose-label{font-size:13px;font-weight:800;color:#ddd5e2;margin-bottom:7px;display:block}
+.message-header{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid #24142d;background:#0e0a12}
+.message-header .avatar{flex:none}
+.message-header strong{display:block}.message-header small{color:#817687}
+.chat-box{height:320px;overflow:auto;padding:16px;background:#08070b;display:flex;flex-direction:column;gap:9px}
+.chat-bubble{max-width:78%;padding:10px 12px;border-radius:15px;background:#17111c;border:1px solid #2e1b38;color:#ddd;align-self:flex-start;white-space:pre-wrap;word-break:break-word}
+.chat-bubble.mine{align-self:flex-end;background:#2a0e39;border-color:#68218a;color:#fff}
+.chat-time{display:block;font-size:9px;color:#8c8092;margin-top:5px;text-align:right}
+.message-row{cursor:pointer;transition:.15s}
+.message-row:hover{background:#120c17}
+.message-row .avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.message-row .message-preview{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+.message-unread{box-shadow:inset 3px 0 0 var(--purple)}
+.message-unread-dot{width:9px;height:9px;border-radius:50%;background:var(--purple);flex:none}
+.inbox-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.inbox-head .count{font-size:11px;color:#c987ff;background:#1a0d23;border:1px solid #542067;padding:5px 9px;border-radius:999px}
+.notice{display:flex;align-items:flex-start;gap:11px;padding:15px;border:1px solid #291932;background:#0e0a12;border-radius:14px;margin-bottom:9px;cursor:pointer}
+.notice.read{opacity:.72}
+.notice.unread{border-color:#542067;background:#110b16}
+.notice>span{font-size:20px}.notice>div{flex:1}.notice p{margin:3px 0 0;color:#928798;font-size:12px}.notice>small{color:#756b7b;font-size:10px}
+@media(max-width:700px){
+ .modal{padding:8px}
+ .modal-box{max-height:94vh;border-radius:20px;padding:20px}
+ .choice-row{grid-template-columns:repeat(2,1fr)}
+ .compose-type button{min-width:88px}
+ .chat-box{height:300px}
+}
+
 .pill{display:inline-flex;align-items:center;padding:5px 9px;border-radius:99px;background:#1c0c27;border:1px solid #512064;color:#d78cff;font-size:11px;font-weight:800}
 #painel{min-height:100vh}.app-shell{min-height:100vh;display:grid;grid-template-columns:250px minmax(480px,680px) 330px;max-width:1500px;margin:auto;background:#050306}
 .sidebar{position:sticky;top:0;height:100vh;padding:18px 13px;border-right:1px solid #211329;background:#070509;display:flex;flex-direction:column}.side-logo{display:flex;align-items:center;gap:9px;padding:3px 12px 23px;font-size:25px;font-weight:900;letter-spacing:-1.5px}.side-logo b{color:var(--purple)}.side-mark{width:31px;height:31px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#b528ff,#e03ab8);box-shadow:0 0 20px rgba(165,0,255,.25)}
@@ -99,13 +136,13 @@ body.light .app-shell,body.light .feed-area,body.light .sidebar,body.light .righ
 
 <div class="modal hidden" id="newPasswordModal"><div class="modal-box"><h2>Nova senha</h2><p class="sub">Digite sua nova senha.</p><div id="newPasswordMsg" class="msg hidden"></div><div class="field"><label>Nova senha</label><input id="newPassword" type="password"></div><div class="field"><label>Confirmar senha</label><input id="newPassword2" type="password"></div><button class="btn primary full" id="btnNewPassword">Salvar nova senha</button></div></div>
 
-<div class="modal hidden" id="storyModal"><div class="modal-box"><button class="close" data-close="storyModal">×</button><h2>Publicar story</h2><p class="sub">Seu story público ficará disponível para outros usuários por 24 horas.</p><div id="storyMsg" class="msg hidden"></div><div class="field"><label>Foto ou vídeo</label><input id="storyFile" type="file" accept="image/*,video/*"></div><div class="field"><label>Texto</label><input id="storyText" placeholder="Escreva algo no seu story..."></div><button class="btn primary full" id="btnPublishStory">Publicar story</button></div></div><div class="modal hidden" id="contentModal"><div class="modal-box"><button class="close" data-close="contentModal">×</button><h2>Criar publicação</h2><p class="sub">Publique foto, vídeo ou link. O conteúdo será associado ao seu perfil.</p><div class="choice-row"><button class="active" data-compose="photo">📷 Foto</button><button data-compose="video">🎥 Vídeo</button><button data-compose="link">🔗 Link</button><button data-compose="text">📝 Texto</button></div><div id="contentMsg" class="msg hidden"></div><div class="field"><label>Título</label><input id="contentTitle" placeholder="Título da publicação"></div><div class="field"><label>Descrição</label><textarea id="contentDescription" placeholder="Escreva algo para sua comunidade..."></textarea></div><div class="field" id="fileField"><label id="fileFieldLabel">Foto</label><input id="contentFile" type="file" accept="image/*"></div><div class="field hidden" id="linkField"><label>Link</label><input id="contentLink" type="url" placeholder="https://..."></div><div class="field"><label>Visibilidade</label><select id="contentVisibility"><option value="public">🌐 Público — qualquer pessoa pode ver</option><option value="subscriber">🔒 Exclusivo — somente assinantes</option></select></div><button class="btn primary full" id="btnPublish">Publicar</button></div></div>
+<div class="modal hidden" id="storyModal"><div class="modal-box"><button class="close" data-close="storyModal">×</button><h2>Publicar story</h2><p class="sub">Seu story público ficará disponível para outros usuários por 24 horas.</p><div id="storyMsg" class="msg hidden"></div><div class="field"><label>Foto ou vídeo</label><input id="storyFile" type="file" accept="image/*,video/*"></div><div class="field"><label>Texto</label><input id="storyText" placeholder="Escreva algo no seu story..."></div><button class="btn primary full" id="btnPublishStory">Publicar story</button></div></div><div class="modal hidden" id="contentModal"><div class="modal-box"><button class="close" data-close="contentModal">×</button><h2>Criar publicação</h2><div class="compose-intro"><strong>Compartilhe com sua comunidade</strong>Escolha o formato abaixo. A foto, o vídeo ou o texto ficará publicado no seu perfil com a legenda.</div><div class="compose-type"><button class="active" data-compose="photo">📷 Foto</button><button data-compose="video">🎥 Vídeo</button><button data-compose="text">📝 Texto</button><button data-compose="link">🔗 Link</button></div><div id="contentMsg" class="msg hidden"></div><div class="field"><label>Título <span class="muted">(opcional)</span></label><input id="contentTitle" placeholder="Dê um título à publicação"></div><div class="field"><label class="compose-label">Legenda</label><textarea id="contentDescription" placeholder="Escreva uma legenda para sua comunidade..."></textarea></div><div class="field" id="fileField"><label id="fileFieldLabel">Foto</label><input id="contentFile" type="file" accept="image/*"></div><div class="compose-preview" id="contentPreview"></div><div class="field hidden" id="linkField"><label>Link</label><input id="contentLink" type="url" placeholder="Cole o link aqui..."></div><div class="field"><label>Visibilidade</label><select id="contentVisibility"><option value="public">🌐 Público — qualquer pessoa pode ver</option><option value="subscriber">🔒 Exclusivo — somente assinantes</option></select></div><button class="btn primary full" id="btnPublish">Publicar publicação</button></div></div>
 
 <div class="modal hidden" id="subscriptionModal"><div class="modal-box"><button class="close" data-close="subscriptionModal">×</button><h2 id="subscriptionTitle">Assinar criador</h2><p id="creatorBioPreview" class="sub">Escolha um plano e uma forma de pagamento.</p><div class="plans" style="grid-template-columns:1fr 1fr"><div class="plan"><span>Semanal</span><strong id="weeklyPrice">R$ 19,99</strong><small>por semana</small><button class="btn primary full" data-sub-plan="weekly">Escolher</button></div><div class="plan"><span>Mensal</span><strong id="monthlyPrice">R$ 39,90</strong><small>por mês</small><button class="btn primary full" data-sub-plan="monthly">Escolher</button></div></div><div id="paymentStep" class="hidden"><h3>Forma de pagamento</h3><div class="payment-options"><button data-pay="pix">💜 Pix</button><button data-pay="card">💳 Cartão</button></div><div id="paymentMsg" class="msg hidden"></div></div></div></div>
 
 <div class="modal hidden" id="creatorProfileModal"><div class="modal-box creator-profile-modal"><button class="close" data-close="creatorProfileModal">×</button><div class="creator-profile-head"><div class="profile-big-avatar" id="creatorModalAvatar">U</div><div><h2 id="creatorModalName">Criador</h2><p id="creatorModalHandle" class="muted">@criador</p><p id="creatorModalBio" class="sub">Conheça o conteúdo deste criador.</p></div></div><div class="creator-profile-actions"><button class="btn secondary" id="creatorFollowBtn">Assinar</button><button class="btn primary" id="creatorMessageBtn">🔒 Assine para enviar mensagem</button></div><div id="creatorModalContent" class="creator-content-grid"><div class="empty-note">Carregando publicações...</div></div></div></div>
 
-<div class="modal hidden" id="messageModal"><div class="modal-box"><button class="close" data-close="messageModal">×</button><h2 id="messageTitle">Mensagem</h2><p class="sub">Envie uma mensagem após assinar o conteúdo do criador.</p><div id="messageMsg" class="msg hidden"></div><div class="field"><textarea id="messageText" placeholder="Escreva sua mensagem..."></textarea></div><button class="btn primary full" id="sendMessage">Enviar mensagem</button></div></div>
+<div class="modal hidden" id="messageModal"><div class="modal-box" style="padding:0;overflow:hidden"><button class="close" data-close="messageModal" style="z-index:2">×</button><div class="message-header"><div class="avatar" id="messageAvatar">U</div><div><strong id="messageTitle">Mensagem</strong><small>Conversa privada</small></div></div><div id="chatHistory" class="chat-box"><div class="empty-note">Carregando conversa...</div></div><div style="padding:14px;background:#0e0a12;border-top:1px solid #24142d"><div id="messageMsg" class="msg hidden"></div><div class="field" style="margin-bottom:9px"><textarea id="messageText" style="min-height:72px" placeholder="Escreva sua mensagem..."></textarea></div><button class="btn primary full" id="sendMessage">Enviar mensagem</button></div></div></div>
 
 <div class="modal hidden" id="withdrawModal"><div class="modal-box"><button class="close" data-close="withdrawModal">×</button><h2>Solicitar saque</h2><p class="sub">Informe o valor e a chave Pix para receber seu saldo.</p><div id="withdrawMsg" class="msg hidden"></div><div class="field"><label>Valor</label><input id="withdrawAmount" type="number" min="1" step="0.01" placeholder="0,00"></div><div class="field"><label>Chave Pix</label><input id="withdrawPix" placeholder="CPF, e-mail, telefone ou chave aleatória"></div><button class="btn primary full" id="sendWithdraw">Solicitar saque</button></div></div>
 
@@ -141,9 +178,9 @@ body.light .app-shell,body.light .feed-area,body.light .sidebar,body.light .righ
 
  <div class="app-page" id="app-explorar"><div class="page-title-row"><div><h2>Explorar</h2><p class="muted">Pesquise pelo nome de um criador.</p></div><input id="creatorSearch" class="search-inline" placeholder="🔎 Pesquisar criador..."></div><div class="explore-grid" id="exploreGrid"><div class="empty-note">Digite o nome de um perfil para pesquisar.</div></div></div>
 
- <div class="app-page" id="app-mensagens"><div class="page-title-row"><div><h2>Mensagens</h2><p class="muted">Converse com criadores depois de assinar o conteúdo.</p></div></div><div id="messageList" class="message-list"><div class="empty-note">Você ainda não tem conversas.</div></div></div>
+ <div class="app-page" id="app-mensagens"><div class="inbox-head"><div><h2>Mensagens</h2><p class="muted">Suas conversas privadas ficam aqui, separadas das notificações.</p></div><span class="count hidden" id="messageCount">0 novas</span></div><div id="messageList" class="message-list"><div class="empty-note">Você ainda não tem conversas.</div></div></div>
 
- <div class="app-page" id="app-notificacoes"><h2>Notificações</h2><p class="muted">Avisos da sua conta e da sua comunidade.</p><div id="notificationList"></div></div>
+ <div class="app-page" id="app-notificacoes"><div class="inbox-head"><div><h2>Notificações</h2><p class="muted">Avisos da sua conta e da sua comunidade. Mensagens ficam em uma caixa separada.</p></div><button class="btn secondary" id="markAllNotifications">Marcar como lidas</button></div><div id="notificationList"></div></div>
 
  <div class="app-page" id="app-perfil"><div class="profile-hero"><div class="profile-cover" id="profileCover"></div><div class="profile-main"><div class="profile-avatar-wrap" id="profileAvatarWrap"><div class="profile-big-avatar" id="profileBigAvatar">U</div><button type="button" class="avatar-edit-badge" id="editAvatarBtn" title="Alterar foto">✎</button></div><div class="profile-info"><h2 id="profileDisplayName">Usuário</h2><p id="profileDisplayHandle">@usuario</p><p id="profileDisplayBio">Seu perfil de criador no Secretyon.</p></div><button class="btn secondary" id="editProfileBtn">Editar perfil</button></div><div class="profile-stats"><span><b id="statPosts">0</b> publicações</span><span><b id="statFollowers">0</b> seguidores</span><span><b id="statSubscribers">0</b> assinantes</span></div></div><div class="box profile-form"><h3>Dados do perfil</h3><div id="profileMsg" class="msg hidden"></div><div class="field"><label>Nome do criador</label><input id="profileName" placeholder="Seu nome público"></div><div class="field"><label>E-mail</label><input id="profileEmail" disabled></div><div class="field"><label>Bio pública</label><textarea id="profileBio" placeholder="Sua biografia pública..."></textarea><small class="muted">A bio pode ser exibida no seu perfil público.</small></div><div class="field"><label>Telefone</label><input id="profilePhone" type="tel" placeholder="(00) 00000-0000"><small class="muted">Dado privado, visível somente para você.</small></div><div class="field"><label>Chave Pix</label><input id="profilePix" placeholder="Sua chave Pix"><small class="muted">Dado privado usado para recebimentos/saques.</small></div><div class="field"><label>Foto do perfil</label><input id="profileAvatarFile" type="file" accept="image/*" style="display:none"><button type="button" class="btn secondary" id="chooseAvatarBtn">📷 Escolher foto</button><small class="muted" style="display:block;margin-top:8px">A foto da bolinha será atualizada aqui.</small></div><div class="field"><label>Capa do perfil</label><input id="profileCoverFile" type="file" accept="image/*" style="display:none"><button type="button" class="btn secondary" id="chooseCoverBtn">🖼️ Escolher capa</button><small class="muted" style="display:block;margin-top:8px">Imagem maior que aparece atrás do perfil.</small></div><button class="btn primary" id="btnSaveProfile">Salvar perfil</button></div></div>
 
@@ -178,7 +215,7 @@ body.light .app-shell,body.light .feed-area,body.light .sidebar,body.light .righ
 <script>
 const SUPABASE_URL = "https://xcxvwlbiubauwjxhjkyj.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_KFDSA_GITFGL0GXnQVBaPw_fk3fSQhs";
-let sb=null,currentUser=null,currentCreators=[],selectedCreator=null,selectedPlan=null,theme="dark";
+let sb=null,currentUser=null,currentCreators=[],selectedCreator=null,selectedChatUser=null,selectedPlan=null,theme="dark";
 
 const $=id=>document.getElementById(id);
 const escapeHtml=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
@@ -279,7 +316,7 @@ async function loadNotifications(){
  let remote=[];
  if(initSupabase()){
    try{
-     const r=await sb.from("notifications").select("id,type,title,text,created_at,read_at").eq("user_id",currentUser.id).order("created_at",{ascending:false}).limit(100);
+     const r=await sb.from("notifications").select("id,type,title,text,created_at,read_at").eq("user_id",currentUser.id).neq("type","message").order("created_at",{ascending:false}).limit(100);
      if(!r.error&&r.data)remote=r.data.map(n=>({id:n.id,kind:n.type||"general",icon:n.type==="subscription"?"💜":n.type==="message"?"💬":n.type==="welcome"?"💜":"✦",title:n.title,text:n.text,time:n.created_at,read:!!n.read_at,remote:true}));
    }catch(e){console.warn("Notificações remotas indisponíveis",e)}
  }
@@ -412,7 +449,7 @@ async function openCreator(id){
  $("creatorModalName").textContent=c.nome||"Criador";$("creatorModalHandle").textContent=handleFor(c.nome);$("creatorModalBio").textContent=c.bio||"Conheça o conteúdo exclusivo deste criador.";
  const followed=isSubscribedTo(c.id);$("creatorFollowBtn").textContent=followed?"✓ Seguindo":"Assinar";$("creatorMessageBtn").textContent=followed?"💬 Mensagem":"🔒 Assine para enviar mensagem";$("creatorMessageBtn").disabled=!followed;
  $("creatorFollowBtn").onclick=()=>{if(isSubscribedTo(c.id)){return}$("subscriptionTitle").textContent="Assinar "+(c.nome||"criador");$("creatorBioPreview").textContent=c.bio||"Conheça o conteúdo exclusivo deste criador.";$("weeklyPrice").textContent=getPlanPrice(c.id,"weekly");$("monthlyPrice").textContent=getPlanPrice(c.id,"monthly");$("paymentStep").classList.add("hidden");closeModal("creatorProfileModal");openModal("subscriptionModal")};
- $("creatorMessageBtn").onclick=()=>{if(!isSubscribedTo(c.id))return;$("messageTitle").textContent="Mensagem para "+(c.nome||"criador");clearMsg("messageMsg");closeModal("creatorProfileModal");openModal("messageModal")};
+ $("creatorMessageBtn").onclick=()=>{if(!isSubscribedTo(c.id))return;closeModal("creatorProfileModal");openConversation(c.id,c.nome,c.avatar_url)};
  const box=$("creatorModalContent");box.innerHTML='<div class="empty-note">Carregando publicações...</div>';openModal("creatorProfileModal");
  try{const {data,error}=await sb.from("contents").select("*").eq("user_id",c.id).order("created_at",{ascending:false}).limit(30);if(error)throw error;if(!data?.length){box.innerHTML='<div class="empty-note">Este criador ainda não publicou conteúdo.</div>';return}
  const visible=data.filter(x=>x.visibility!=="subscriber" || isSubscribedTo(c.id));if(!visible.length){box.innerHTML='<div class="empty-note">Este criador ainda não publicou conteúdo público. Assine para acessar o conteúdo exclusivo.</div>';return}box.innerHTML=visible.map(x=>{let media=x.mime_type?.startsWith("video/")?`<video controls src="${escapeAttr(x.file_url)}"></video>`:x.mime_type?.startsWith("image/")?`<img src="${escapeAttr(x.file_url)}">`:x.mime_type==="text/link"?`<a href="${escapeAttr(x.file_url)}" target="_blank" rel="noopener">🔗 Abrir link</a>`:`<div>📝 Publicação</div>`;return `<article class="content"><div class="media">${isSubscribedTo(c.id)?media:'<div class="post-placeholder"><div class="lock-big">🔒</div><strong>Conteúdo exclusivo</strong></div>'}</div><div class="info"><h3>${escapeHtml(x.title||"Publicação")}</h3><p>${escapeHtml(x.description||"")}</p></div></article>`}).join("")}catch(e){box.innerHTML='<div class="empty-note">Não foi possível carregar as publicações deste criador.</div>'}
@@ -431,7 +468,7 @@ async function choosePayment(method){
  // Registro local para a experiência do protótipo.
  const k="secretyon_subscriptions_"+currentUser.id,a=JSON.parse(localStorage.getItem(k)||"[]");a.unshift({creatorId:selectedCreator.id,creatorName:selectedCreator.nome,plan:selectedPlan,method,status:"ativa (modo teste)",date:new Date().toISOString()});localStorage.setItem(k,JSON.stringify(a));
  localStorage.setItem("secretyon_following_"+currentUser.id+"_"+selectedCreator.id,"1");
- const mk="secretyon_messages_"+currentUser.id,ma=JSON.parse(localStorage.getItem(mk)||"[]");ma.unshift({creatorId:selectedCreator.id,creatorName:selectedCreator.nome,text:"Olá! Obrigado por assinar meu conteúdo 💜 Aproveite seu acesso e fique de olho nas próximas publicações!",date:new Date().toISOString(),system:true});localStorage.setItem(mk,JSON.stringify(ma));
+ const mk="secretyon_messages_"+currentUser.id,ma=JSON.parse(localStorage.getItem(mk)||"[]");ma.unshift({creatorId:selectedCreator.id,creatorName:selectedCreator.nome,text:"Olá! Obrigado por assinar meu conteúdo 💜 Aproveite seu acesso e fique de olho nas próximas publicações!",date:new Date().toISOString(),system:true,mine:false});localStorage.setItem(mk,JSON.stringify(ma));
  const creatorKey="secretyon_notifications_"+selectedCreator.id;
  let creatorNotices=JSON.parse(localStorage.getItem(creatorKey)||"[]");
  creatorNotices.unshift({id:crypto.randomUUID(),kind:"subscription",icon:"💜",title:"Nova assinatura",text:publicProfileName(currentUser)+" assinou seu conteúdo.",time:new Date().toISOString(),read:false});
@@ -444,7 +481,7 @@ async function choosePayment(method){
  }
  loadSubscriptions();await loadMessages();renderSuggestions(currentCreators);setTimeout(()=>{closeModal("subscriptionModal");openCreator(selectedCreator.id)},900)
 }
-function loadSubscriptions(){const box=$("mySubscriptions");if(!box)return;const a=JSON.parse(localStorage.getItem("secretyon_subscriptions_"+currentUser.id)||"[]");box.innerHTML='<h3>Minhas assinaturas</h3>'+(a.length?a.map(s=>`<div class="box" style="margin:10px 0"><strong>${escapeHtml(s.creatorName)}</strong><p class="muted">${s.plan==="weekly"?"Semanal":"Mensal"} · ${escapeHtml(s.method==="pix"?"Pix":"Cartão")} · ${escapeHtml(s.status)}</p><button class="btn secondary" data-msg-creator="${escapeAttr(s.creatorId)}">Mensagem</button></div>`).join(""):'<div class="box"><p class="muted">Nenhuma assinatura ainda.</p></div>');box.querySelectorAll("[data-msg-creator]").forEach(b=>b.onclick=()=>{const c=currentCreators.find(x=>x.id===b.dataset.msgCreator);if(c){selectedCreator=c;$("messageTitle").textContent="Mensagem para "+c.nome;openModal("messageModal")}})}
+function loadSubscriptions(){const box=$("mySubscriptions");if(!box)return;const a=JSON.parse(localStorage.getItem("secretyon_subscriptions_"+currentUser.id)||"[]");box.innerHTML='<h3>Minhas assinaturas</h3>'+(a.length?a.map(s=>`<div class="box" style="margin:10px 0"><strong>${escapeHtml(s.creatorName)}</strong><p class="muted">${s.plan==="weekly"?"Semanal":"Mensal"} · ${escapeHtml(s.method==="pix"?"Pix":"Cartão")} · ${escapeHtml(s.status)}</p><button class="btn secondary" data-msg-creator="${escapeAttr(s.creatorId)}">Mensagem</button></div>`).join(""):'<div class="box"><p class="muted">Nenhuma assinatura ainda.</p></div>');box.querySelectorAll("[data-msg-creator]").forEach(b=>b.onclick=()=>{const c=currentCreators.find(x=>x.id===b.dataset.msgCreator);if(c)openConversation(c.id,c.nome,c.avatar_url)})}
 
 
 async function publishStory(){
@@ -523,8 +560,9 @@ async function publish(){
  if(!initSupabase()){msg("contentMsg","Supabase não configurado.","error");return}
  const title=$("contentTitle").value.trim(),description=$("contentDescription").value.trim(),file=$("contentFile").files[0],link=$("contentLink").value.trim(),visibility=$("contentVisibility")?.value||"public";
  const mode=document.querySelector("[data-compose].active")?.dataset.compose||"media";
- if(!title){msg("contentMsg","Digite um título.","error");return}
+ if(mode!=="text" && !title && !description){msg("contentMsg","Adicione uma legenda ou um título para sua publicação.","error");return}
  if((mode==="photo"||mode==="video")&&!file){msg("contentMsg",mode==="photo"?"Escolha uma foto.":"Escolha um vídeo.","error");return}
+ if(mode==="text"&&!title&&!description){msg("contentMsg","Escreva o texto da publicação.","error");return}
  if(mode==="link"&&!/^https?:\/\//i.test(link)){msg("contentMsg","Cole um link válido começando com http:// ou https://.","error");return}
  msg("contentMsg","Publicando...");
  try{
@@ -540,7 +578,7 @@ async function publish(){
   else{fileUrl="";mime="text/plain"}
   const {error:db}=await sb.from("contents").insert({user_id:currentUser.id,title,description,file_path:path,file_url:fileUrl,mime_type:mime,visibility});
   if(db){if(path)await sb.storage.from("content").remove([path]);msg("contentMsg",db.message,"error");return}
-  $("contentTitle").value="";$("contentDescription").value="";$("contentFile").value="";$("contentLink").value="";if($("contentVisibility"))$("contentVisibility").value="public";
+  $("contentTitle").value="";$("contentDescription").value="";$("contentFile").value="";$("contentLink").value="";$("contentPreview").innerHTML="";$("contentPreview").classList.remove("show");if($("contentVisibility"))$("contentVisibility").value="public";
   msg("contentMsg","Publicado com sucesso!","success");await loadContents();await loadFeed();await refreshStats();setTimeout(()=>closeModal("contentModal"),700)
  }catch(e){msg("contentMsg",e.message||"Erro ao publicar.","error")}
 }
@@ -555,6 +593,15 @@ function setCompose(mode){
    $("fileFieldLabel").textContent=mode==="video"?"Vídeo":"Foto";
    input.value="";
  }
+ const preview=$("contentPreview");if(preview){preview.innerHTML="";preview.classList.remove("show")}
+}
+function updateContentPreview(){
+ const input=$("contentFile"),preview=$("contentPreview");if(!input||!preview)return;
+ const file=input.files?.[0];if(!file){preview.innerHTML="";preview.classList.remove("show");return}
+ if(!file.type.startsWith("image/")&&!file.type.startsWith("video/"))return;
+ const url=URL.createObjectURL(file);
+ preview.innerHTML=file.type.startsWith("video/")?`<video controls src="${url}"></video><div class="preview-caption">Prévia do vídeo</div>`:`<img src="${url}" alt="Prévia"><div class="preview-caption">Prévia da foto</div>`;
+ preview.classList.add("show");
 }
 function openContent(){if(!currentUser){openModal("loginModal");return}clearMsg("contentMsg");setCompose("photo");openModal("contentModal")}
 
@@ -602,40 +649,90 @@ async function refreshStats(){
  $("statFollowers").textContent=localStorage.getItem("secretyon_followers_"+currentUser.id)||"0";
  $("statSubscribers").textContent=localStorage.getItem("secretyon_subscribers_"+currentUser.id)||"0";
 }
+async function openConversation(userId,name,avatarUrl){
+ if(!currentUser||!userId)return;
+ selectedChatUser={id:userId,nome:name||"Usuário",avatar_url:avatarUrl||""};
+ $("messageTitle").textContent=selectedChatUser.nome;
+ $("messageAvatar").innerHTML=selectedChatUser.avatar_url?`<img src="${escapeAttr(selectedChatUser.avatar_url)}" alt="">`:escapeHtml(initialFor(selectedChatUser.nome));
+ clearMsg("messageMsg");
+ $("messageText").value="";
+ openModal("messageModal");
+ await loadChatHistory(userId);
+}
+async function loadChatHistory(userId){
+ const box=$("chatHistory");if(!box||!currentUser||!userId)return;
+ let rows=[];
+ if(initSupabase()){
+   try{
+     const r=await sb.from("messages").select("id,sender_id,receiver_id,content,created_at,is_system").or(`and(sender_id.eq.${currentUser.id},receiver_id.eq.${userId}),and(sender_id.eq.${userId},receiver_id.eq.${currentUser.id})`).order("created_at",{ascending:true}).limit(200);
+     if(!r.error&&r.data)rows=r.data;
+     if(!r.error)await sb.from("messages").update({read_at:new Date().toISOString()}).eq("sender_id",userId).eq("receiver_id",currentUser.id).is("read_at",null);
+   }catch(e){console.warn("Histórico remoto indisponível",e)}
+ }
+ const local=JSON.parse(localStorage.getItem("secretyon_messages_"+currentUser.id)||"[]").filter(x=>String(x.creatorId)===String(userId));
+ const localRows=(rows.length?local.filter(x=>x.mine===false&&x.system):local).map(x=>({id:x.id||crypto.randomUUID(),sender_id:x.mine===false?userId:currentUser.id,receiver_id:x.mine===false?currentUser.id:userId,content:x.text,created_at:x.date,is_system:!!x.system}));
+ rows=[...rows,...localRows];
+ rows.sort((a,b)=>new Date(a.created_at||0)-new Date(b.created_at||0));
+ box.innerHTML=rows.length?rows.map(m=>{
+   const mine=String(m.sender_id)===String(currentUser.id);
+   return `<div class="chat-bubble ${mine?"mine":""}">${escapeHtml(m.content||"")}<span class="chat-time">${formatNoticeTime(m.created_at)}</span></div>`;
+ }).join(""):'<div class="empty-note">Nenhuma mensagem ainda. Comece a conversa.</div>';
+ box.scrollTop=box.scrollHeight;
+ await loadMessages();
+}
 async function sendMessage(){
- if(!selectedCreator||!currentUser)return;
- const subs=JSON.parse(localStorage.getItem("secretyon_subscriptions_"+currentUser.id)||"[]");
- if(!subs.some(s=>s.creatorId===selectedCreator.id&&(s.status||"").startsWith("ativa"))){msg("messageMsg","Assine o conteúdo deste criador antes de enviar uma mensagem.","error");return}
+ if(!selectedChatUser||!currentUser)return;
  const text=$("messageText").value.trim();if(!text){msg("messageMsg","Escreva sua mensagem.","error");return}
  let savedRemote=false;
  if(initSupabase()){
-   try{const r=await sb.from("messages").insert({sender_id:currentUser.id,receiver_id:selectedCreator.id,content:text,is_system:false});savedRemote=!r.error;if(r.error)console.warn(r.error)}catch(e){console.warn(e)}
+   try{
+     const r=await sb.from("messages").insert({sender_id:currentUser.id,receiver_id:selectedChatUser.id,content:text,is_system:false});
+     savedRemote=!r.error;if(r.error)console.warn(r.error);
+   }catch(e){console.warn(e)}
  }
- const k="secretyon_messages_"+currentUser.id,a=JSON.parse(localStorage.getItem(k)||"[]");a.push({creatorId:selectedCreator.id,creatorName:selectedCreator.nome,text,date:new Date().toISOString()});localStorage.setItem(k,JSON.stringify(a));
+ const k="secretyon_messages_"+currentUser.id,a=JSON.parse(localStorage.getItem(k)||"[]");
+ a.push({id:crypto.randomUUID(),creatorId:selectedChatUser.id,creatorName:selectedChatUser.nome,text,date:new Date().toISOString()});
+ localStorage.setItem(k,JSON.stringify(a));
  if(initSupabase()){
-   try{await sb.from("notifications").insert({user_id:selectedCreator.id,type:"message",title:"Nova mensagem",text:publicProfileName(currentUser)+" enviou uma mensagem.",data:{sender_id:currentUser.id}})}catch(e){console.warn(e)}
+   try{await sb.from("notifications").insert({user_id:selectedChatUser.id,type:"message",title:"Nova mensagem",text:publicProfileName(currentUser)+" enviou uma mensagem.",data:{sender_id:currentUser.id}})}catch(e){console.warn("Aviso de mensagem não criado",e)}
  }
- $("messageText").value="";msg("messageMsg",savedRemote?"Mensagem enviada!":"Mensagem salva neste dispositivo. A sincronização será ativada após configurar as tabelas de mensagens.","success");await loadMessages();setTimeout(()=>closeModal("messageModal"),700)
+ $("messageText").value="";
+ await loadChatHistory(selectedChatUser.id);
+ msg("messageMsg",savedRemote?"Mensagem enviada!":"Mensagem salva neste dispositivo.","success");
 }
 async function loadMessages(){
  const box=$("messageList");if(!box||!currentUser)return;
  let remote=[];
  if(initSupabase()){
    try{
-     const r=await sb.from("messages").select("id,sender_id,receiver_id,content,created_at,is_system").or(`sender_id.eq.${currentUser.id},receiver_id.eq.${currentUser.id}`).order("created_at",{ascending:false}).limit(100);
+     const r=await sb.from("messages").select("id,sender_id,receiver_id,content,created_at,is_system,read_at").or(`sender_id.eq.${currentUser.id},receiver_id.eq.${currentUser.id}`).order("created_at",{ascending:false}).limit(200);
      if(!r.error&&r.data){
        const ids=[...new Set(r.data.map(m=>m.sender_id===currentUser.id?m.receiver_id:m.sender_id))];
        const profs=ids.length?await sb.from("profiles").select("id,nome,avatar_url").in("id",ids):{data:[]};
        const map=Object.fromEntries((profs.data||[]).map(p=>[p.id,p]));
-       remote=r.data.map(m=>({id:m.id,creatorId:m.sender_id===currentUser.id?m.receiver_id:m.sender_id,creatorName:map[m.sender_id===currentUser.id?m.receiver_id:m.sender_id]?.nome||"Criador",text:m.content,date:m.created_at,system:m.is_system}));
+       remote=r.data.map(m=>{
+         const other=m.sender_id===currentUser.id?m.receiver_id:m.sender_id;
+         return {id:m.id,userId:other,userName:map[other]?.nome||"Usuário",avatarUrl:map[other]?.avatar_url||"",text:m.content,date:m.created_at,mine:m.sender_id===currentUser.id,read:!!m.read_at};
+       });
      }
    }catch(e){console.warn("Mensagens remotas indisponíveis",e)}
  }
  const local=JSON.parse(localStorage.getItem("secretyon_messages_"+currentUser.id)||"[]");
- const ids=new Set(remote.map(m=>String(m.id)));
- const all=[...remote,...local.filter(m=>!m.id||!ids.has(String(m.id)))];
- all.sort((a,b)=>new Date(b.date||0)-new Date(a.date||0));
- box.innerHTML=all.length?all.map(m=>`<div class="message-row ${m.system?"message-system":""}"><div class="avatar">${escapeHtml(initialFor(m.creatorName))}</div><div><strong>${escapeHtml(m.creatorName)}</strong><small>${escapeHtml(m.text)}</small></div><small class="muted">${formatNoticeTime(m.date)}</small></div>`).join(""):'<div class="empty-note">Depois de assinar um criador, você poderá enviar mensagens.</div>';
+ const grouped={};
+ remote.forEach(m=>{const k=String(m.userId);if(!grouped[k]||new Date(m.date)>new Date(grouped[k].date))grouped[k]=m});
+ local.forEach(m=>{const k=String(m.creatorId);if(!grouped[k]||new Date(m.date)>new Date(grouped[k].date))grouped[k]={userId:m.creatorId,userName:m.creatorName||"Usuário",avatarUrl:"",text:m.text,date:m.date,mine:true,read:true}});
+ const conversations=Object.values(grouped).sort((a,b)=>new Date(b.date)-new Date(a.date));
+ const unreadRemote=remote.filter(m=>!m.mine&&!m.read).length;
+ setBadge("msgBadge",unreadRemote);
+ const count=$("messageCount");if(count){count.textContent=unreadRemote?`${unreadRemote} ${unreadRemote===1?"nova":"novas"}`:"Nenhuma nova";count.classList.toggle("hidden",!unreadRemote)}
+ box.innerHTML=conversations.length?conversations.map(c=>{
+   const av=c.avatarUrl?`<img src="${escapeAttr(c.avatarUrl)}" alt="">`:escapeHtml(initialFor(c.userName));
+   return `<div class="message-row ${!c.read&&!c.mine?"message-unread":""}" data-chat-user="${escapeAttr(c.userId)}" data-chat-name="${escapeAttr(c.userName)}" data-chat-avatar="${escapeAttr(c.avatarUrl||"")}"><div class="avatar">${av}</div><div style="min-width:0"><strong>${escapeHtml(c.userName)}</strong><small class="message-preview">${escapeHtml(c.text||"")}</small></div><small class="muted">${formatNoticeTime(c.date)}</small>${!c.read&&!c.mine?'<span class="message-unread-dot"></span>':""}</div>`;
+ }).join(""):'<div class="empty-note"><div style="font-size:34px;margin-bottom:8px">💬</div><strong>Nenhuma conversa ainda</strong><br><span>Quando você tiver mensagens de outros usuários, elas aparecerão aqui.</span></div>';
+ box.querySelectorAll("[data-chat-user]").forEach(row=>row.onclick=()=>openConversation(row.dataset.chatUser,row.dataset.chatName,row.dataset.chatAvatar));
+ const right=$("rightMessageBox");
+ if(right)right.innerHTML=conversations.length?conversations.slice(0,4).map(c=>`<div class="message-row" data-chat-user="${escapeAttr(c.userId)}" data-chat-name="${escapeAttr(c.userName)}" data-chat-avatar="${escapeAttr(c.avatarUrl||"")}"><div class="avatar">${c.avatarUrl?`<img src="${escapeAttr(c.avatarUrl)}" alt="">`:escapeHtml(initialFor(c.userName))}</div><div style="min-width:0"><strong>${escapeHtml(c.userName)}</strong><small class="message-preview">${escapeHtml(c.text||"")}</small></div>${!c.read&&!c.mine?'<span class="message-unread-dot"></span>':""}</div>`).join(""):'<div class="empty-note" style="padding:20px 5px">Suas conversas aparecerão aqui.</div>';
+ right?.querySelectorAll("[data-chat-user]").forEach(row=>row.onclick=()=>openConversation(row.dataset.chatUser,row.dataset.chatName,row.dataset.chatAvatar));
 }
 
 function loadWallet(){const balance=Number(localStorage.getItem("secretyon_balance_"+currentUser.id)||0);$("walletBalance").textContent="R$ "+balance.toFixed(2).replace(".",",");const a=JSON.parse(localStorage.getItem("secretyon_withdraw_"+currentUser.id)||"[]");$("withdrawHistory").innerHTML=a.length?a.map(x=>`<div class="notice" style="cursor:default"><span>💸</span><div><strong>R$ ${Number(x.amount).toFixed(2).replace(".",",")}</strong><p>${escapeHtml(x.pix)} · ${escapeHtml(x.status)}</p></div></div>`).join(""):'<p class="muted">Nenhum saque registrado.</p>'}
@@ -685,7 +782,7 @@ document.addEventListener("DOMContentLoaded",()=>{
  document.querySelectorAll(".modal").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)closeModal(m.id)}));
  $("btnEntrar").onclick=login;$("btnCadastrar").onclick=register;$("btnEsqueci").onclick=()=>openModal("recoverModal");$("btnCadastroLogin").onclick=()=>openModal("cadModal");$("btnLoginCad").onclick=()=>openModal("loginModal");$("btnRecover").onclick=recover;$("btnNewPassword").onclick=newPassword;
  $("sideAdd").onclick=openContent;$("sideCreate").onclick=openContent;$("btnAddContent2").onclick=openContent;$("mobileAdd").onclick=openContent;$("ownStory").onclick=()=>{clearMsg("storyMsg");openModal("storyModal")};$("btnPublishStory").onclick=publishStory;
- $("btnPublish").onclick=publish;$("btnSaveProfile").onclick=saveProfile;$("editProfileBtn").onclick=()=>{showAppPage("perfil");$("profileName").focus()};
+ $("btnPublish").onclick=publish;$("contentFile")?.addEventListener("change",updateContentPreview);$("btnSaveProfile").onclick=saveProfile;$("editProfileBtn").onclick=()=>{showAppPage("perfil");$("profileName").focus()};
  ["profileBigAvatar","sideAvatar","ownStoryAvatar","profileAvatarWrap"].forEach(id=>$(id)?.addEventListener("click",()=>$("profileAvatarFile")?.click()));
  $("editAvatarBtn")?.addEventListener("click",e=>{e.stopPropagation();$("profileAvatarFile")?.click()});
  $("chooseAvatarBtn")?.addEventListener("click",()=>$("profileAvatarFile")?.click());
@@ -697,7 +794,7 @@ document.addEventListener("DOMContentLoaded",()=>{
  document.querySelectorAll("[data-sub-plan]").forEach(b=>b.onclick=()=>selectPlan(b.dataset.subPlan));document.querySelectorAll("[data-pay]").forEach(b=>b.onclick=()=>choosePayment(b.dataset.pay));
  document.querySelectorAll("[data-compose]").forEach(b=>b.onclick=()=>setCompose(b.dataset.compose));
  document.querySelectorAll(".side-item[data-app],.mobile-bottom button[data-app]").forEach(b=>b.onclick=()=>{showAppPage(b.dataset.app);if(b.dataset.app==="inicio"){window.scrollTo({top:0,behavior:"smooth"});loadFeed()}});
- $("rightMessages").onclick=e=>{e.preventDefault();showAppPage("mensagens")};$("seeAllCreators").onclick=e=>{e.preventDefault();showAppPage("explorar")};
+ $("rightMessages").onclick=e=>{e.preventDefault();showAppPage("mensagens")};$("markAllNotifications")?.addEventListener("click",markNotificationsRead);$("seeAllCreators").onclick=e=>{e.preventDefault();showAppPage("explorar")};
  document.querySelectorAll("[data-setting]").forEach(b=>b.onclick=()=>{
    if(b.dataset.setting==="notifications"){
      const key="secretyon_notifications_enabled_"+currentUser.id;

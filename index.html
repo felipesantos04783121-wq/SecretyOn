@@ -106,6 +106,24 @@ body.light .app-shell,body.light .feed-area,body.light .sidebar,body.light .righ
 .creator-profile-actions{display:flex;gap:10px;flex-wrap:wrap}.creator-profile-actions button{flex:1;min-width:150px}
 @media(max-width:700px){.profile-main{align-items:flex-start}.profile-avatar-wrap{width:78px;height:78px;margin-top:-39px}.profile-avatar-wrap .profile-big-avatar{width:78px;height:78px}.avatar-edit-badge{width:27px;height:27px}}
 
+
+/* ===== Rodada 5: perfil, notificações e sincronização ===== */
+.section-kicker{font-size:9px;letter-spacing:1.7px;color:#b76be7;font-weight:900;margin-bottom:5px}
+.inbox-tabs{display:flex;gap:8px;padding:12px 0 16px;border-bottom:1px solid #211329;margin-bottom:12px}
+.inbox-tab{border:1px solid #2d1b37;background:#0e0a12;color:#9d92a4;border-radius:999px;padding:9px 14px;font-weight:800;font-size:12px;cursor:pointer}
+.inbox-tab.active{background:linear-gradient(135deg,#25102f,#170b20);border-color:#8e2bc0;color:#fff}
+.notification-empty{padding:55px 20px;text-align:center;border:1px dashed #302039;border-radius:18px;color:#8c8193}
+.profile-cover{cursor:pointer}
+.cover-edit-btn{position:absolute;right:14px;bottom:14px;z-index:3;border:1px solid rgba(255,255,255,.2);background:rgba(8,5,11,.75);backdrop-filter:blur(12px);color:#fff;border-radius:999px;padding:9px 13px;font-weight:800;font-size:11px;cursor:pointer;box-shadow:0 8px 25px rgba(0,0,0,.25)}
+.cover-edit-btn span{margin-left:4px}
+#profileCoverInlineFile{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.profile-cover.has-image:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.2));pointer-events:none}
+.sync-status{font-size:10px;color:#796e80;margin-top:8px}
+.notice{display:flex;align-items:flex-start;gap:12px;padding:15px;border:1px solid #281831;border-radius:16px;background:#0d0a11;margin-bottom:10px}
+.notice>span{width:36px;height:36px;flex:none;border-radius:12px;display:flex;align-items:center;justify-content:center;background:#1b0d24}
+.notice>div{flex:1;min-width:0}.notice p{margin:4px 0 0;color:#94899b;font-size:12px;line-height:1.45}.notice>small{color:#756a7b;font-size:10px;white-space:nowrap}
+.message-list .empty-note{padding:55px 20px;border:1px dashed #302039;border-radius:18px}
+@media(max-width:700px){.cover-edit-btn{right:10px;bottom:10px;padding:8px 11px}.inbox-tabs{padding-top:9px}.notice{padding:13px}.notice>small{font-size:9px}}
 /* ===== Refinamento visual: Stories, Publicações e Menu mobile ===== */
 .mobile-menu-head{display:none}
 .modal-kicker{font-size:10px;letter-spacing:1.7px;color:#c46dff;font-weight:900;margin-bottom:7px}
@@ -204,11 +222,11 @@ body.light .app-shell,body.light .feed-area,body.light .sidebar,body.light .righ
 
  <div class="app-page" id="app-explorar"><div class="page-title-row"><div><h2>Explorar</h2><p class="muted">Pesquise pelo nome de um criador.</p></div><input id="creatorSearch" class="search-inline" placeholder="🔎 Pesquisar criador..."></div><div class="explore-grid" id="exploreGrid"><div class="empty-note">Digite o nome de um perfil para pesquisar.</div></div></div>
 
- <div class="app-page" id="app-mensagens"><div class="inbox-head"><div><h2>Mensagens</h2><p class="muted">Suas conversas privadas ficam aqui, separadas das notificações.</p></div><span class="count hidden" id="messageCount">0 novas</span></div><div id="messageList" class="message-list"><div class="empty-note">Você ainda não tem conversas.</div></div></div>
+ <div class="app-page" id="app-mensagens"><div class="inbox-head"><div><div class="section-kicker">CAIXA DE ENTRADA</div><h2>Mensagens</h2><p class="muted">Conversas privadas com outros usuários. Avisos e atividades ficam em Notificações.</p></div><span class="count hidden" id="messageCount">0 novas</span></div><div class="inbox-tabs"><button class="inbox-tab active" type="button">💬 Conversas</button><button class="inbox-tab" type="button" id="openNotificationsTab">🔔 Notificações</button></div><div id="messageList" class="message-list"><div class="empty-note">Você ainda não tem conversas.</div></div></div>
 
- <div class="app-page" id="app-notificacoes"><div class="inbox-head"><div><h2>Notificações</h2><p class="muted">Avisos da sua conta e da sua comunidade. Mensagens ficam em uma caixa separada.</p></div><button class="btn secondary" id="markAllNotifications">Marcar como lidas</button></div><div id="notificationList"></div></div>
+ <div class="app-page" id="app-notificacoes"><div class="inbox-head"><div><div class="section-kicker">ATIVIDADE DA CONTA</div><h2>Notificações</h2><p class="muted">Novos seguidores, assinaturas, curtidas e outros avisos. Conversas ficam em Mensagens.</p></div><button class="btn secondary" id="markAllNotifications">Marcar como lidas</button></div><div class="inbox-tabs"><button class="inbox-tab active" type="button">🔔 Atividade</button><button class="inbox-tab" type="button" id="openMessagesTab">💬 Mensagens</button></div><div id="notificationList"></div></div>
 
- <div class="app-page" id="app-perfil"><div class="profile-hero"><div class="profile-cover" id="profileCover"></div><div class="profile-main"><div class="profile-avatar-wrap" id="profileAvatarWrap"><div class="profile-big-avatar" id="profileBigAvatar">U</div><button type="button" class="avatar-edit-badge" id="editAvatarBtn" title="Alterar foto">✎</button></div><div class="profile-info"><h2 id="profileDisplayName">Usuário</h2><p id="profileDisplayHandle">@usuario</p><p id="profileDisplayBio">Seu perfil de criador no Secretyon.</p></div><button class="btn secondary" id="editProfileBtn">Editar perfil</button></div><div class="profile-stats"><span><b id="statPosts">0</b> publicações</span><span><b id="statFollowers">0</b> seguidores</span><span><b id="statSubscribers">0</b> assinantes</span></div></div><div class="box profile-form"><h3>Dados do perfil</h3><div id="profileMsg" class="msg hidden"></div><div class="field"><label>Nome do criador</label><input id="profileName" placeholder="Seu nome público"></div><div class="field"><label>E-mail</label><input id="profileEmail" disabled></div><div class="field"><label>Bio pública</label><textarea id="profileBio" placeholder="Sua biografia pública..."></textarea><small class="muted">A bio pode ser exibida no seu perfil público.</small></div><div class="field"><label>Telefone</label><input id="profilePhone" type="tel" placeholder="(00) 00000-0000"><small class="muted">Dado privado, visível somente para você.</small></div><div class="field"><label>Chave Pix</label><input id="profilePix" placeholder="Sua chave Pix"><small class="muted">Dado privado usado para recebimentos/saques.</small></div><div class="field"><label>Foto do perfil</label><input id="profileAvatarFile" type="file" accept="image/*" style="display:none"><button type="button" class="btn secondary" id="chooseAvatarBtn">📷 Escolher foto</button><small class="muted" style="display:block;margin-top:8px">A foto da bolinha será atualizada aqui.</small></div><div class="field"><label>Capa do perfil</label><input id="profileCoverFile" type="file" accept="image/*" style="display:none"><button type="button" class="btn secondary" id="chooseCoverBtn">🖼️ Escolher capa</button><small class="muted" style="display:block;margin-top:8px">Imagem maior que aparece atrás do perfil.</small></div><button class="btn primary" id="btnSaveProfile">Salvar perfil</button></div></div>
+ <div class="app-page" id="app-perfil"><div class="profile-hero"><div class="profile-cover" id="profileCover"><button type="button" class="cover-edit-btn" id="editCoverBtn" title="Alterar capa">✎ <span>Alterar capa</span></button><input id="profileCoverInlineFile" type="file" accept="image/*" aria-label="Escolher capa"></div><div class="profile-main"><div class="profile-avatar-wrap" id="profileAvatarWrap"><div class="profile-big-avatar" id="profileBigAvatar">U</div><button type="button" class="avatar-edit-badge" id="editAvatarBtn" title="Alterar foto">✎</button></div><div class="profile-info"><h2 id="profileDisplayName">Usuário</h2><p id="profileDisplayHandle">@usuario</p><p id="profileDisplayBio">Seu perfil de criador no Secretyon.</p></div><button class="btn secondary" id="editProfileBtn">Editar perfil</button></div><div class="profile-stats"><span><b id="statPosts">0</b> publicações</span><span><b id="statFollowers">0</b> seguidores</span><span><b id="statSubscribers">0</b> assinantes</span></div></div><div class="box profile-form"><h3>Dados do perfil</h3><div id="profileMsg" class="msg hidden"></div><div class="field"><label>Nome do criador</label><input id="profileName" placeholder="Seu nome público"></div><div class="field"><label>E-mail</label><input id="profileEmail" disabled></div><div class="field"><label>Bio pública</label><textarea id="profileBio" placeholder="Sua biografia pública..."></textarea><small class="muted">A bio pode ser exibida no seu perfil público.</small></div><div class="field"><label>Telefone</label><input id="profilePhone" type="tel" placeholder="(00) 00000-0000"><small class="muted">Dado privado, visível somente para você.</small></div><div class="field"><label>Chave Pix</label><input id="profilePix" placeholder="Sua chave Pix"><small class="muted">Dado privado usado para recebimentos/saques.</small></div><div class="field"><label>Foto do perfil</label><input id="profileAvatarFile" type="file" accept="image/*" style="display:none"><button type="button" class="btn secondary" id="chooseAvatarBtn">📷 Escolher foto</button><small class="muted" style="display:block;margin-top:8px">A foto da bolinha será atualizada aqui.</small></div><div class="field"><label>Capa do perfil</label><input id="profileCoverFile" type="file" accept="image/*" style="display:none"><button type="button" class="btn secondary" id="chooseCoverBtn">🖼️ Escolher capa</button><small class="muted" style="display:block;margin-top:8px">Imagem maior que aparece atrás do perfil.</small></div><button class="btn primary" id="btnSaveProfile">Salvar perfil</button></div></div>
 
  <div class="app-page" id="app-conteudo"><div class="page-title-row"><div><h2>Meu conteúdo</h2><p class="muted">Tudo o que você publicou.</p></div><button class="btn primary" id="btnAddContent2">＋ Adicionar</button></div><div id="contentList" class="grid"></div></div>
 
@@ -283,7 +301,9 @@ async function loadUser(){
  if(!initSupabase())return false;
  const {data,error}=await sb.auth.getUser();
  if(error||!data.user){currentUser=null;return false}
- currentUser=data.user;updateProfileUI();
+ currentUser=data.user;
+ try{const pr=await sb.from("profiles").select("id,nome,email,bio,avatar_url,cover_url").eq("id",currentUser.id).maybeSingle();if(!pr.error&&pr.data){currentUser.user_metadata={...(currentUser.user_metadata||{}),nome:pr.data.nome||currentUser.user_metadata?.nome,bio:pr.data.bio??currentUser.user_metadata?.bio,avatar_url:pr.data.avatar_url||currentUser.user_metadata?.avatar_url,cover_url:pr.data.cover_url||currentUser.user_metadata?.cover_url}}}catch(e){}
+ updateProfileUI();
  try{await sb.from("profiles").upsert({id:currentUser.id,nome:publicProfileName(currentUser),email:currentUser.email,bio:publicBio(currentUser),avatar_url:currentUser.user_metadata?.avatar_url||null,cover_url:currentUser.user_metadata?.cover_url||null},{onConflict:"id"})}catch(e){}
  await createLocalWelcome();
  await refreshStats();
@@ -302,11 +322,18 @@ async function login(){
   currentUser=data.user;await loadUser();closeModal("loginModal");showPanel();
  }catch(e){msg("loginMsg",e?.message||"Não foi possível entrar. Verifique sua conexão.","error")}finally{btn.disabled=false;btn.textContent="Entrar"}
 }
+async function isProfileNameAvailable(nome,excludeId=""){
+ const clean=String(nome||"").trim().replace(/\\s+/g," ");
+ if(!clean)return false;
+ try{const r=await sb.from("profiles").select("id,nome").ilike("nome",clean).limit(20);if(r.error)return true;return !(r.data||[]).some(x=>String(x.id)!==String(excludeId)&&String(x.nome||"").trim().toLocaleLowerCase("pt-BR")===clean.toLocaleLowerCase("pt-BR"))}catch(e){return true}
+}
+
 async function register(){
  if(!initSupabase()){msg("cadMsg","O Supabase não foi carregado ou configurado.","error");return}
  const nome=$("cadNome").value.trim(),email=$("cadEmail").value.trim(),password=$("cadPassword").value;
  if(!nome||!email||!password){msg("cadMsg","Preencha nome, e-mail e senha.","error");return}
  if(password.length<6){msg("cadMsg","A senha precisa ter pelo menos 6 caracteres.","error");return}
+ if(!await isProfileNameAvailable(nome)){msg("cadMsg","Esse nome já está sendo usado. Escolha outro nome público.","error");return}
  msg("cadMsg","Criando sua conta...");
  const {data,error}=await sb.auth.signUp({email,password,options:{data:{nome,bio:""}}});
  if(error){msg("cadMsg",error.message,"error");return}
@@ -337,13 +364,16 @@ async function createLocalWelcome(){
  await loadNotifications();
 }
 
+function notificationIcon(kind){const k=String(kind||"").toLowerCase();if(k==="follow"||k==="follower")return "👤";if(k==="subscription")return "💜";if(k==="like")return "♥";if(k==="comment")return "💬";if(k==="content")return "✦";if(k==="welcome")return "✨";return "🔔"}
+function notificationTitle(kind){const k=String(kind||"").toLowerCase();if(k==="follow"||k==="follower")return "Novo seguidor";if(k==="subscription")return "Nova assinatura";if(k==="like")return "Nova curtida";if(k==="comment")return "Novo comentário";return "Nova atividade"}
+
 async function loadNotifications(){
  if(!currentUser)return;
  let remote=[];
  if(initSupabase()){
    try{
-     const r=await sb.from("notifications").select("id,type,title,text,created_at,read_at").eq("user_id",currentUser.id).neq("type","message").order("created_at",{ascending:false}).limit(100);
-     if(!r.error&&r.data)remote=r.data.map(n=>({id:n.id,kind:n.type||"general",icon:n.type==="subscription"?"💜":n.type==="message"?"💬":n.type==="welcome"?"💜":"✦",title:n.title,text:n.text,time:n.created_at,read:!!n.read_at,remote:true}));
+     const r=await sb.from("notifications").select("id,type,title,text,created_at,read_at,data").eq("user_id",currentUser.id).neq("type","message").order("created_at",{ascending:false}).limit(100);
+     if(!r.error&&r.data)remote=r.data.map(n=>({id:n.id,kind:n.type||"general",icon:notificationIcon(n.type),title:n.title||notificationTitle(n.type),text:n.text,time:n.created_at,read:!!n.read_at,remote:true,data:n.data||{}}));
    }catch(e){console.warn("Notificações remotas indisponíveis",e)}
  }
  const key="secretyon_notifications_"+currentUser.id;
@@ -351,7 +381,7 @@ async function loadNotifications(){
  const seen=new Set(remote.map(n=>String(n.id)));
  const arr=[...remote,...local.filter(n=>!seen.has(String(n.id)))];
  const list=$("notificationList");if(!list)return;
- list.innerHTML=arr.length?arr.map(n=>`<div class="notice ${n.read?"read":"unread"}" data-notice-id="${escapeAttr(n.id||n.kind)}" data-notice="${escapeAttr(n.kind)}" data-remote="${n.remote?"1":"0"}"><span>${n.icon||"✦"}</span><div><strong>${escapeHtml(n.title)}</strong><p>${escapeHtml(n.text)}</p></div><small>${formatNoticeTime(n.time)}</small></div>`).join(""):'<div class="empty-note">Você está em dia.</div>';
+ list.innerHTML=arr.length?arr.map(n=>`<div class="notice ${n.read?"read":"unread"}" data-notice-id="${escapeAttr(n.id||n.kind)}" data-notice="${escapeAttr(n.kind)}" data-remote="${n.remote?"1":"0"}"><span>${n.icon||notificationIcon(n.kind)}</span><div><strong>${escapeHtml(n.title||notificationTitle(n.kind))}</strong><p>${escapeHtml(n.text||"Nova atividade na sua conta.")}</p></div><small>${formatNoticeTime(n.time)}</small></div>`).join(""):'<div class="notification-empty"><div style="font-size:34px;margin-bottom:10px">🔔</div><strong>Nenhuma notificação</strong><p>Quando alguém seguir, assinar ou interagir com seu perfil, os avisos aparecerão aqui.</p></div>';
  document.querySelectorAll(".notice[data-notice-id]").forEach(x=>x.onclick=()=>handleNotification(x.dataset.noticeId,x.dataset.notice,x.dataset.remote));
  const unread=arr.filter(n=>!n.read).length;setBadge("notifBadge",unread);
 }
@@ -641,12 +671,15 @@ function updateStoryPreview(){
 }
 function openContent(){if(!currentUser){openModal("loginModal");return}clearMsg("contentMsg");setCompose("photo");if($("contentTitle"))$("contentTitle").value="";if($("contentDescription"))$("contentDescription").value="";if($("contentCharCount"))$("contentCharCount").textContent="0";openModal("contentModal")}
 
+function previewCoverFile(file){if(!file||!file.type.startsWith("image/"))return;if(file.size>10*1024*1024){alert("A capa deve ter no máximo 10 MB.");return}const u=URL.createObjectURL(file);const c=$("profileCover");if(c){c.style.backgroundImage=`url("${u}")`;c.classList.add("has-image")}}
+
 async function saveProfile(){
  if(!currentUser||!initSupabase())return;
  const nome=$("profileName").value.trim(),bio=$("profileBio")?.value.trim()||"",
        telefone=$("profilePhone")?.value.trim()||"",pix=$("profilePix")?.value.trim()||"",
-       avatarFile=$("profileAvatarFile")?.files?.[0]||null,coverFile=$("profileCoverFile")?.files?.[0]||null;
+       avatarFile=$("profileAvatarFile")?.files?.[0]||null,coverFile=$("profileCoverFile")?.files?.[0]||$("profileCoverInlineFile")?.files?.[0]||null;
  if(!nome){msg("profileMsg","Digite seu nome.","error");return}
+ if(!await isProfileNameAvailable(nome,currentUser.id)){msg("profileMsg","Esse nome já está sendo usado por outro perfil. Escolha outro.","error");return}
  let avatar_url=currentUser.user_metadata?.avatar_url||"",cover_url=currentUser.user_metadata?.cover_url||"";
  try{
    if(avatarFile){
@@ -672,6 +705,7 @@ async function saveProfile(){
    if(r.error){console.warn("Perfil salvo no Auth; profiles:",r.error.message)}
    if($("profileAvatarFile"))$("profileAvatarFile").value="";
    if($("profileCoverFile"))$("profileCoverFile").value="";
+   if($("profileCoverInlineFile"))$("profileCoverInlineFile").value="";
    updateProfileUI();await loadCreators();await refreshStats();
    msg("profileMsg","Perfil salvo com sucesso!","success");
  }catch(e){console.error(e);msg("profileMsg",e.message||"Não foi possível salvar o perfil.","error")}
@@ -819,18 +853,19 @@ document.addEventListener("DOMContentLoaded",()=>{
  $("btnEntrar").onclick=login;$("btnCadastrar").onclick=register;$("btnEsqueci").onclick=()=>openModal("recoverModal");$("btnCadastroLogin").onclick=()=>openModal("cadModal");$("btnLoginCad").onclick=()=>openModal("loginModal");$("btnRecover").onclick=recover;$("btnNewPassword").onclick=newPassword;
  $("sideAdd").onclick=openContent;$("sideCreate").onclick=openContent;$("btnAddContent2").onclick=openContent;$("mobileAdd").onclick=openContent;$("ownStory").onclick=()=>{clearMsg("storyMsg");openModal("storyModal")};$("btnPublishStory").onclick=publishStory;
  $("btnPublish").onclick=publish;$("contentFile")?.addEventListener("change",updateContentPreview);$("storyFile")?.addEventListener("change",updateStoryPreview);$("storyText")?.addEventListener("input",()=>{if($("storyCharCount"))$("storyCharCount").textContent=$("storyText").value.length});$("contentDescription")?.addEventListener("input",()=>{if($("contentCharCount"))$("contentCharCount").textContent=$("contentDescription").value.length});$("btnSaveProfile").onclick=saveProfile;$("editProfileBtn").onclick=()=>{showAppPage("perfil");$("profileName").focus()};
- ["profileBigAvatar","sideAvatar","ownStoryAvatar","profileAvatarWrap"].forEach(id=>$(id)?.addEventListener("click",()=>$("profileAvatarFile")?.click()));
+ ["profileBigAvatar","sideAvatar","ownStoryAvatar","profileAvatarWrap"].forEach(id=>$(id)?.addEventListener("click",()=>$("profileAvatarFile")?.click()));$("profileCover")?.addEventListener("click",e=>{if(e.target?.closest("#editCoverBtn"))return;$("profileCoverInlineFile")?.click()});
  $("editAvatarBtn")?.addEventListener("click",e=>{e.stopPropagation();$("profileAvatarFile")?.click()});
  $("chooseAvatarBtn")?.addEventListener("click",()=>$("profileAvatarFile")?.click());
  $("profileAvatarFile")?.addEventListener("change",()=>{const f=$("profileAvatarFile").files?.[0];if(!f||!f.type.startsWith("image/"))return;if(f.size>10*1024*1024){alert("A foto deve ter no máximo 10 MB.");return}const u=URL.createObjectURL(f);["profileBigAvatar","sideAvatar","ownStoryAvatar"].forEach(id=>{const n=$(id);if(n)n.innerHTML=`<img src="${u}" alt="Prévia">`})});
+ $("profileCoverFile")?.addEventListener("change",()=>previewCoverFile($("profileCoverFile").files?.[0]));$("profileCoverInlineFile")?.addEventListener("change",()=>previewCoverFile($("profileCoverInlineFile").files?.[0]));
  $("logoutTop").onclick=logout;$("settingsLogout").onclick=logout;$("withdrawBtn").onclick=requestWithdraw;$("sendWithdraw").onclick=sendWithdraw;$("sendMessage").onclick=sendMessage;
  $("themeToggle").onclick=toggleTheme;$("searchTop").onclick=()=>{showAppPage("explorar");setTimeout(()=>$("creatorSearch")?.focus(),100)};$("mobileMenu").onclick=openSidebar;$("closeMobileMenu")?.addEventListener("click",closeSidebar);$("sidebarOverlay").onclick=closeSidebar;
  [".feed-area",".rightbar"].forEach(sel=>document.querySelector(sel)?.addEventListener("click",()=>{if(window.innerWidth<=700)closeSidebar()}));
- $("chooseAvatarBtn").onclick=()=>$("profileAvatarFile")?.click();$("editAvatarBtn").onclick=()=>$("profileAvatarFile")?.click();$("chooseCoverBtn").onclick=()=>$("profileCoverFile")?.click();$("editWeekly").onclick=()=>setPlanPrice("weekly");$("editMonthly").onclick=()=>setPlanPrice("monthly");$("payPixInfo").onclick=()=>alert("Pix será disponibilizado no checkout quando o gateway estiver conectado.");$("payCardInfo").onclick=()=>alert("Cartão será disponibilizado no checkout quando o gateway estiver conectado.");
+ $("chooseAvatarBtn").onclick=()=>$("profileAvatarFile")?.click();$("editAvatarBtn").onclick=()=>$("profileAvatarFile")?.click();$("chooseCoverBtn").onclick=()=>$("profileCoverFile")?.click();$("editCoverBtn")?.addEventListener("click",e=>{e.stopPropagation();$("profileCoverInlineFile")?.click()});$("editWeekly").onclick=()=>setPlanPrice("weekly");$("editMonthly").onclick=()=>setPlanPrice("monthly");$("payPixInfo").onclick=()=>alert("Pix será disponibilizado no checkout quando o gateway estiver conectado.");$("payCardInfo").onclick=()=>alert("Cartão será disponibilizado no checkout quando o gateway estiver conectado.");
  document.querySelectorAll("[data-sub-plan]").forEach(b=>b.onclick=()=>selectPlan(b.dataset.subPlan));document.querySelectorAll("[data-pay]").forEach(b=>b.onclick=()=>choosePayment(b.dataset.pay));
  document.querySelectorAll("[data-compose]").forEach(b=>b.onclick=()=>setCompose(b.dataset.compose));
  document.querySelectorAll(".side-item[data-app],.mobile-bottom button[data-app]").forEach(b=>b.onclick=()=>{showAppPage(b.dataset.app);if(b.dataset.app==="inicio"){window.scrollTo({top:0,behavior:"smooth"});loadFeed()}});
- $("rightMessages").onclick=e=>{e.preventDefault();showAppPage("mensagens")};$("markAllNotifications")?.addEventListener("click",markNotificationsRead);$("seeAllCreators").onclick=e=>{e.preventDefault();showAppPage("explorar")};
+ $("rightMessages").onclick=e=>{e.preventDefault();showAppPage("mensagens")};$("markAllNotifications")?.addEventListener("click",markNotificationsRead);$("openNotificationsTab")?.addEventListener("click",()=>showAppPage("notificacoes"));$("openMessagesTab")?.addEventListener("click",()=>showAppPage("mensagens"));$("seeAllCreators").onclick=e=>{e.preventDefault();showAppPage("explorar")};
  document.querySelectorAll("[data-setting]").forEach(b=>b.onclick=()=>{
    if(b.dataset.setting==="notifications"){
      const key="secretyon_notifications_enabled_"+currentUser.id;
@@ -865,10 +900,13 @@ document.addEventListener("DOMContentLoaded",()=>{
   };
   loadTheme();
   if(window.__secretyonCreatorRefresh)clearInterval(window.__secretyonCreatorRefresh);
-  window.__secretyonCreatorRefresh=setInterval(()=>{if(currentUser){loadCreators();loadStories();loadNotifications();loadMessages()}},10000);
+  window.__secretyonCreatorRefresh=setInterval(()=>{if(currentUser){loadCreators();loadStories();loadNotifications();loadMessages()}},5000);
+ document.addEventListener("visibilitychange",()=>{if(!document.hidden&&currentUser){loadCreators();loadStories();loadNotifications();loadMessages()}});
+ window.addEventListener("focus",()=>{if(currentUser){loadCreators();loadNotifications();loadMessages()}});
 
  if(initSupabase()){
-  sb.auth.onAuthStateChange((event,session)=>{if(event==="PASSWORD_RECOVERY")openModal("newPasswordModal");if(event==="SIGNED_OUT")showHome()});
+  sb.auth.onAuthStateChange((event,session)=>{if(event==="PASSWORD_RECOVERY")openModal("newPasswordModal");if(event==="SIGNED_OUT")showHome();if(event==="SIGNED_IN"&&session){currentUser=session.user;loadCreators();loadNotifications();loadMessages()}});
+  try{sb.channel("secretyon-profiles-live").on("postgres_changes",{event:"*",schema:"public",table:"profiles"},()=>{if(currentUser)loadCreators()}).subscribe()}catch(e){console.warn("Sincronização em tempo real de perfis indisponível",e)}
   sb.auth.getSession().then(async({data})=>{if(data?.session){currentUser=data.session.user;await loadUser();showPanel()}});
  }
 });

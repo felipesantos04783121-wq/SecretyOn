@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="Secretyon — sua plataforma de conteúdo exclusivo.">
-<title>Secretyon</title>
+<meta name="description" content="Secretyon — plataforma de criadores, comunidades e conteúdo exclusivo.">
+<title>Secretyon — Conteúdo Exclusivo</title>
 <style>
 :root{
  --bg:#050306;--bg2:#09040d;--panel:#0d0a12;--panel2:#15101c;
@@ -92,6 +92,12 @@ footer{padding:35px 5%;background:#040306;border-top:1px solid #1b1023;color:#75
  .hero{padding:40px 4%}.hero h1{font-size:47px;letter-spacing:-2.5px}.visual{min-height:430px}.login-overlay-card{padding:22px}
  .footer-grid{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.body,.nav,.panel-head{padding-left:4%;padding-right:4%}
 }
+
+/* Secretyon dashboard */
+.app-shell{min-height:100vh;display:grid;grid-template-columns:250px minmax(480px,680px) 330px;max-width:1500px;margin:auto;background:#050306}.sidebar{position:sticky;top:0;height:100vh;padding:20px 14px 14px;border-right:1px solid #211329;background:#070509;display:flex;flex-direction:column}.side-logo{display:flex;align-items:center;gap:9px;padding:3px 12px 24px;font-size:25px;font-weight:900;letter-spacing:-1.5px}.side-logo b{color:var(--purple)}.side-mark{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#b528ff,#e03ab8);box-shadow:0 0 20px rgba(165,0,255,.25)}.side-nav{display:flex;flex-direction:column;gap:4px}.side-item{border:0;background:transparent;color:#aaa0b0;border-radius:12px;padding:12px 13px;display:flex;align-items:center;gap:13px;text-align:left;font-size:14px}.side-item span{font-size:22px;width:24px;text-align:center}.side-item b{font-weight:700;flex:1}.side-item i{font-style:normal;background:var(--purple);color:#fff;border-radius:999px;min-width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:10px}.side-item:hover,.side-item.active{background:linear-gradient(90deg,rgba(165,0,255,.18),rgba(165,0,255,.04));color:#fff;border:1px solid #5b2075}.create-post{margin:22px 10px 15px;border:0;border-radius:999px;padding:14px;background:linear-gradient(135deg,#b528ff,#8015dc);color:#fff;font-weight:900;box-shadow:0 10px 30px rgba(165,0,255,.2)}.side-profile{margin-top:auto;border-top:1px solid #211329;padding:15px 8px 2px;display:flex;align-items:center;gap:10px}.side-profile .avatar{flex:none}.side-profile strong{display:block;font-size:13px}.side-profile small{display:block;color:#7f7488;font-size:11px}.side-profile>span{margin-left:auto;color:#888}.avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#9d4dff,#df3bb3);display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;border:2px solid #2d1839}.fake1{background:linear-gradient(135deg,#c57aff,#54208d)}.fake2{background:linear-gradient(135deg,#ffae54,#5a2180)}.fake3{background:linear-gradient(135deg,#e947a9,#f0a4d0)}.fake4{background:linear-gradient(135deg,#4b8cff,#252045)}
+.feed-area{min-width:0;border-right:1px solid #211329;background:#050306}.feed-header{height:68px;position:sticky;top:0;z-index:5;background:rgba(5,3,6,.92);backdrop-filter:blur(16px);border-bottom:1px solid #211329;padding:0 22px;display:flex;align-items:center;justify-content:space-between}.feed-header h1{font-size:21px;margin:0}.feed-tools{display:flex;gap:8px}.feed-tools button{border:0;background:transparent;color:#b9aebe;font-size:20px}.stories{display:flex;gap:14px;padding:18px 18px 15px;overflow:auto;border-bottom:1px solid #17101c}.story{min-width:66px;text-align:center;color:#aaa0ad;font-size:10px}.story-avatar{width:57px;height:57px;border-radius:50%;margin:0 auto 5px;display:flex;align-items:center;justify-content:center;background:#1a1220;border:2px solid var(--purple);font-weight:900;font-size:19px}.story.own .story-avatar{background:#141017;border:2px dashed #9141bf;font-size:26px}.post-card{margin:18px;background:#0d0a11;border:1px solid #271832;border-radius:18px;overflow:hidden}.post-head{display:flex;align-items:center;gap:10px;padding:15px}.post-head>div:nth-child(2){flex:1}.post-head strong{display:block;font-size:14px}.post-head small{display:block;color:#7e7484;font-size:11px;margin-top:2px}.post-head button{background:none;border:0;color:#8e8394}.verified{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:var(--purple);color:#fff;font-size:9px}.post-text{padding:0 17px 15px;color:#d8d0dc;font-size:14px}.post-text span{color:#c58aff}.post-placeholder{height:430px;background:radial-gradient(circle at 50% 45%,rgba(165,0,255,.18),transparent 27%),linear-gradient(145deg,#21102d,#09070b 65%,#2d0b2a);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#eee}.post-placeholder .lock-big{font-size:40px;margin-bottom:10px}.post-placeholder small{color:#8f8495;margin-top:5px}.post-actions{display:flex;gap:25px;padding:14px 17px;color:#aaa0ad}.post-actions button{background:none;border:0;color:inherit;font-size:17px}.post-actions button span{font-size:12px;margin-left:4px}.post-actions .save-btn{margin-left:auto}.app-page{display:none;padding:24px}.app-page.active{display:block}.app-page h2{font-size:28px;margin:0 0 5px}.muted,.page-title-row p{color:#8b8191;font-size:13px}.page-title-row{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:22px}.search-inline,.search-box input{background:#0e0a12;border:1px solid #392445;color:#fff;border-radius:999px;padding:12px 15px;outline:0}.search-inline{width:230px}.explore-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.explore-tile{border:1px solid #2b1935;border-radius:15px;overflow:hidden;background:#0e0a12}.tile-cover{height:180px;display:flex;align-items:center;justify-content:center;font-size:30px;background:linear-gradient(135deg,#301244,#0b070e 60%,#43102f)}.tile-cover.c2{background:linear-gradient(135deg,#24134d,#0b070e 60%,#3f113b)}.tile-cover.c3{background:linear-gradient(135deg,#43142e,#0b070e 60%,#261049)}.explore-tile>div:last-child{padding:14px;position:relative}.explore-tile strong,.explore-tile small{display:block}.explore-tile small{color:#82788a;margin-top:3px}.explore-tile button{position:absolute;right:12px;top:16px;border:1px solid #8624b7;background:transparent;color:#d69bff;border-radius:999px;padding:7px 12px}.message-list{border:1px solid #291932;border-radius:15px;overflow:hidden}.message-row{display:flex;align-items:center;gap:12px;padding:15px;border-bottom:1px solid #211329}.message-row>div:nth-child(2){flex:1}.message-row strong,.message-row small{display:block}.message-row small{color:#807687;margin-top:3px}.message-row>b{background:var(--purple);border-radius:99px;padding:3px 7px;font-size:10px}.empty-note{text-align:center;color:#756b7b;padding:40px}.notice{display:flex;align-items:flex-start;gap:13px;padding:17px;border:1px solid #281731;background:#0e0a12;border-radius:15px;margin:10px 0}.notice>span{font-size:21px;color:#cf73ff}.notice div{flex:1}.notice p{margin:4px 0 0;color:#817686;font-size:13px}.notice>small{color:#6d6371}.profile-hero{border:1px solid #2a1833;border-radius:18px;overflow:hidden;background:#0e0a12;margin-bottom:18px}.profile-cover{height:160px;background:radial-gradient(circle at 50% 50%,rgba(165,0,255,.3),transparent 30%),linear-gradient(135deg,#291136,#0a070d 60%,#3d102e)}.profile-main{display:flex;align-items:center;gap:15px;padding:0 20px 18px;position:relative}.profile-big-avatar{width:90px;height:90px;margin-top:-45px;border:4px solid #0e0a12;border-radius:50%;background:linear-gradient(135deg,#b528ff,#df3bb3);display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:900}.profile-info{flex:1}.profile-info h2{margin:7px 0 2px}.profile-info p{margin:2px 0;color:#8d8293;font-size:12px}.profile-stats{display:flex;gap:28px;padding:14px 20px;border-top:1px solid #23142b;color:#8e8493;font-size:12px}.profile-stats b{color:#fff}.profile-form{max-width:none}.plans{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:20px 0}.plan{border:1px solid #382044;background:#100c14;border-radius:16px;padding:20px}.plan span,.plan strong,.plan small{display:block}.plan strong{font-size:30px;margin:9px 0 0}.plan small{color:#817687;margin-bottom:18px}.wallet{padding:25px;border:1px solid #382044;border-radius:18px;background:linear-gradient(135deg,#170d20,#0d0911);margin:18px 0}.wallet small,.wallet strong{display:block}.wallet strong{font-size:36px;margin:5px 0 20px}.settings-list{border:1px solid #291932;border-radius:16px;overflow:hidden}.settings-list button{width:100%;display:flex;align-items:center;gap:13px;padding:17px;background:#0e0a12;border:0;border-bottom:1px solid #211329;color:#fff;text-align:left}.settings-list button:last-child{border-bottom:0}.settings-list button>span{font-size:20px;width:28px}.settings-list button div{flex:1}.settings-list strong,.settings-list small{display:block}.settings-list small{color:#7d7383;margin-top:3px}.settings-list b{color:#7b7180}.rightbar{padding:18px 14px;background:#050306}.search-box{display:flex;align-items:center;gap:8px;background:#0d0a11;border:1px solid #2e1b38;border-radius:999px;padding:0 14px}.search-box span{font-size:22px;color:#9c8fa4}.search-box input{border:0;border-radius:0;background:transparent;width:100%;padding:13px 0}.right-card{margin-top:16px;padding:16px;border:1px solid #25152e;border-radius:17px;background:#0b080e}.right-title{display:flex;justify-content:space-between;gap:10px;margin-bottom:14px}.right-title a{color:#bd72e9;font-size:12px}.suggest,.right-message{display:flex;align-items:center;gap:9px;margin:14px 0}.suggest>div:nth-child(2),.right-message>div:nth-child(2){flex:1}.suggest strong,.suggest small,.right-message strong,.right-message small{display:block}.suggest small,.right-message small{color:#766c7b;font-size:11px;margin-top:2px}.suggest button{border:1px solid #7e24a9;color:#d78eff;background:transparent;border-radius:999px;padding:6px 10px;font-size:11px}.right-message>b{background:var(--purple);border-radius:99px;padding:3px 6px;font-size:9px}.trends>div:not(.right-title){padding:10px 0;border-bottom:1px solid #1e1226}.trends>div:last-child{border-bottom:0}.trends b,.trends small{display:block}.trends small{color:#766c7b;margin-top:2px}.mobile-top,.mobile-bottom{display:none}
+@media(max-width:1100px){.app-shell{grid-template-columns:230px minmax(480px,1fr)}.rightbar{display:none}}
+@media(max-width:700px){.app-shell{display:block}.sidebar{position:fixed;left:-280px;top:0;width:270px;z-index:100;transition:.25s;box-shadow:20px 0 50px #000}.sidebar.open{left:0}.feed-area{border:0;padding-bottom:74px}.mobile-top{height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 15px;border-bottom:1px solid #211329;position:sticky;top:0;z-index:20;background:rgba(5,3,6,.94)}.mobile-top .side-logo{padding:0;font-size:21px}.mobile-top .side-mark{width:26px;height:26px}.mobile-top button{border:0;background:transparent;color:#fff;font-size:23px}.feed-header{top:62px}.mobile-bottom{position:fixed;bottom:0;left:0;right:0;height:68px;z-index:90;background:rgba(8,5,10,.96);border-top:1px solid #2b1735;display:grid;grid-template-columns:repeat(5,1fr);backdrop-filter:blur(15px)}.mobile-bottom button{border:0;background:transparent;color:#9d93a3;font-size:21px}.mobile-bottom button small{display:block;font-size:9px;margin-top:2px}.mobile-bottom button.active{color:#d37aff}.app-page{padding:18px 14px}.post-card{margin:14px 0}.post-placeholder{height:330px}.explore-grid,.plans{grid-template-columns:1fr}.page-title-row{align-items:flex-start;flex-direction:column}.search-inline{width:100%}}
 </style>
 </head>
 <body>
@@ -245,29 +251,64 @@ footer{padding:35px 5%;background:#040306;border-top:1px solid #1b1023;color:#75
 </div>
 
 <section id="painel" class="hidden">
-<div class="panel-head"><h2>Olá, <span id="nomePainel">usuário</span> 👋</h2><p>Gerencie sua conta e seus conteúdos.</p></div>
-<div class="nav">
-<button type="button" data-section="perfil">Meu perfil</button>
-<button type="button" data-section="conteudo">Meu conteúdo</button>
-<button type="button" id="btnAddPanel">Adicionar conteúdo</button>
-<button type="button" data-section="assinaturas">Assinaturas</button>
-<button type="button" data-section="config">Configurações</button>
-<button type="button" id="btnSair">Sair</button>
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="side-logo"><span class="side-mark">♡</span><span>Secrety<b>on</b></span></div>
+    <nav class="side-nav">
+      <button class="side-item active" data-app="inicio"><span>⌂</span><b>Início</b></button>
+      <button class="side-item" data-app="explorar"><span>⌕</span><b>Explorar</b></button>
+      <button class="side-item" data-app="mensagens"><span>✉</span><b>Mensagens</b><i id="msgBadge">3</i></button>
+      <button class="side-item" data-app="notificacoes"><span>♧</span><b>Notificações</b><i id="notifBadge">5</i></button>
+      <button class="side-item" data-app="perfil"><span>◯</span><b>Meu perfil</b></button>
+      <button class="side-item" data-app="conteudo"><span>▧</span><b>Meu conteúdo</b></button>
+      <button class="side-item" id="sideAdd"><span>＋</span><b>Adicionar conteúdo</b></button>
+      <button class="side-item" data-app="assinaturas"><span>♕</span><b>Assinaturas</b></button>
+      <button class="side-item" data-app="carteira"><span>▱</span><b>Carteira</b></button>
+      <button class="side-item" data-app="config"><span>⚙</span><b>Configurações</b></button>
+    </nav>
+    <button class="create-post" id="sideCreate"><span>＋</span> Criar publicação</button>
+    <div class="side-profile" id="sideProfile"><div class="avatar" id="sideAvatar">S</div><div><strong id="sideName">Usuário</strong><small id="sideHandle">@usuario</small></div><span>•••</span></div>
+  </aside>
+
+  <main class="feed-area">
+    <div class="mobile-top"><div class="side-logo"><span class="side-mark">♡</span><span>Secrety<b>on</b></span></div><button id="mobileMenu">☰</button></div>
+    <div class="feed-header"><h1 id="pageTitle">Início</h1><div class="feed-tools"><button title="Modo escuro">☾</button><button id="logoutTop" title="Sair">↪</button></div></div>
+
+    <div class="app-page active" id="app-inicio">
+      <div class="stories" id="stories"><div class="story own"><div class="story-avatar">+</div><small>Seu story</small></div><div class="story"><div class="story-avatar fake1">C</div><small>criador1</small></div><div class="story"><div class="story-avatar fake2">V</div><small>vic_store</small></div><div class="story"><div class="story-avatar fake3">M</div><small>makeup</small></div><div class="story"><div class="story-avatar fake4">A</div><small>alves</small></div></div>
+      <article class="post-card">
+        <div class="post-head"><div class="avatar post-avatar">S</div><div><strong>Seu perfil de criador <span class="verified">✓</span></strong><small>@seuusuario · agora</small></div><button>•••</button></div>
+        <div class="post-text">Publique seu primeiro conteúdo e comece a construir sua comunidade. 💜<br><span>Mais que conteúdo, é conexão.</span> ✨</div>
+        <div class="post-placeholder"><div class="lock-big">🔒</div><strong>Conteúdo exclusivo</strong><small>Seu conteúdo publicado aparecerá aqui.</small></div>
+        <div class="post-actions"><button class="like-btn">♡ <span>0</span></button><button>◯ <span>0</span></button><button>➤ <span>0</span></button><button class="save-btn">♧</button></div>
+      </article>
+    </div>
+
+    <div class="app-page" id="app-explorar"><div class="page-title-row"><div><h2>Explorar</h2><p>Encontre criadores e conteúdos.</p></div><input id="creatorSearch" class="search-inline" placeholder="Pesquisar criadores..." /></div><div class="explore-grid" id="exploreGrid"><article class="explore-tile"><div class="tile-cover c1">🔒</div><div><strong>Perfil em destaque</strong><small>@criador1</small><button>Seguir</button></div></article><article class="explore-tile"><div class="tile-cover c2">🔒</div><div><strong>Conteúdo premium</strong><small>@vic_store</small><button>Seguir</button></div></article><article class="explore-tile"><div class="tile-cover c3">🔒</div><div><strong>Área VIP</strong><small>@makeup</small><button>Seguir</button></div></article></div></div>
+
+    <div class="app-page" id="app-mensagens"><div class="page-title-row"><div><h2>Mensagens</h2><p>Suas conversas aparecem aqui.</p></div><button class="btn primary" id="newMessage">+ Nova mensagem</button></div><div class="message-list"><div class="message-row"><div class="avatar">C</div><div><strong>Comunidade Secretyon</strong><small>Bem-vindo à plataforma! ✨</small></div><b>2</b></div><div class="message-row"><div class="avatar fake2">V</div><div><strong>Criador</strong><small>Envie uma mensagem para começar.</small></div></div><div class="empty-note">Quando você receber mensagens, elas aparecerão nesta área.</div></div></div>
+
+    <div class="app-page" id="app-notificacoes"><h2>Notificações</h2><div class="notice"><span>♡</span><div><strong>Bem-vindo ao Secretyon!</strong><p>Seu perfil está pronto para receber conteúdos.</p></div><small>agora</small></div><div class="notice"><span>✦</span><div><strong>Complete seu perfil</strong><p>Adicione uma descrição para seus seguidores conhecerem você.</p></div><small>hoje</small></div><div class="notice"><span>🔒</span><div><strong>Publique seu primeiro conteúdo</strong><p>Use “Adicionar conteúdo” no menu lateral.</p></div><small>hoje</small></div></div>
+
+    <div class="app-page" id="app-perfil"><div class="profile-hero"><div class="profile-cover"></div><div class="profile-main"><div class="profile-big-avatar" id="profileBigAvatar">S</div><div class="profile-info"><h2 id="profileDisplayName">Usuário <span class="verified">✓</span></h2><p id="profileDisplayHandle">@usuario</p><p id="profileDisplayBio">Seu perfil de criador no Secretyon.</p></div><button class="btn secondary" id="editProfileBtn">Editar perfil</button></div><div class="profile-stats"><span><b>0</b> publicações</span><span><b>0</b> seguidores</span><span><b>0</b> seguindo</span></div></div><div class="box profile-form"><h3>Dados do perfil</h3><div id="profileMsg" class="msg hidden"></div><div class="field"><label>Nome</label><input id="profileName"></div><div class="field"><label>E-mail</label><input id="profileEmail" disabled></div><div class="field"><label>Bio</label><textarea id="profileBio" placeholder="Fale um pouco sobre você..."></textarea></div><button type="button" class="btn primary" id="btnSaveProfile">Salvar perfil</button></div></div>
+
+    <div class="app-page" id="app-conteudo"><div class="page-title-row"><div><h2>Meu conteúdo</h2><p>Gerencie suas publicações.</p></div><button type="button" class="btn primary" id="btnAddContent2">+ Adicionar</button></div><div id="contentList" class="grid"></div></div>
+
+    <div class="app-page" id="app-assinaturas"><h2>Assinaturas</h2><p class="muted">Área para seus planos e assinaturas.</p><div class="plans"><div class="plan"><span>Plano mensal</span><strong>R$ 19,90</strong><small>por mês</small><button class="btn primary">Ativar plano</button></div><div class="plan"><span>Plano premium</span><strong>R$ 29,90</strong><small>por mês</small><button class="btn primary">Ativar plano</button></div></div><div class="box"><strong>Pagamentos</strong><p class="muted">A integração real de cobrança será feita com gateway e backend/webhook antes de receber pagamentos de clientes.</p></div></div>
+
+    <div class="app-page" id="app-carteira"><h2>Carteira</h2><div class="wallet"><small>Saldo disponível</small><strong>R$ 0,00</strong><button class="btn primary">Solicitar saque</button></div><div class="box"><strong>Histórico</strong><p class="muted">Nenhuma movimentação registrada.</p></div></div>
+
+    <div class="app-page" id="app-config"><h2>Configurações</h2><div class="settings-list"><button id="btnChangePassword"><span>🔐</span><div><strong>Alterar senha</strong><small>Atualize sua senha de acesso</small></div><b>›</b></button><button><span>🔔</span><div><strong>Notificações</strong><small>Preferências de notificações</small></div><b>›</b></button><button><span>🛡️</span><div><strong>Privacidade</strong><small>Controle de privacidade e segurança</small></div><b>›</b></button><button id="settingsLogout"><span>↪</span><div><strong>Sair da conta</strong><small>Encerrar sessão neste dispositivo</small></div><b>›</b></button></div></div>
+  </main>
+
+  <aside class="rightbar">
+    <div class="search-box"><span>⌕</span><input id="globalSearch" placeholder="Pesquisar criadores, posts..." /></div>
+    <div class="right-card"><div class="right-title"><strong>Sugeridos para você</strong><a href="#" onclick="return false">Ver todos</a></div><div class="suggest"><div class="avatar fake1">C</div><div><strong>Criador 1 <span class="verified">✓</span></strong><small>@criador1</small></div><button>Seguir</button></div><div class="suggest"><div class="avatar fake2">V</div><div><strong>Vic Store <span class="verified">✓</span></strong><small>@vic_store</small></div><button>Seguir</button></div><div class="suggest"><div class="avatar fake3">M</div><div><strong>Mary Makeup</strong><small>@marymakeup</small></div><button>Seguir</button></div></div>
+    <div class="right-card"><div class="right-title"><strong>Mensagens</strong><a href="#" onclick="return false" id="rightMessages">Ver todas</a></div><div class="right-message"><div class="avatar fake1">C</div><div><strong>Criador 1</strong><small>Envie uma mensagem...</small></div><b>2</b></div><div class="right-message"><div class="avatar fake2">V</div><div><strong>Vic Store</strong><small>Comece uma conversa.</small></div></div></div>
+    <div class="right-card trends"><div class="right-title"><strong>🔥 Em alta no Secretyon</strong></div><div><b>#conteudoexclusivo</b><small>Conteúdo em destaque</small></div><div><b>#secretyon</b><small>Comunidade</small></div><div><b>#criadores</b><small>Novos criadores</small></div></div>
+  </aside>
 </div>
-<div class="body">
-<div class="section" id="perfil">
-<h2>Meu perfil</h2><br><div class="box"><div id="profileMsg" class="msg hidden"></div>
-<div class="field"><label>Nome</label><input id="profileName"></div>
-<div class="field"><label>E-mail</label><input id="profileEmail" disabled></div>
-<button type="button" class="btn primary" id="btnSaveProfile">Salvar perfil</button></div>
-</div>
-<div class="section" id="conteudo">
-<div style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap"><h2>Meu conteúdo</h2><button type="button" class="btn primary" id="btnAddContent2">+ Adicionar</button></div><br>
-<div id="contentList" class="grid"></div>
-</div>
-<div class="section" id="assinaturas"><h2>Assinaturas</h2><br><div class="box"><p>Área preparada para integração de planos e pagamentos.</p><p style="color:#999;margin-top:10px">O pagamento real precisa de um gateway e backend/webhook.</p></div></div>
-<div class="section" id="config"><h2>Configurações</h2><br><div class="box"><button type="button" class="btn secondary" id="btnChangePassword">Alterar senha</button></div></div>
-</div>
+<div class="mobile-bottom"><button data-app="inicio">⌂<small>Início</small></button><button data-app="explorar">⌕<small>Explorar</small></button><button id="mobileAdd">＋<small>Criar</small></button><button data-app="mensagens">✉<small>Mensagens</small></button><button data-app="perfil">◯<small>Perfil</small></button></div>
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -348,8 +389,8 @@ async function loadUser(){
  if(error||!data.user){currentUser=null;return}
  currentUser=data.user;
  const nome=currentUser.user_metadata?.nome||currentUser.email.split("@")[0];
- el("nomePainel").textContent=nome;el("profileName").value=nome;el("profileEmail").value=currentUser.email;
- await sb.from("profiles").upsert({id:currentUser.id,nome,email:currentUser.email},{onConflict:"id"});
+ if(el("nomePainel"))el("nomePainel").textContent=nome;if(el("profileName"))el("profileName").value=nome;if(el("profileEmail"))el("profileEmail").value=currentUser.email;const prof=await sb.from("profiles").select("bio").eq("id",currentUser.id).maybeSingle();if(el("profileBio"))el("profileBio").value=prof.data?.bio||"";if(el("profileDisplayBio"))el("profileDisplayBio").textContent=prof.data?.bio||"Seu perfil de criador no Secretyon.";updateDashboardProfile();
+ await sb.from("profiles").upsert({id:currentUser.id,nome,email:currentUser.email,bio},{onConflict:"id"});
 }
 
 function showPanel(){
@@ -368,11 +409,11 @@ function showSection(id){
 
 async function saveProfile(){
  if(!currentUser||!supabaseReady())return;
- const nome=el("profileName").value.trim();if(!nome){message("profileMsg","Digite seu nome.","error");return}
- const {error}=await sb.from("profiles").upsert({id:currentUser.id,nome,email:currentUser.email},{onConflict:"id"});
+ const nome=el("profileName").value.trim();const bio=el("profileBio")?el("profileBio").value.trim():"";if(!nome){message("profileMsg","Digite seu nome.","error");return}
+ const {error}=await sb.from("profiles").upsert({id:currentUser.id,nome,email:currentUser.email,bio},{onConflict:"id"});
  if(error){message("profileMsg",error.message,"error");return}
  await sb.auth.updateUser({data:{nome}});
- el("nomePainel").textContent=nome;message("profileMsg","Perfil salvo!","success");
+ el("nomePainel").textContent=nome;currentUser.user_metadata={...(currentUser.user_metadata||{}),nome};updateDashboardProfile();if(el("profileDisplayBio"))el("profileDisplayBio").textContent=bio||"Seu perfil de criador no Secretyon.";message("profileMsg","Perfil salvo!","success");
 }
 
 async function publish(){
@@ -424,40 +465,74 @@ async function quickLogin(){
   await login();
 }
 
+
+function showAppPage(id){
+ document.querySelectorAll('.app-page').forEach(x=>x.classList.remove('active'));
+ const page=el('app-'+id); if(page) page.classList.add('active');
+ document.querySelectorAll('.side-item[data-app],.mobile-bottom button[data-app]').forEach(x=>x.classList.toggle('active',x.dataset.app===id));
+ const titles={inicio:'Início',explorar:'Explorar',mensagens:'Mensagens',notificacoes:'Notificações',perfil:'Meu perfil',conteudo:'Meu conteúdo',assinaturas:'Assinaturas',carteira:'Carteira',config:'Configurações'};
+ el('pageTitle').textContent=titles[id]||'Secretyon';
+ if(id==='conteudo') loadContents();
+ if(id==='perfil') loadUser();
+}
+function updateDashboardProfile(){
+ if(!currentUser)return;
+ const nome=currentUser.user_metadata?.nome||currentUser.email.split('@')[0];
+ const handle='@'+nome.toLowerCase().replace(/[^a-z0-9]+/g,'').slice(0,20);
+ ['sideName','profileDisplayName'].forEach(id=>{if(el(id))el(id).textContent=nome});
+ if(el('sideHandle'))el('sideHandle').textContent=handle;
+ if(el('profileDisplayHandle'))el('profileDisplayHandle').textContent=handle;
+ ['sideAvatar','profileBigAvatar'].forEach(id=>{if(el(id))el(id).textContent=(nome[0]||'S').toUpperCase()});
+}
+
 document.addEventListener("DOMContentLoaded",()=>{
 
   const ql=el("quickLogin");
-  if(ql) ql.onclick=quickLogin;
+  if(ql) ql.addEventListener("click",quickLogin);
   const qg=el("socialGoogle");
   if(qg) qg.onclick=()=>alert("O login com Google será ativado quando o provedor social for configurado no Supabase.");
   const qa=el("socialApple");
   if(qa) qa.onclick=()=>alert("O login com Apple será ativado quando o provedor social for configurado no Supabase.");
 
- // Button events are attached directly and do NOT depend on Supabase.
- el("btnCadastroTopo").onclick=openCadastro;
- el("btnLoginTopo").onclick=openLogin;
- el("btnComecar").onclick=openCadastro;
- el("btnEntrarHero").onclick=openLogin;
- el("closeLogin").onclick=()=>closeModal("loginModal");
- el("closeCad").onclick=()=>closeModal("cadModal");
- el("closeRecover").onclick=()=>closeModal("recoverModal");
- el("closeContent").onclick=()=>closeModal("contentModal");
- el("btnEntrar").onclick=login;
- el("btnCadastrar").onclick=register;
- el("btnEsqueci").onclick=openRecover;
- el("btnCadastroLogin").onclick=openCadastro;
- el("btnLoginCad").onclick=openLogin;
- el("btnRecover").onclick=recover;
- el("btnBackLogin").onclick=openLogin;
- el("btnNewPassword").onclick=newPassword;
- el("btnAddPanel").onclick=openContent;
- el("btnAddContent2").onclick=openContent;
- el("btnPublish").onclick=publish;
- el("btnSaveProfile").onclick=saveProfile;
- el("btnChangePassword").onclick=openRecover;
- el("btnSair").onclick=logout;
- document.querySelectorAll(".nav button[data-section]").forEach(b=>b.onclick=()=>showSection(b.dataset.section));
+ // Button events are attached safely: missing optional buttons cannot stop the rest of the panel.
+ const on=(id,event,fn)=>{const x=el(id);if(x)x.addEventListener(event,fn)};
+ on("btnCadastroTopo","click",openCadastro);
+ on("btnLoginTopo","click",openLogin);
+ on("btnComecar","click",openCadastro);
+ on("btnEntrarHero","click",openLogin);
+ on("closeLogin","click",e=>{e.preventDefault();closeModal("loginModal")});
+ on("closeCad","click",e=>{e.preventDefault();closeModal("cadModal")});
+ on("closeRecover","click",e=>{e.preventDefault();closeModal("recoverModal")});
+ on("closeContent","click",e=>{e.preventDefault();closeModal("contentModal")});
+ on("btnEntrar","click",login);
+ on("btnCadastrar","click",register);
+ on("btnEsqueci","click",openRecover);
+ on("btnCadastroLogin","click",openCadastro);
+ on("btnLoginCad","click",openLogin);
+ on("btnRecover","click",recover);
+ on("btnBackLogin","click",openLogin);
+ on("btnNewPassword","click",newPassword);
+ on("btnAddPanel","click",openContent);
+ on("btnAddContent2","click",openContent);
+ on("btnPublish","click",publish);
+ on("btnSaveProfile","click",saveProfile);
+ on("btnChangePassword","click",openRecover);
+ on("btnSair","click",logout);
+ document.querySelectorAll(".nav button[data-section]").forEach(b=>b.addEventListener("click",()=>showSection(b.dataset.section)));
  document.querySelectorAll(".modal").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)closeModal(m.id)}));
+
+
+ document.querySelectorAll('.side-item[data-app],.mobile-bottom button[data-app]').forEach(b=>b.addEventListener('click',()=>showAppPage(b.dataset.app)));
+ on('sideAdd','click',openContent); on('sideCreate','click',openContent); on('btnAddContent2','click',openContent); on('mobileAdd','click',openContent);
+ on('logoutTop','click',logout); on('settingsLogout','click',logout);
+ on('mobileMenu','click',()=>el('sidebar')?.classList.toggle('open'));
+ on('newMessage','click',()=>alert('A caixa de mensagens está pronta para receber a integração de conversas em tempo real.'));
+ on('rightMessages','click',e=>{e.preventDefault();showAppPage('mensagens')});
+ on('editProfileBtn','click',()=>showAppPage('perfil'));
+ const gs=el('globalSearch'); if(gs) gs.addEventListener('input',()=>{const q=gs.value.toLowerCase();document.querySelectorAll('.explore-tile').forEach(x=>x.style.display=x.textContent.toLowerCase().includes(q)?'':'none')});
+ const cs=el('creatorSearch'); if(cs) cs.addEventListener('input',()=>{const q=cs.value.toLowerCase();document.querySelectorAll('.explore-tile').forEach(x=>x.style.display=x.textContent.toLowerCase().includes(q)?'':'none')});
+ document.querySelectorAll('.like-btn').forEach(b=>b.addEventListener('click',()=>{const n=b.querySelector('span');n.textContent=String(Number(n.textContent||0)+1);b.firstChild.textContent='♥ '}));
+ document.querySelectorAll('.save-btn').forEach(b=>b.addEventListener('click',()=>b.textContent=b.textContent==='♧'?'▣':'♧'));
 
  // Supabase initialization is optional for the visual/button test.
  if(supabaseReady()){

@@ -53,7 +53,7 @@ body.light .app-shell,body.light .feed-area,body.light .sidebar,body.light .righ
  .feed-area{border:0;padding-bottom:74px}.mobile-top{height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 15px;border-bottom:1px solid #211329;position:sticky;top:0;z-index:20;background:rgba(5,3,6,.94)}.mobile-top .side-logo{padding:0;font-size:21px}.mobile-top .side-mark{width:26px;height:26px}.mobile-top button{border:0;background:transparent;color:#fff;font-size:23px}
  .feed-header{top:62px}.mobile-bottom{position:fixed;bottom:0;left:0;right:0;height:68px;z-index:90;background:rgba(8,5,10,.96);border-top:1px solid #2b1735;display:grid;grid-template-columns:repeat(5,1fr);backdrop-filter:blur(15px)}.mobile-bottom button{border:0;background:transparent;color:#9d93a3;font-size:21px}.mobile-bottom button small{display:block;font-size:9px;margin-top:2px}.mobile-bottom button.active{color:#d37aff}
  .app-page{padding:18px 14px}.post-card{margin:14px 0}.post-placeholder{height:270px}.explore-grid,.plans{grid-template-columns:1fr}.page-title-row{align-items:flex-start;flex-direction:column}.search-inline{width:100%}.grid{grid-template-columns:1fr}.profile-main{align-items:flex-start;flex-wrap:wrap}.profile-main .btn{margin-left:auto}.profile-stats{gap:15px;flex-wrap:wrap}
- .landing{padding:45px 4%}.landing-inner{grid-template-columns:1fr}.landing-art{min-height:380px}.top-links{display:none}.top-actions .secondary{display:none}
+ .landing{padding:45px 4%}.landing-inner{grid-template-columns:1fr}.landing-art{min-height:380px}.top-links{display:none}.top-actions{display:flex;gap:8px}.top-actions .secondary{display:inline-flex}
 }
 </style>
 </head>
@@ -432,9 +432,16 @@ function closeSidebar(){$("sidebar")?.classList.remove("open");$("sidebarOverlay
 function openSidebar(){$("sidebar")?.classList.add("open");$("sidebarOverlay")?.classList.add("show")}
 
 document.addEventListener("DOMContentLoaded",()=>{
+ // Navegação pública: botões Entrar/Criar conta/Explorar funcionam também no celular.
+ document.querySelectorAll('a[href="#loginModal"]').forEach(a=>a.addEventListener("click",e=>{e.preventDefault();openModal("loginModal")}));
+ document.querySelectorAll('a[href="#cadModal"]').forEach(a=>a.addEventListener("click",e=>{e.preventDefault();openModal("cadModal")}));
+ document.querySelectorAll('a[href="#recoverModal"]').forEach(a=>a.addEventListener("click",e=>{e.preventDefault();openModal("recoverModal")}));
+ document.querySelectorAll('a[href="#publicExplore"]').forEach(a=>a.addEventListener("click",e=>{e.preventDefault();document.getElementById("publicExplore")?.scrollIntoView({behavior:"smooth",block:"start"})}));
+
  loadTheme();
 
  document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>closeModal(b.dataset.close));
+ document.addEventListener("keydown",e=>{if(e.key==="Escape")closeAll()});
  document.querySelectorAll(".modal").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)closeModal(m.id)}));
  $("btnEntrar").onclick=login;$("btnCadastrar").onclick=register;$("btnEsqueci").onclick=()=>openModal("recoverModal");$("btnCadastroLogin").onclick=()=>openModal("cadModal");$("btnLoginCad").onclick=()=>openModal("loginModal");$("btnRecover").onclick=recover;$("btnNewPassword").onclick=newPassword;
  $("sideAdd").onclick=openContent;$("sideCreate").onclick=openContent;$("btnAddContent2").onclick=openContent;$("mobileAdd").onclick=openContent;$("ownStory").onclick=openContent;

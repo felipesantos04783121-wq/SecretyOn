@@ -2,785 +2,459 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="Secretyon — plataforma de criadores, comunidades e conteúdo exclusivo.">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="description" content="Secretyon — plataforma para criadores, comunidades e conteúdo exclusivo.">
 <title>Secretyon — Conteúdo Exclusivo</title>
 <style>
 :root{
- --bg:#050306;--bg2:#09040d;--panel:#0d0a12;--panel2:#15101c;
- --line:#3b1b55;--purple:#a500ff;--purple2:#7b18d6;--pink:#e347b9;
- --text:#fff;--muted:#a99fb1
+ --bg:#050306;--bg2:#09040d;--panel:#0d0a12;--panel2:#15101c;--line:#291634;
+ --purple:#a500ff;--purple2:#7b18d6;--pink:#e347b9;--text:#fff;--muted:#9e94a7;
+ --card:#0e0a12;--success:#48d597;--danger:#ff5c7c
 }
-*{box-sizing:border-box}html{scroll-behavior:smooth}html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
-body{line-height:1.45;overflow-x:hidden}button,input,textarea{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inherit}.hidden{display:none}.modal.hidden:target{display:flex!important}
-
-header{
- height:78px;padding:0 4.5%;display:flex;align-items:center;justify-content:space-between;
- background:rgba(4,3,6,.94);border-bottom:1px solid #1b1024;position:sticky;top:0;z-index:100;backdrop-filter:blur(18px)
-}
-.logo-wrap{display:flex;align-items:center;gap:10px}.logo{
- font-size:31px;font-weight:900;letter-spacing:-1.8px;color:#f4eff8
-}.logo b{color:var(--purple);font-weight:900}
-.logo-mark{width:31px;height:31px;border-radius:50%;background:linear-gradient(135deg,var(--purple),#df36c4);display:flex;align-items:center;justify-content:center;font-size:17px;box-shadow:0 0 25px rgba(165,0,255,.35)}
-.topnav{display:flex;align-items:center;gap:28px;margin-left:auto;margin-right:30px;color:#a9a1af;font-size:14px}.topnav a:hover{color:#fff}
-.actions{display:flex;gap:10px}.btn{border:0;border-radius:999px;padding:12px 22px;font-weight:800;transition:.2s}.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
-.primary{background:linear-gradient(135deg,#bd32ff,#8c19e9);color:#fff;box-shadow:0 8px 28px rgba(165,0,255,.25)}
-.secondary{background:transparent;color:#fff;border:1px solid #8f22c8}
-
-.hero{
- min-height:720px;display:flex;align-items:center;padding:75px 5%;
- position:relative;overflow:hidden;background:
- radial-gradient(circle at 72% 30%,rgba(137,0,214,.25),transparent 28%),
- radial-gradient(circle at 80% 75%,rgba(221,40,170,.12),transparent 24%),
- linear-gradient(115deg,#050306 0%,#08040d 50%,#100315 100%)
-}
-.hero:before{
- content:"";position:absolute;inset:0;pointer-events:none;
- background:linear-gradient(90deg,rgba(5,3,6,.96) 0%,rgba(5,3,6,.78) 38%,rgba(5,3,6,.28) 70%,rgba(5,3,6,.72) 100%)
-}
-.hero-glow{position:absolute;width:600px;height:600px;border-radius:50%;right:-230px;top:50px;border:1px solid rgba(165,0,255,.13);box-shadow:0 0 130px rgba(165,0,255,.12)}
-.hero-inner{max-width:1180px;width:100%;margin:auto;position:relative;z-index:2;display:grid;grid-template-columns:1fr .85fr;gap:40px;align-items:center}
-.hero-copy{max-width:610px}.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;border:1px solid #54206d;background:#110a17;color:#d7b7e7;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.8px}
-.eyebrow b{color:#0a0610;background:var(--purple);padding:2px 5px;border-radius:4px}
-.hero h1{font-size:clamp(49px,6vw,78px);line-height:.98;letter-spacing:-4px;margin:23px 0 22px;font-weight:900}
-.hero h1 span{color:var(--purple)}
-.hero-copy p{color:#aaa2b0;font-size:17px;line-height:1.7;max-width:570px;margin:0 0 28px}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap}.hero-actions .btn{padding:14px 25px}
-.trust{display:flex;gap:25px;flex-wrap:wrap;margin-top:34px;color:#817887;font-size:12px}.trust strong{color:#bbb1c2}
-
-.visual{
- min-height:500px;position:relative;border-radius:28px;overflow:hidden;
- background:linear-gradient(145deg,#21122d,#09060c 55%,#2b092a);
- border:1px solid #3e1a54;box-shadow:0 35px 100px rgba(0,0,0,.55)
-}
-.visual:before{content:"";position:absolute;inset:0;background:
- radial-gradient(ellipse at 65% 30%,rgba(178,0,255,.28),transparent 28%),
- radial-gradient(ellipse at 50% 80%,rgba(222,52,183,.18),transparent 33%)}
-.visual-shape{position:absolute;right:-60px;top:-80px;width:390px;height:650px;border-radius:48% 52% 40% 60%;background:linear-gradient(135deg,rgba(183,83,232,.24),rgba(16,5,23,.08));filter:blur(1px);transform:rotate(12deg)}
-.visual-copy{position:absolute;left:28px;bottom:27px;right:28px}.visual-copy small{color:#c39adb;font-weight:800}.visual-copy h3{font-size:29px;margin:7px 0}.visual-copy p{color:#9b8da3;margin:0;font-size:13px}
-.creator-mini{position:absolute;left:22px;top:22px;padding:10px 13px;border-radius:12px;background:rgba(4,2,7,.65);border:1px solid #5b2a74;font-size:12px}.creator-mini b{color:#c879ff}
-
-.login-overlay-card{
- position:absolute;z-index:4;left:50%;top:50%;transform:translate(-50%,-50%);
- width:min(470px,90%);background:rgba(8,7,12,.92);border:1px solid #9b22db;
- border-radius:24px;padding:28px;box-shadow:0 25px 100px rgba(0,0,0,.75),0 0 45px rgba(165,0,255,.13);backdrop-filter:blur(15px)
-}
-.login-overlay-card h2{text-align:center;font-size:30px;margin:0 0 4px}.login-overlay-card>p{text-align:center;color:#a49ba9;margin:0 0 22px;font-size:14px}
-.field{margin-bottom:14px}.field label{display:block;color:#ddd5e2;font-size:13px;margin-bottom:7px;font-weight:800}
-.field input,.field textarea{width:100%;background:#08070b;color:#fff;border:1px solid #51425a;border-radius:12px;padding:14px;outline:0}.field input:focus,.field textarea:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(165,0,255,.1)}
-.full{width:100%}.switch{text-align:center;margin-top:14px;color:#99909f;font-size:14px}.link{background:none;border:0;color:#cf74ff;font-weight:800;padding:0}
-.msg{padding:11px;border-radius:10px;background:#19141e;color:#ddd;font-size:14px;margin-bottom:14px}.success{border:1px solid #315d43}.error{border:1px solid #733636}
-
-.explore{padding:76px 5%;background:#070509;border-top:1px solid #1b1022}.section-inner{max-width:1180px;margin:auto}
-.section-title{text-align:center;margin-bottom:30px}.section-title h2{font-size:35px;margin:0 0 8px}.section-title p{color:#8f8596;margin:0}
-.creator-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.creator-card{background:#100d14;border:1px solid #2d1b38;border-radius:18px;overflow:hidden}.creator-cover{height:180px;background:linear-gradient(135deg,#301244,#0c0710 60%,#40102e);position:relative}.creator-cover.two{background:linear-gradient(135deg,#20134a,#0c0710 60%,#3e1139)}.creator-cover.three{background:linear-gradient(135deg,#40132d,#0b0710 60%,#261049)}.locked{position:absolute;right:12px;top:12px;background:rgba(0,0,0,.55);border:1px solid #674174;border-radius:999px;padding:6px 9px;font-size:10px}.creator-info{padding:17px}.creator-info h3{margin:0 0 3px}.creator-info p{margin:0;color:#8e8594;font-size:13px}.creator-meta{display:flex;justify-content:space-between;align-items:center;margin-top:15px}.creator-price{font-weight:900}.creator-view{color:#c86cff;font-size:12px;font-weight:800}
-
-.benefits{padding:70px 5%;background:#0b0710}.benefit-grid{max-width:1050px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.benefit{background:#120d18;border:1px solid #2b1835;border-radius:16px;padding:23px}.benefit-icon{font-size:25px;margin-bottom:10px}.benefit h3{margin:0 0 7px}.benefit p{margin:0;color:#89808e;font-size:13px}
-
-.cta{padding:80px 5%;text-align:center;background:radial-gradient(circle at 50% 0,rgba(165,0,255,.18),transparent 42%),#060407;border-top:1px solid #21102b}.cta h2{font-size:40px;margin:0 0 10px}.cta p{color:#918798;max-width:600px;margin:0 auto 25px}
-footer{padding:35px 5%;background:#040306;border-top:1px solid #1b1023;color:#756d7c;font-size:12px}.footer-grid{max-width:1180px;margin:auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px}.footer-brand{font-size:25px;font-weight:900;color:#eee}.footer-brand b{color:var(--purple)}.footer-col h4{color:#cfc5d4;margin:0 0 12px}.footer-col a{display:block;color:#776e7e;margin:7px 0}.copyright{max-width:1180px;margin:35px auto 0;padding-top:20px;border-top:1px solid #19131e}
-
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.86);z-index:9999;align-items:center;justify-content:center;padding:20px}.modal-box{width:100%;max-width:450px;background:#0e0b12;border:1px solid #5a2471;border-radius:20px;padding:27px;position:relative;box-shadow:0 25px 90px #000;color:#fff}.close{position:absolute;right:13px;top:8px;background:none;border:0;color:#aaa;font-size:28px}.modal h2{margin:0 0 5px}.sub{color:#9990a0;font-size:14px;margin:0 0 20px}.modal .field input,.modal .field textarea{background:#08070b;color:#fff;border-color:#4b3a55}.modal .primary{background:linear-gradient(135deg,#b523ff,#8516df);color:#fff}\n.btn:disabled{opacity:.65;cursor:wait;transform:none!important;filter:none!important}
-
-#painel{min-height:100vh;background:#08060a}.panel-head{padding:38px 5% 22px;background:#0e0a12;border-bottom:1px solid #25152e}.panel-head h2{margin:0;font-size:31px}.panel-head p{color:#99909f;margin:6px 0 0}.nav{display:flex;gap:8px;overflow:auto;padding:14px 5%;background:#0b080e;border-bottom:1px solid #25152e}.nav button{white-space:nowrap;background:#151019;color:#ccc;border:1px solid #362341;padding:10px 14px;border-radius:10px;font-weight:700}.body{max-width:1150px;margin:auto;padding:32px 5% 70px}.section{display:none}.section.active{display:block}.box{background:#110d15;border:1px solid #2c1b35;border-radius:17px;padding:24px;max-width:720px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.content{background:#120e16;border:1px solid #2a1933;border-radius:16px;overflow:hidden}.media{height:190px;background:#09070b;display:flex;align-items:center;justify-content:center;color:#777}.media img,.media video{width:100%;height:100%;object-fit:cover}.info{padding:15px}.info h3{margin:0 0 5px}.info p{color:#999;font-size:13px;margin:0}
-
-@media(max-width:900px){
- .topnav{display:none}.hero{padding:50px 4%}.hero-inner{grid-template-columns:1fr}.visual{min-height:420px}.creator-grid,.benefit-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}
-}
-@media(max-width:600px){
- header{height:68px;padding:0 4%}.logo{font-size:26px}.logo-mark{width:27px;height:27px}.actions .secondary{display:none}
- .hero{padding:40px 4%}.hero h1{font-size:47px;letter-spacing:-2.5px}.visual{min-height:430px}.login-overlay-card{padding:22px}
- .footer-grid{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.body,.nav,.panel-head{padding-left:4%;padding-right:4%}
-}
-
-/* Secretyon dashboard */
-.app-shell{min-height:100vh;display:grid;grid-template-columns:250px minmax(480px,680px) 330px;max-width:1500px;margin:auto;background:#050306}.sidebar{position:sticky;top:0;height:100vh;padding:20px 14px 14px;border-right:1px solid #211329;background:#070509;display:flex;flex-direction:column}.side-logo{display:flex;align-items:center;gap:9px;padding:3px 12px 24px;font-size:25px;font-weight:900;letter-spacing:-1.5px}.side-logo b{color:var(--purple)}.side-mark{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#b528ff,#e03ab8);box-shadow:0 0 20px rgba(165,0,255,.25)}.side-nav{display:flex;flex-direction:column;gap:4px}.side-item{border:0;background:transparent;color:#aaa0b0;border-radius:12px;padding:12px 13px;display:flex;align-items:center;gap:13px;text-align:left;font-size:14px}.side-item span{font-size:22px;width:24px;text-align:center}.side-item b{font-weight:700;flex:1}.side-item i{font-style:normal;background:var(--purple);color:#fff;border-radius:999px;min-width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:10px}.side-item:hover,.side-item.active{background:linear-gradient(90deg,rgba(165,0,255,.18),rgba(165,0,255,.04));color:#fff;border:1px solid #5b2075}.create-post{margin:22px 10px 15px;border:0;border-radius:999px;padding:14px;background:linear-gradient(135deg,#b528ff,#8015dc);color:#fff;font-weight:900;box-shadow:0 10px 30px rgba(165,0,255,.2)}.side-profile{margin-top:auto;border-top:1px solid #211329;padding:15px 8px 2px;display:flex;align-items:center;gap:10px}.side-profile .avatar{flex:none}.side-profile strong{display:block;font-size:13px}.side-profile small{display:block;color:#7f7488;font-size:11px}.side-profile>span{margin-left:auto;color:#888}.avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#9d4dff,#df3bb3);display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;border:2px solid #2d1839}.fake1{background:linear-gradient(135deg,#c57aff,#54208d)}.fake2{background:linear-gradient(135deg,#ffae54,#5a2180)}.fake3{background:linear-gradient(135deg,#e947a9,#f0a4d0)}.fake4{background:linear-gradient(135deg,#4b8cff,#252045)}
-.feed-area{min-width:0;border-right:1px solid #211329;background:#050306}.feed-header{height:68px;position:sticky;top:0;z-index:5;background:rgba(5,3,6,.92);backdrop-filter:blur(16px);border-bottom:1px solid #211329;padding:0 22px;display:flex;align-items:center;justify-content:space-between}.feed-header h1{font-size:21px;margin:0}.feed-tools{display:flex;gap:8px}.feed-tools button{border:0;background:transparent;color:#b9aebe;font-size:20px}.stories{display:flex;gap:14px;padding:18px 18px 15px;overflow:auto;border-bottom:1px solid #17101c}.story{min-width:66px;text-align:center;color:#aaa0ad;font-size:10px}.story-avatar{width:57px;height:57px;border-radius:50%;margin:0 auto 5px;display:flex;align-items:center;justify-content:center;background:#1a1220;border:2px solid var(--purple);font-weight:900;font-size:19px}.story.own .story-avatar{background:#141017;border:2px dashed #9141bf;font-size:26px}.post-card{margin:18px;background:#0d0a11;border:1px solid #271832;border-radius:18px;overflow:hidden}.post-head{display:flex;align-items:center;gap:10px;padding:15px}.post-head>div:nth-child(2){flex:1}.post-head strong{display:block;font-size:14px}.post-head small{display:block;color:#7e7484;font-size:11px;margin-top:2px}.post-head button{background:none;border:0;color:#8e8394}.verified{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:var(--purple);color:#fff;font-size:9px}.post-text{padding:0 17px 15px;color:#d8d0dc;font-size:14px}.post-text span{color:#c58aff}.post-placeholder{height:430px;background:radial-gradient(circle at 50% 45%,rgba(165,0,255,.18),transparent 27%),linear-gradient(145deg,#21102d,#09070b 65%,#2d0b2a);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#eee}.post-placeholder .lock-big{font-size:40px;margin-bottom:10px}.post-placeholder small{color:#8f8495;margin-top:5px}.post-actions{display:flex;gap:25px;padding:14px 17px;color:#aaa0ad}.post-actions button{background:none;border:0;color:inherit;font-size:17px}.post-actions button span{font-size:12px;margin-left:4px}.post-actions .save-btn{margin-left:auto}.app-page{display:none;padding:24px}.app-page.active{display:block}.app-page h2{font-size:28px;margin:0 0 5px}.muted,.page-title-row p{color:#8b8191;font-size:13px}.page-title-row{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:22px}.search-inline,.search-box input{background:#0e0a12;border:1px solid #392445;color:#fff;border-radius:999px;padding:12px 15px;outline:0}.search-inline{width:230px}.explore-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.explore-grid .empty-note{grid-column:1/-1}.explore-tile{border:1px solid #2b1935;border-radius:15px;overflow:hidden;background:#0e0a12}.tile-cover{height:180px;display:flex;align-items:center;justify-content:center;font-size:30px;background:linear-gradient(135deg,#301244,#0b070e 60%,#43102f)}.tile-cover.c2{background:linear-gradient(135deg,#24134d,#0b070e 60%,#3f113b)}.tile-cover.c3{background:linear-gradient(135deg,#43142e,#0b070e 60%,#261049)}.explore-tile>div:last-child{padding:14px;position:relative}.explore-tile strong,.explore-tile small{display:block}.explore-tile small{color:#82788a;margin-top:3px}.explore-tile button{position:absolute;right:12px;top:16px;border:1px solid #8624b7;background:transparent;color:#d69bff;border-radius:999px;padding:7px 12px}.message-list{border:1px solid #291932;border-radius:15px;overflow:hidden}.message-row{display:flex;align-items:center;gap:12px;padding:15px;border-bottom:1px solid #211329}.message-row>div:nth-child(2){flex:1}.message-row strong,.message-row small{display:block}.message-row small{color:#807687;margin-top:3px}.message-row>b{background:var(--purple);border-radius:99px;padding:3px 7px;font-size:10px}.empty-note{text-align:center;color:#756b7b;padding:40px}.notice{display:flex;align-items:flex-start;gap:13px;padding:17px;border:1px solid #281731;background:#0e0a12;border-radius:15px;margin:10px 0}.notice>span{font-size:21px;color:#cf73ff}.notice div{flex:1}.notice p{margin:4px 0 0;color:#817686;font-size:13px}.notice>small{color:#6d6371}.profile-hero{border:1px solid #2a1833;border-radius:18px;overflow:hidden;background:#0e0a12;margin-bottom:18px}.profile-cover{height:160px;background:radial-gradient(circle at 50% 50%,rgba(165,0,255,.3),transparent 30%),linear-gradient(135deg,#291136,#0a070d 60%,#3d102e)}.profile-main{display:flex;align-items:center;gap:15px;padding:0 20px 18px;position:relative}.profile-big-avatar{width:90px;height:90px;margin-top:-45px;border:4px solid #0e0a12;border-radius:50%;background:linear-gradient(135deg,#b528ff,#df3bb3);display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:900}.profile-info{flex:1}.profile-info h2{margin:7px 0 2px}.profile-info p{margin:2px 0;color:#8d8293;font-size:12px}.profile-stats{display:flex;gap:28px;padding:14px 20px;border-top:1px solid #23142b;color:#8e8493;font-size:12px}.profile-stats b{color:#fff}.profile-form{max-width:none}.plans{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:20px 0}.plan{border:1px solid #382044;background:#100c14;border-radius:16px;padding:20px}.plan span,.plan strong,.plan small{display:block}.plan strong{font-size:30px;margin:9px 0 0}.plan small{color:#817687;margin-bottom:18px}.wallet{padding:25px;border:1px solid #382044;border-radius:18px;background:linear-gradient(135deg,#170d20,#0d0911);margin:18px 0}.wallet small,.wallet strong{display:block}.wallet strong{font-size:36px;margin:5px 0 20px}.settings-list{border:1px solid #291932;border-radius:16px;overflow:hidden}.settings-list button{width:100%;display:flex;align-items:center;gap:13px;padding:17px;background:#0e0a12;border:0;border-bottom:1px solid #211329;color:#fff;text-align:left}.settings-list button:last-child{border-bottom:0}.settings-list button>span{font-size:20px;width:28px}.settings-list button div{flex:1}.settings-list strong,.settings-list small{display:block}.settings-list small{color:#7d7383;margin-top:3px}.settings-list b{color:#7b7180}.rightbar{padding:18px 14px;background:#050306}.search-box{display:flex;align-items:center;gap:8px;background:#0d0a11;border:1px solid #2e1b38;border-radius:999px;padding:0 14px}.search-box span{font-size:22px;color:#9c8fa4}.search-box input{border:0;border-radius:0;background:transparent;width:100%;padding:13px 0}.right-card{margin-top:16px;padding:16px;border:1px solid #25152e;border-radius:17px;background:#0b080e}.right-title{display:flex;justify-content:space-between;gap:10px;margin-bottom:14px}.right-title a{color:#bd72e9;font-size:12px}.suggest,.right-message{display:flex;align-items:center;gap:9px;margin:14px 0}.suggest>div:nth-child(2),.right-message>div:nth-child(2){flex:1}.suggest strong,.suggest small,.right-message strong,.right-message small{display:block}.suggest small,.right-message small{color:#766c7b;font-size:11px;margin-top:2px}.suggest button{border:1px solid #7e24a9;color:#d78eff;background:transparent;border-radius:999px;padding:6px 10px;font-size:11px}.right-message>b{background:var(--purple);border-radius:99px;padding:3px 6px;font-size:9px}.trends>div:not(.right-title){padding:10px 0;border-bottom:1px solid #1e1226}.trends>div:last-child{border-bottom:0}.trends b,.trends small{display:block}.trends small{color:#766c7b;margin-top:2px}.mobile-top,.mobile-bottom{display:none}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif;line-height:1.45}
+button,input,textarea,select{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inherit}.hidden{display:none!important}
+.btn{border:0;border-radius:999px;padding:12px 20px;font-weight:800;transition:.18s}.btn:hover{transform:translateY(-1px);filter:brightness(1.08)}
+.primary{background:linear-gradient(135deg,#bd32ff,#8315dc);color:#fff;box-shadow:0 9px 28px rgba(165,0,255,.22)}
+.secondary{background:transparent;color:#fff;border:1px solid #8624b5}.danger{background:#34101c;color:#ff9db1;border:1px solid #6d2037}
+.full{width:100%}.muted{color:var(--muted);font-size:13px}.msg{padding:11px 13px;border-radius:11px;background:#17121c;color:#ddd;margin:12px 0;font-size:13px}.msg.error{border:1px solid #733646}.msg.success{border:1px solid #2e7257}
+.top-header{height:76px;padding:0 4.5%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #1d1126;background:rgba(5,3,6,.95);position:sticky;top:0;z-index:100;backdrop-filter:blur(15px)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:30px;letter-spacing:-1.8px}.brand b{color:var(--purple)}.brand-mark{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#b528ff,#e03ab8);box-shadow:0 0 24px rgba(165,0,255,.3)}
+.top-links{display:flex;gap:25px;color:#a69dab;font-size:14px}.top-actions{display:flex;gap:9px}
+.landing{min-height:calc(100vh - 76px);background:radial-gradient(circle at 78% 25%,rgba(165,0,255,.22),transparent 25%),linear-gradient(115deg,#050306,#0a040e 65%,#160517);padding:70px 5%;display:flex;align-items:center}
+.landing-inner{max-width:1150px;width:100%;margin:auto;display:grid;grid-template-columns:1fr .85fr;gap:50px;align-items:center}
+.eyebrow{display:inline-flex;padding:7px 12px;border:1px solid #56206c;background:#110a17;border-radius:999px;color:#d8bce7;font-size:11px;font-weight:900;text-transform:uppercase}.eyebrow b{background:var(--purple);color:#100614;border-radius:4px;padding:2px 5px;margin-right:6px}
+.landing h1{font-size:clamp(48px,6vw,76px);line-height:.98;letter-spacing:-4px;margin:23px 0}.landing h1 span{color:var(--purple)}.landing p{max-width:600px;color:#aaa1af;font-size:17px;line-height:1.7}.landing-actions{display:flex;gap:12px;flex-wrap:wrap;margin:28px 0}.trust{display:flex;gap:20px;flex-wrap:wrap;color:#817786;font-size:12px}
+.landing-art{min-height:520px;border:1px solid #3d1a51;border-radius:28px;background:radial-gradient(circle at 65% 30%,rgba(183,0,255,.28),transparent 25%),linear-gradient(145deg,#21102d,#09060c 62%,#300a2a);position:relative;overflow:hidden;box-shadow:0 35px 100px rgba(0,0,0,.55)}
+.art-badge{position:absolute;top:22px;left:22px;background:rgba(4,2,7,.72);border:1px solid #5b2a74;border-radius:12px;padding:10px 13px;font-size:12px}.art-badge b{color:#d07aff}.art-copy{position:absolute;left:28px;bottom:28px}.art-copy small{color:#c88ae9;font-weight:800}.art-copy h2{font-size:30px;margin:7px 0}.art-copy p{font-size:13px;color:#988d9e}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.86);z-index:9999;display:flex;align-items:center;justify-content:center;padding:18px}.modal-box{width:min(480px,100%);max-height:92vh;overflow:auto;background:#0e0b12;border:1px solid #67218a;border-radius:22px;padding:26px;position:relative;box-shadow:0 30px 100px #000}.close{position:absolute;right:14px;top:9px;border:0;background:none;color:#aaa;font-size:28px}.modal h2{margin:0 0 5px;font-size:28px}.modal .sub{margin:0 0 20px;color:#988e9f;font-size:14px}.field{margin:0 0 14px}.field label{display:block;font-size:13px;font-weight:800;color:#ddd5e2;margin-bottom:7px}.field input,.field textarea,.field select{width:100%;background:#08070b;color:#fff;border:1px solid #4c3c56;border-radius:11px;padding:13px;outline:0}.field textarea{min-height:105px;resize:vertical}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(165,0,255,.11)}
+.choice-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:15px}.choice-row button{padding:11px;border-radius:10px;background:#110d15;border:1px solid #3b2445;color:#aaa}.choice-row button.active{border-color:var(--purple);color:#fff;background:#1b0d24}
+.pill{display:inline-flex;align-items:center;padding:5px 9px;border-radius:99px;background:#1c0c27;border:1px solid #512064;color:#d78cff;font-size:11px;font-weight:800}
+#painel{min-height:100vh}.app-shell{min-height:100vh;display:grid;grid-template-columns:250px minmax(480px,680px) 330px;max-width:1500px;margin:auto;background:#050306}
+.sidebar{position:sticky;top:0;height:100vh;padding:18px 13px;border-right:1px solid #211329;background:#070509;display:flex;flex-direction:column}.side-logo{display:flex;align-items:center;gap:9px;padding:3px 12px 23px;font-size:25px;font-weight:900;letter-spacing:-1.5px}.side-logo b{color:var(--purple)}.side-mark{width:31px;height:31px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#b528ff,#e03ab8);box-shadow:0 0 20px rgba(165,0,255,.25)}
+.side-nav{display:flex;flex-direction:column;gap:3px}.side-item{border:1px solid transparent;background:transparent;color:#aaa0b0;border-radius:12px;padding:11px 12px;display:flex;align-items:center;gap:12px;text-align:left;font-size:14px}.side-item span{font-size:21px;width:24px;text-align:center}.side-item b{font-weight:700;flex:1}.side-item i{font-style:normal;background:var(--purple);color:#fff;border-radius:99px;min-width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:10px}.side-item:hover,.side-item.active{background:linear-gradient(90deg,rgba(165,0,255,.18),rgba(165,0,255,.03));color:#fff;border-color:#5b2075}
+.create-post{margin:20px 9px 13px;border:0;border-radius:99px;padding:14px;background:linear-gradient(135deg,#b528ff,#8015dc);color:#fff;font-weight:900;box-shadow:0 10px 30px rgba(165,0,255,.2)}.side-profile{margin-top:auto;border-top:1px solid #211329;padding:14px 8px 2px;display:flex;align-items:center;gap:10px}.side-profile .avatar{flex:none}.side-profile strong{display:block;font-size:13px}.side-profile small{display:block;color:#7f7488;font-size:11px}.side-profile>span{margin-left:auto;color:#888}
+.avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#9d4dff,#df3bb3);display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;border:2px solid #2d1839}.avatar img,.profile-big-avatar img,.story-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.feed-area{min-width:0;border-right:1px solid #211329;background:#050306}.feed-header{height:68px;position:sticky;top:0;z-index:5;background:rgba(5,3,6,.92);backdrop-filter:blur(16px);border-bottom:1px solid #211329;padding:0 22px;display:flex;align-items:center;justify-content:space-between}.feed-header h1{font-size:21px;margin:0}.feed-tools{display:flex;gap:8px}.feed-tools button{border:0;background:transparent;color:#b9aebe;font-size:20px}
+.stories{display:flex;gap:14px;padding:18px 18px 15px;overflow:auto;border-bottom:1px solid #17101c}.story{min-width:66px;text-align:center;color:#aaa0ad;font-size:10px;cursor:pointer}.story-avatar{width:57px;height:57px;border-radius:50%;margin:0 auto 5px;display:flex;align-items:center;justify-content:center;background:#1a1220;border:2px solid var(--purple);font-weight:900;font-size:19px}.story.own .story-avatar{background:#141017;border:2px dashed #9141bf;font-size:26px}
+.post-card{margin:18px;background:#0d0a11;border:1px solid #271832;border-radius:18px;overflow:hidden}.post-head{display:flex;align-items:center;gap:10px;padding:15px}.post-head>div:nth-child(2){flex:1}.post-head strong{display:block;font-size:14px}.post-head small{display:block;color:#7e7484;font-size:11px;margin-top:2px}.post-head button{background:none;border:0;color:#8e8394}.post-text{padding:0 17px 15px;color:#d8d0dc;font-size:14px;white-space:pre-wrap}.post-media{background:#08070b;max-height:620px;display:flex;align-items:center;justify-content:center}.post-media img,.post-media video{width:100%;max-height:620px;object-fit:cover}.post-link{padding:30px 18px;background:linear-gradient(135deg,#170d20,#09070b);color:#d37cff}.post-link strong{display:block;font-size:17px}.post-link small{display:block;color:#8e8297;margin-top:6px;word-break:break-all}.post-placeholder{height:300px;background:radial-gradient(circle at 50% 45%,rgba(165,0,255,.18),transparent 27%),linear-gradient(145deg,#21102d,#09070b 65%,#2d0b2a);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#eee}.post-placeholder .lock-big{font-size:40px;margin-bottom:10px}.post-placeholder small{color:#8f8495;margin-top:5px}.post-actions{display:flex;gap:20px;padding:14px 17px;color:#aaa0ad;border-top:1px solid #1b1220}.post-actions button{background:none;border:0;color:inherit;font-size:17px}.post-actions button span{font-size:12px;margin-left:4px}.post-actions .save-btn{margin-left:auto}
+.app-page{display:none;padding:24px}.app-page.active{display:block}.app-page h2{font-size:28px;margin:0 0 5px}.page-title-row{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:22px}.search-inline{width:240px;background:#0e0a12;border:1px solid #392445;color:#fff;border-radius:999px;padding:12px 15px;outline:0}
+.explore-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.explore-tile{border:1px solid #2b1935;border-radius:15px;overflow:hidden;background:#0e0a12}.tile-cover{height:150px;display:flex;align-items:center;justify-content:center;font-size:30px;background:linear-gradient(135deg,#301244,#0b070e 60%,#43102f)}.explore-tile>div:last-child{padding:14px;position:relative}.explore-tile strong,.explore-tile small{display:block}.explore-tile small{color:#82788a;margin-top:3px}.explore-tile button{position:absolute;right:12px;top:16px;border:1px solid #8624b7;background:transparent;color:#d69bff;border-radius:999px;padding:7px 12px}
+.message-list,.settings-list{border:1px solid #291932;border-radius:15px;overflow:hidden}.message-row{display:flex;align-items:center;gap:12px;padding:15px;border-bottom:1px solid #211329}.message-row:last-child{border-bottom:0}.message-row>div:nth-child(2){flex:1}.message-row strong,.message-row small{display:block}.message-row small{color:#807687;margin-top:3px}.message-row>b{background:var(--purple);border-radius:99px;padding:3px 7px;font-size:10px}.empty-note{text-align:center;color:#756b7b;padding:40px}
+.notice{display:flex;align-items:flex-start;gap:13px;padding:17px;border:1px solid #281731;background:#0e0a12;border-radius:15px;margin:10px 0;cursor:pointer}.notice>span{font-size:21px;color:#cf73ff}.notice div{flex:1}.notice p{margin:4px 0 0;color:#817686;font-size:13px}.notice>small{color:#6d6371}
+.profile-hero{border:1px solid #2a1833;border-radius:18px;overflow:hidden;background:#0e0a12;margin-bottom:18px}.profile-cover{height:160px;background:radial-gradient(circle at 50% 50%,rgba(165,0,255,.3),transparent 30%),linear-gradient(135deg,#291136,#0a070d 60%,#3d102e)}.profile-main{display:flex;align-items:center;gap:15px;padding:0 20px 18px;position:relative}.profile-big-avatar{width:90px;height:90px;margin-top:-45px;border:4px solid #0e0a12;border-radius:50%;background:linear-gradient(135deg,#b528ff,#df3bb3);display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:900;overflow:hidden}.profile-info{flex:1}.profile-info h2{margin:7px 0 2px}.profile-info p{margin:2px 0;color:#8d8293;font-size:12px}.profile-stats{display:flex;gap:28px;padding:14px 20px;border-top:1px solid #23142b;color:#8e8493;font-size:12px}.profile-stats b{color:#fff}.profile-form{max-width:none}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.content{background:#120e16;border:1px solid #2a1933;border-radius:16px;overflow:hidden}.media{height:190px;background:#09070b;display:flex;align-items:center;justify-content:center;color:#777}.media img,.media video{width:100%;height:100%;object-fit:cover}.info{padding:15px}.info h3{margin:0 0 5px}.info p{color:#999;font-size:13px;margin:0}
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:20px 0}.plan{border:1px solid #382044;background:#100c14;border-radius:16px;padding:20px}.plan span,.plan strong,.plan small{display:block}.plan strong{font-size:30px;margin:9px 0 0}.plan small{color:#817687;margin-bottom:18px}.plan.custom{border-color:#a52ee2}.payment-options{display:grid;grid-template-columns:1fr 1fr;gap:10px}.payment-options button{background:#100c14;border:1px solid #3a2445;color:#ddd;border-radius:12px;padding:14px}.wallet{padding:25px;border:1px solid #382044;border-radius:18px;background:linear-gradient(135deg,#170d20,#0d0911);margin:18px 0}.wallet small,.wallet strong{display:block}.wallet strong{font-size:36px;margin:5px 0 20px}.settings-list button{width:100%;display:flex;align-items:center;gap:13px;padding:17px;background:#0e0a12;border:0;border-bottom:1px solid #211329;color:#fff;text-align:left}.settings-list button:last-child{border-bottom:0}.settings-list button>span{font-size:20px;width:28px}.settings-list button div{flex:1}.settings-list strong,.settings-list small{display:block}.settings-list small{color:#7d7383;margin-top:3px}.settings-list button>b{color:#7b7180}.toggle{width:44px;height:24px;border-radius:99px;background:#33253b;position:relative;display:inline-block}.toggle:after{content:"";width:18px;height:18px;position:absolute;top:3px;left:3px;border-radius:50%;background:#aaa;transition:.2s}.toggle.on{background:var(--purple)}.toggle.on:after{left:23px;background:#fff}
+.rightbar{padding:18px 14px;background:#050306}.search-box{display:flex;align-items:center;gap:8px;background:#0d0a11;border:1px solid #2e1b38;border-radius:999px;padding:0 14px}.search-box span{font-size:22px;color:#9c8fa4}.search-box input{border:0;border-radius:0;background:transparent;color:#fff;width:100%;padding:13px 0;outline:0}.right-card{margin-top:16px;padding:16px;border:1px solid #25152e;border-radius:17px;background:#0b080e}.right-title{display:flex;justify-content:space-between;gap:10px;margin-bottom:14px}.right-title a{color:#bd72e9;font-size:12px}.suggest,.right-message{display:flex;align-items:center;gap:9px;margin:14px 0}.suggest>div:nth-child(2),.right-message>div:nth-child(2){flex:1}.suggest strong,.suggest small,.right-message strong,.right-message small{display:block}.suggest small,.right-message small{color:#766c7b;font-size:11px;margin-top:2px}.suggest button{border:1px solid #7e24a9;color:#d78eff;background:transparent;border-radius:999px;padding:6px 10px;font-size:11px}.trends>div:not(.right-title){padding:10px 0;border-bottom:1px solid #1e1226}.trends>div:last-child{border-bottom:0}.trends b,.trends small{display:block}.trends small{color:#766c7b;margin-top:2px}
+.mobile-top,.mobile-bottom,.sidebar-overlay{display:none}
+body.light{--bg:#f7f7fa;--bg2:#fff;--panel:#fff;--panel2:#f2eff5;--line:#ddd4e4;--text:#17121c;--muted:#6e6475;--card:#fff}
+body.light .app-shell,body.light .feed-area,body.light .sidebar,body.light .rightbar{background:#fff;color:#17121c}body.light .sidebar,body.light .feed-area{border-color:#e6dfea}body.light .feed-header,body.light .stories,body.light .right-card,body.light .post-card,body.light .app-page .box,body.light .settings-list,body.light .message-list{background:#fff;border-color:#e6dfea}body.light .post-text,body.light .settings-list button{color:#28212d}body.light .side-item{color:#6d6474}body.light .side-item:hover,body.light .side-item.active{color:#17121c;background:#f2e9f7}body.light .search-box,body.light .search-inline,body.light .field input,body.light .field textarea,body.light .field select{background:#fff;color:#17121c;border-color:#d4cbd9}
 @media(max-width:1100px){.app-shell{grid-template-columns:230px minmax(480px,1fr)}.rightbar{display:none}}
-@media(max-width:700px){.app-shell{display:block}.sidebar{position:fixed;left:-280px;top:0;width:270px;z-index:100;transition:.25s;box-shadow:20px 0 50px #000}.sidebar.open{left:0}.feed-area{border:0;padding-bottom:74px}.mobile-top{height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 15px;border-bottom:1px solid #211329;position:sticky;top:0;z-index:20;background:rgba(5,3,6,.94)}.mobile-top .side-logo{padding:0;font-size:21px}.mobile-top .side-mark{width:26px;height:26px}.mobile-top button{border:0;background:transparent;color:#fff;font-size:23px}.feed-header{top:62px}.mobile-bottom{position:fixed;bottom:0;left:0;right:0;height:68px;z-index:90;background:rgba(8,5,10,.96);border-top:1px solid #2b1735;display:grid;grid-template-columns:repeat(5,1fr);backdrop-filter:blur(15px)}.mobile-bottom button{border:0;background:transparent;color:#9d93a3;font-size:21px}.mobile-bottom button small{display:block;font-size:9px;margin-top:2px}.mobile-bottom button.active{color:#d37aff}.app-page{padding:18px 14px}.post-card{margin:14px 0}.post-placeholder{height:330px}.explore-grid,.plans{grid-template-columns:1fr}.page-title-row{align-items:flex-start;flex-direction:column}.search-inline{width:100%}}
+@media(max-width:700px){
+ .app-shell{display:block}.sidebar{position:fixed;left:-285px;top:0;width:275px;z-index:110;transition:.22s;box-shadow:20px 0 50px #000}.sidebar.open{left:0}.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:105}.sidebar-overlay.show{display:block}
+ .feed-area{border:0;padding-bottom:74px}.mobile-top{height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 15px;border-bottom:1px solid #211329;position:sticky;top:0;z-index:20;background:rgba(5,3,6,.94)}.mobile-top .side-logo{padding:0;font-size:21px}.mobile-top .side-mark{width:26px;height:26px}.mobile-top button{border:0;background:transparent;color:#fff;font-size:23px}
+ .feed-header{top:62px}.mobile-bottom{position:fixed;bottom:0;left:0;right:0;height:68px;z-index:90;background:rgba(8,5,10,.96);border-top:1px solid #2b1735;display:grid;grid-template-columns:repeat(5,1fr);backdrop-filter:blur(15px)}.mobile-bottom button{border:0;background:transparent;color:#9d93a3;font-size:21px}.mobile-bottom button small{display:block;font-size:9px;margin-top:2px}.mobile-bottom button.active{color:#d37aff}
+ .app-page{padding:18px 14px}.post-card{margin:14px 0}.post-placeholder{height:270px}.explore-grid,.plans{grid-template-columns:1fr}.page-title-row{align-items:flex-start;flex-direction:column}.search-inline{width:100%}.grid{grid-template-columns:1fr}.profile-main{align-items:flex-start;flex-wrap:wrap}.profile-main .btn{margin-left:auto}.profile-stats{gap:15px;flex-wrap:wrap}
+ .landing{padding:45px 4%}.landing-inner{grid-template-columns:1fr}.landing-art{min-height:380px}.top-links{display:none}.top-actions .secondary{display:none}
+}
 </style>
 </head>
 <body>
-
-<header id="header">
-  <div class="logo-wrap">
-    <div class="logo-mark">♡</div>
-    <div class="logo">Secrety<b>on</b></div>
-  </div>
-  <nav class="topnav">
-    <a href="#explore">Explorar</a><a href="#beneficios">Criadores</a><a href="#cta">Planos</a>
-  </nav>
-  <div class="actions">
-    <a class="btn secondary" href="#loginModal">Entrar</a>
-    <a class="btn primary" href="#cadModal">Criar conta</a>
-  </div>
+<header class="top-header" id="publicHeader">
+ <div class="brand"><span class="brand-mark">♡</span><span>Secrety<b>on</b></span></div>
+ <nav class="top-links"><a href="#publicExplore">Explorar</a><a href="#publicBenefits">Criadores</a><a href="#publicPlans">Planos</a></nav>
+ <div class="top-actions"><a class="btn secondary" href="#loginModal">Entrar</a><a class="btn primary" href="#cadModal">Criar conta</a></div>
 </header>
 
 <main id="home">
-<section class="hero">
-  <div class="hero-glow"></div>
-  <div class="hero-inner">
-    <div class="hero-copy">
-      <div class="eyebrow"><b>18+</b> Conteúdo exclusivo</div>
-      <h1>Seu conteúdo.<br>Suas regras.<br><span>Seu público.</span></h1>
-      <p>Uma plataforma para criadores e comunidades que valorizam conteúdo exclusivo, liberdade e conexão.</p>
-      <div class="hero-actions">
-        <a class="btn primary" href="#cadModal">Criar minha conta</a>
-        <a class="btn secondary" href="#explore">Explorar criadores</a>
-      </div>
-      <div class="trust">
-        <span>🔒 <strong>Acesso protegido</strong></span>
-        <span>💜 <strong>Conteúdo exclusivo</strong></span>
-        <span>⚡ <strong>Você no controle</strong></span>
-      </div>
-    </div>
-
-    <div class="visual">
-      <div class="creator-mini">🔒 <b>Área exclusiva</b> · somente para assinantes</div>
-      <div class="visual-shape"></div>
-      <div class="visual-copy"><small>SEU PERFIL DE CRIADOR</small><h3>Mais que conteúdo.<br>É conexão.</h3><p>Crie seu espaço e compartilhe o que quiser com sua comunidade.</p></div>
-    </div>
+<section class="landing">
+ <div class="landing-inner">
+  <div>
+   <div class="eyebrow"><b>18+</b> Conteúdo exclusivo</div>
+   <h1>Seu conteúdo.<br>Suas regras.<br><span>Seu público.</span></h1>
+   <p>Uma plataforma para criadores e comunidades. Publique fotos, vídeos e links, crie seu perfil e construa sua comunidade.</p>
+   <div class="landing-actions"><a class="btn primary" href="#cadModal">Criar minha conta</a><a class="btn secondary" href="#publicExplore">Explorar criadores</a></div>
+   <div class="trust"><span>🔒 Acesso protegido</span><span>💜 Conteúdo exclusivo</span><span>⚡ Você no controle</span></div>
   </div>
-
-  <div class="login-overlay-card">
-    <h2>Entrar</h2>
-    <p>Acesse sua conta Secretyon.</p>
-    <div class="field"><label>E-mail</label><input id="quickEmail" type="email" placeholder="seuemail@exemplo.com" autocomplete="email"></div>
-    <div class="field"><label>Senha</label><input id="quickPassword" type="password" placeholder="Sua senha" autocomplete="current-password"></div>
-    <button type="button" class="btn primary full" id="quickLogin">Entrar</button>
-    <div class="switch"><a href="#recoverModal" class="link">Esqueci minha senha</a></div>
-    <div style="display:flex;align-items:center;gap:10px;margin:18px 0;color:#6f6675;font-size:12px"><span style="height:1px;background:#302533;flex:1"></span>OU<span style="height:1px;background:#302533;flex:1"></span></div>
-    <button type="button" class="btn secondary full" id="socialGoogle" style="margin-bottom:10px">G&nbsp;&nbsp; Continuar com o Google</button>
-    <button type="button" class="btn secondary full" id="socialApple">&nbsp;&nbsp; Continuar com a Apple</button>
-    <div class="switch">Não tem conta? <a href="#cadModal" class="link">Criar conta</a></div>
-  </div>
-</section>
-
-<section class="explore" id="explore">
-<div class="section-inner">
- <div class="section-title"><h2>Explore criadores</h2><p>Descubra perfis e conteúdos exclusivos.</p></div>
- <div class="creator-grid">
-  <article class="creator-card"><div class="creator-cover"><span class="locked">🔒 EXCLUSIVO</span></div><div class="creator-info"><h3>Perfil em destaque</h3><p>Conteúdo premium para assinantes</p><div class="creator-meta"><span class="creator-price">R$ 19,90/mês</span><span class="creator-view">Ver perfil →</span></div></div></article>
-  <article class="creator-card"><div class="creator-cover two"><span class="locked">🔒 EXCLUSIVO</span></div><div class="creator-info"><h3>Conteúdo privado</h3><p>Fotos, vídeos e novidades</p><div class="creator-meta"><span class="creator-price">R$ 24,90/mês</span><span class="creator-view">Ver perfil →</span></div></div></article>
-  <article class="creator-card"><div class="creator-cover three"><span class="locked">🔒 EXCLUSIVO</span></div><div class="creator-info"><h3>Área VIP</h3><p>Experiência exclusiva para fãs</p><div class="creator-meta"><span class="creator-price">R$ 29,90/mês</span><span class="creator-view">Ver perfil →</span></div></div></article>
- </div>
-</div>
-</section>
-
-<section class="benefits" id="beneficios">
- <div class="benefit-grid">
-  <div class="benefit"><div class="benefit-icon">🔐</div><h3>Privacidade</h3><p>Tenha controle sobre seu perfil e seus conteúdos.</p></div>
-  <div class="benefit"><div class="benefit-icon">💎</div><h3>Conteúdo premium</h3><p>Crie uma experiência exclusiva para sua comunidade.</p></div>
-  <div class="benefit"><div class="benefit-icon">📱</div><h3>Em qualquer dispositivo</h3><p>Uma experiência adaptada para celular e computador.</p></div>
+  <div class="landing-art"><div class="art-badge">🔒 <b>Área exclusiva</b> · para assinantes</div><div class="art-copy"><small>SEU PERFIL DE CRIADOR</small><h2>Mais que conteúdo.<br>É conexão.</h2><p>Seu espaço para criar, publicar e se conectar.</p></div></div>
  </div>
 </section>
-
-<section class="cta" id="cta">
- <h2>Crie seu espaço no Secretyon.</h2><p>Monte seu perfil, publique seus conteúdos e construa sua comunidade.</p>
- <a class="btn primary" href="#cadModal">Criar minha conta</a>
-</section>
+<section id="publicExplore" class="explore" style="padding:70px 5%;background:#070509;border-top:1px solid #1b1022"><div class="section-inner" style="max-width:1180px;margin:auto"><div class="section-title" style="text-align:center;margin-bottom:28px"><h2>Explore criadores</h2><p class="muted">Somente perfis reais cadastrados no Secretyon.</p></div><div id="publicCreators" class="explore-grid"><div class="empty-note">Entre para explorar os criadores.</div></div></div></section>
+<section id="publicBenefits" style="padding:70px 5%;background:#0b0710"><div class="benefit-grid" style="max-width:1050px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:15px"><div class="benefit" style="background:#120d18;border:1px solid #2b1835;border-radius:16px;padding:23px"><h3>🔐 Privacidade</h3><p class="muted">Controle seu perfil e seus conteúdos.</p></div><div class="benefit" style="background:#120d18;border:1px solid #2b1835;border-radius:16px;padding:23px"><h3>💎 Conteúdo premium</h3><p class="muted">Crie experiências exclusivas para sua comunidade.</p></div><div class="benefit" style="background:#120d18;border:1px solid #2b1835;border-radius:16px;padding:23px"><h3>📱 Em qualquer dispositivo</h3><p class="muted">Experiência adaptada para celular e computador.</p></div></div></section>
+<section id="publicPlans" style="padding:70px 5%;text-align:center;background:#060407"><h2>Planos para sua comunidade</h2><p class="muted">O criador pode personalizar os valores antes de ativar o pagamento.</p></section>
 </main>
 
-<footer id="footer">
- <div class="footer-grid">
-  <div><div class="footer-brand">Secrety<b>on</b></div><p>Conteúdo exclusivo. Sua comunidade. Seu espaço.</p></div>
-  <div class="footer-col"><h4>Plataforma</h4><a href="#explore">Explorar</a><a href="#beneficios">Criadores</a><a href="#cta">Planos</a></div>
-  <div class="footer-col"><h4>Ajuda</h4><a href="#cadModal">Criar conta</a><a href="#loginModal">Entrar</a><a href="#">Central de ajuda</a></div>
-  <div class="footer-col"><h4>Legal</h4><a href="#">Privacidade</a><a href="#">Termos de serviço</a><a href="#">Diretrizes</a></div>
- </div>
- <div class="copyright">© 2026 Secretyon · Plataforma destinada a maiores de 18 anos.</div>
-</footer>
+<div class="modal hidden" id="loginModal"><div class="modal-box"><button class="close" data-close="loginModal">×</button><h2>Entrar</h2><p class="sub">Acesse sua conta Secretyon.</p><div id="loginMsg" class="msg hidden"></div><div class="field"><label>E-mail</label><input id="loginEmail" type="email" autocomplete="email"></div><div class="field"><label>Senha</label><input id="loginPassword" type="password" autocomplete="current-password"></div><button class="btn primary full" id="btnEntrar">Entrar</button><div class="switch" style="text-align:center;margin-top:14px"><button class="link" id="btnEsqueci" style="border:0;background:none;color:#cf74ff;font-weight:800">Esqueci minha senha</button></div><div class="switch" style="text-align:center;margin-top:14px;color:#99909f">Não tem conta? <button class="link" id="btnCadastroLogin" style="border:0;background:none;color:#cf74ff;font-weight:800">Criar conta</button></div></div></div>
 
-<div class="modal hidden" id="loginModal">
-<div class="modal-box">
-<a class="close" href="#home" id="closeLogin" style="text-decoration:none">×</a>
-<h2>Entrar</h2><p class="sub">Acesse sua conta Secretyon.</p>
-<div id="loginMsg" class="msg hidden"></div>
-<div class="field"><label>E-mail</label><input id="loginEmail" type="email" autocomplete="email"></div>
-<div class="field"><label>Senha</label><input id="loginPassword" type="password" autocomplete="current-password"></div>
-<button type="button" class="btn primary full" id="btnEntrar">Entrar</button>
-<div class="switch"><button type="button" class="link" id="btnEsqueci">Esqueci minha senha</button></div>
-<div class="switch">Não tem conta? <button type="button" class="link" id="btnCadastroLogin">Criar conta</button></div>
-</div>
-</div>
+<div class="modal hidden" id="cadModal"><div class="modal-box"><button class="close" data-close="cadModal">×</button><h2>Criar conta</h2><p class="sub">Seu nome será o nome público do seu perfil.</p><div id="cadMsg" class="msg hidden"></div><div class="field"><label>Nome do criador</label><input id="cadNome" placeholder="Como você quer aparecer?"></div><div class="field"><label>E-mail</label><input id="cadEmail" type="email" autocomplete="email"></div><div class="field"><label>Senha</label><input id="cadPassword" type="password" autocomplete="new-password"></div><button class="btn primary full" id="btnCadastrar">Criar minha conta</button><div class="switch" style="text-align:center;margin-top:14px">Já tem conta? <button class="link" id="btnLoginCad" style="border:0;background:none;color:#cf74ff;font-weight:800">Entrar</button></div></div></div>
 
-<div class="modal hidden" id="cadModal">
-<div class="modal-box">
-<a class="close" href="#home" id="closeCad" style="text-decoration:none">×</a>
-<h2>Criar conta</h2><p class="sub">Crie seu acesso ao Secretyon.</p>
-<div id="cadMsg" class="msg hidden"></div>
-<div class="field"><label>Nome do criador</label><input id="cadNome" type="text" autocomplete="name" placeholder="Como você quer aparecer no Secretyon?"><small style="display:block;color:#817687;margin-top:6px;font-size:11px">Esse nome aparecerá no seu perfil e na área Explorar.</small></div>
-<div class="field"><label>E-mail</label><input id="cadEmail" type="email" autocomplete="email"></div>
-<div class="field"><label>Senha</label><input id="cadPassword" type="password" autocomplete="new-password"></div>
-<button type="button" class="btn primary full" id="btnCadastrar">Criar minha conta</button>
-<div class="switch">Já tem conta? <button type="button" class="link" id="btnLoginCad">Entrar</button></div>
-</div>
-</div>
+<div class="modal hidden" id="recoverModal"><div class="modal-box"><button class="close" data-close="recoverModal">×</button><h2>Recuperar senha</h2><p class="sub">Receba um link para alterar sua senha.</p><div id="recoverMsg" class="msg hidden"></div><div class="field"><label>E-mail</label><input id="recoverEmail" type="email"></div><button class="btn primary full" id="btnRecover">Enviar link</button></div></div>
 
-<div class="modal hidden" id="recoverModal">
-<div class="modal-box">
-<a class="close" href="#home" id="closeRecover" style="text-decoration:none">×</a>
-<h2>Recuperar senha</h2><p class="sub">Digite seu e-mail para receber o link.</p>
-<div id="recoverMsg" class="msg hidden"></div>
-<div class="field"><label>E-mail</label><input id="recoverEmail" type="email"></div>
-<button type="button" class="btn primary full" id="btnRecover">Enviar link</button>
-<div class="switch"><button type="button" class="link" id="btnBackLogin">Voltar para o login</button></div>
-</div>
-</div>
+<div class="modal hidden" id="newPasswordModal"><div class="modal-box"><h2>Nova senha</h2><p class="sub">Digite sua nova senha.</p><div id="newPasswordMsg" class="msg hidden"></div><div class="field"><label>Nova senha</label><input id="newPassword" type="password"></div><div class="field"><label>Confirmar senha</label><input id="newPassword2" type="password"></div><button class="btn primary full" id="btnNewPassword">Salvar nova senha</button></div></div>
 
-<div class="modal hidden" id="newPasswordModal">
-<div class="modal-box">
-<h2>Nova senha</h2><p class="sub">Digite sua nova senha.</p>
-<div id="newPasswordMsg" class="msg hidden"></div>
-<div class="field"><label>Nova senha</label><input id="newPassword" type="password"></div>
-<div class="field"><label>Confirmar senha</label><input id="newPassword2" type="password"></div>
-<button type="button" class="btn primary full" id="btnNewPassword">Salvar nova senha</button>
-</div>
-</div>
+<div class="modal hidden" id="contentModal"><div class="modal-box"><button class="close" data-close="contentModal">×</button><h2>Criar publicação</h2><p class="sub">Publique foto, vídeo ou link. O conteúdo será associado ao seu perfil.</p><div class="choice-row"><button class="active" data-compose="media">📷 Foto/Vídeo</button><button data-compose="link">🔗 Link</button><button data-compose="text">📝 Texto</button></div><div id="contentMsg" class="msg hidden"></div><div class="field"><label>Título</label><input id="contentTitle" placeholder="Título da publicação"></div><div class="field"><label>Descrição</label><textarea id="contentDescription" placeholder="Escreva algo para sua comunidade..."></textarea></div><div class="field" id="fileField"><label>Foto ou vídeo</label><input id="contentFile" type="file" accept="image/*,video/*"></div><div class="field hidden" id="linkField"><label>Link</label><input id="contentLink" type="url" placeholder="https://..."></div><button class="btn primary full" id="btnPublish">Publicar</button></div></div>
 
-<div class="modal hidden" id="contentModal">
-<div class="modal-box">
-<a class="close" href="#home" id="closeContent" style="text-decoration:none">×</a>
-<h2>Adicionar conteúdo</h2><p class="sub">Envie uma foto ou vídeo.</p>
-<div id="contentMsg" class="msg hidden"></div>
-<div class="field"><label>Título</label><input id="contentTitle"></div>
-<div class="field"><label>Descrição</label><textarea id="contentDescription"></textarea></div>
-<div class="field"><label>Arquivo</label><input id="contentFile" type="file" accept="image/*,video/*"></div>
-<button type="button" class="btn primary full" id="btnPublish">Publicar conteúdo</button>
-</div>
-</div>
+<div class="modal hidden" id="subscriptionModal"><div class="modal-box"><button class="close" data-close="subscriptionModal">×</button><h2 id="subscriptionTitle">Assinar criador</h2><p class="sub">Escolha um plano e uma forma de pagamento.</p><div class="plans" style="grid-template-columns:1fr 1fr"><div class="plan"><span>Semanal</span><strong id="weeklyPrice">R$ 19,99</strong><small>por semana</small><button class="btn primary full" data-sub-plan="weekly">Escolher</button></div><div class="plan"><span>Mensal</span><strong id="monthlyPrice">R$ 39,90</strong><small>por mês</small><button class="btn primary full" data-sub-plan="monthly">Escolher</button></div></div><div id="paymentStep" class="hidden"><h3>Forma de pagamento</h3><div class="payment-options"><button data-pay="pix">💜 Pix</button><button data-pay="card">💳 Cartão</button></div><div id="paymentMsg" class="msg hidden"></div></div></div></div>
+
+<div class="modal hidden" id="messageModal"><div class="modal-box"><button class="close" data-close="messageModal">×</button><h2 id="messageTitle">Mensagem</h2><p class="sub">Envie uma mensagem após assinar o conteúdo do criador.</p><div id="messageMsg" class="msg hidden"></div><div class="field"><textarea id="messageText" placeholder="Escreva sua mensagem..."></textarea></div><button class="btn primary full" id="sendMessage">Enviar mensagem</button></div></div>
+
+<div class="modal hidden" id="withdrawModal"><div class="modal-box"><button class="close" data-close="withdrawModal">×</button><h2>Solicitar saque</h2><p class="sub">Informe o valor e a chave Pix para receber seu saldo.</p><div id="withdrawMsg" class="msg hidden"></div><div class="field"><label>Valor</label><input id="withdrawAmount" type="number" min="1" step="0.01" placeholder="0,00"></div><div class="field"><label>Chave Pix</label><input id="withdrawPix" placeholder="CPF, e-mail, telefone ou chave aleatória"></div><button class="btn primary full" id="sendWithdraw">Solicitar saque</button></div></div>
 
 <section id="painel" class="hidden">
 <div class="app-shell">
-  <aside class="sidebar" id="sidebar">
-    <div class="side-logo"><span class="side-mark">♡</span><span>Secrety<b>on</b></span></div>
-    <nav class="side-nav">
-      <button class="side-item active" data-app="inicio"><span>⌂</span><b>Início</b></button>
-      <button class="side-item" data-app="explorar"><span>⌕</span><b>Explorar</b></button>
-      <button class="side-item" data-app="mensagens"><span>✉</span><b>Mensagens</b><i id="msgBadge">3</i></button>
-      <button class="side-item" data-app="notificacoes"><span>♧</span><b>Notificações</b><i id="notifBadge">5</i></button>
-      <button class="side-item" data-app="perfil"><span>◯</span><b>Meu perfil</b></button>
-      <button class="side-item" data-app="conteudo"><span>▧</span><b>Meu conteúdo</b></button>
-      <button class="side-item" id="sideAdd"><span>＋</span><b>Adicionar conteúdo</b></button>
-      <button class="side-item" data-app="assinaturas"><span>♕</span><b>Assinaturas</b></button>
-      <button class="side-item" data-app="carteira"><span>▱</span><b>Carteira</b></button>
-      <button class="side-item" data-app="config"><span>⚙</span><b>Configurações</b></button>
-    </nav>
-    <button class="create-post" id="sideCreate"><span>＋</span> Criar publicação</button>
-    <div class="side-profile" id="sideProfile"><div class="avatar" id="sideAvatar">S</div><div><strong id="sideName">Usuário</strong><small id="sideHandle">@usuario</small></div><span>•••</span></div>
-  </aside>
+<aside class="sidebar" id="sidebar">
+ <div class="side-logo"><span class="side-mark">♡</span><span>Secrety<b>on</b></span></div>
+ <nav class="side-nav">
+  <button class="side-item active" data-app="inicio"><span>⌂</span><b>Início</b></button>
+  <button class="side-item" data-app="explorar"><span>⌕</span><b>Explorar</b></button>
+  <button class="side-item" data-app="mensagens"><span>✉</span><b>Mensagens</b><i id="msgBadge" class="hidden">0</i></button>
+  <button class="side-item" data-app="notificacoes"><span>♧</span><b>Notificações</b><i id="notifBadge" class="hidden">0</i></button>
+  <button class="side-item" data-app="perfil"><span>◯</span><b>Meu perfil</b></button>
+  <button class="side-item" data-app="conteudo"><span>▧</span><b>Meu conteúdo</b></button>
+  <button class="side-item" id="sideAdd"><span>＋</span><b>Adicionar conteúdo</b></button>
+  <button class="side-item" data-app="assinaturas"><span>♕</span><b>Assinaturas</b></button>
+  <button class="side-item" data-app="carteira"><span>▱</span><b>Carteira</b></button>
+  <button class="side-item" data-app="config"><span>⚙</span><b>Configurações</b></button>
+ </nav>
+ <button class="create-post" id="sideCreate">＋ Criar publicação</button>
+ <div class="side-profile" id="sideProfile"><div class="avatar" id="sideAvatar">U</div><div><strong id="sideName">Usuário</strong><small id="sideHandle">@usuario</small></div><span>•••</span></div>
+</aside>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-  <main class="feed-area">
-    <div class="mobile-top"><div class="side-logo"><span class="side-mark">♡</span><span>Secrety<b>on</b></span></div><button id="mobileMenu">☰</button></div>
-    <div class="feed-header"><h1 id="pageTitle">Início</h1><div class="feed-tools"><button title="Modo escuro">☾</button><button id="logoutTop" title="Sair">↪</button></div></div>
+<main class="feed-area">
+ <div class="mobile-top"><div class="side-logo"><span class="side-mark">♡</span><span>Secrety<b>on</b></span></div><button id="mobileMenu">☰</button></div>
+ <div class="feed-header"><h1 id="pageTitle">Início</h1><div class="feed-tools"><button id="themeToggle" title="Modo claro">☾</button><button id="logoutTop" title="Sair">↪</button></div></div>
 
-    <div class="app-page active" id="app-inicio">
-      <div class="stories" id="stories">
-  <div class="story own">
-    <div class="story-avatar" id="ownStoryAvatar">+</div>
-    <small>Seu perfil</small>
-  </div>
-  <div id="realStories" style="display:flex;gap:14px"></div>
-</div>
-      <article class="post-card">
-        <div class="post-head"><div class="avatar post-avatar">S</div><div><strong>Seu perfil de criador <span class="verified">✓</span></strong><small>@seuusuario · agora</small></div><button>•••</button></div>
-        <div class="post-text">Publique seu primeiro conteúdo e comece a construir sua comunidade. 💜<br><span>Mais que conteúdo, é conexão.</span> ✨</div>
-        <div class="post-placeholder"><div class="lock-big">🔒</div><strong>Conteúdo exclusivo</strong><small>Seu conteúdo publicado aparecerá aqui.</small></div>
-        <div class="post-actions"><button class="like-btn">♡ <span>0</span></button><button>◯ <span>0</span></button><button>➤ <span>0</span></button><button class="save-btn">♧</button></div>
-      </article>
-    </div>
+ <div class="app-page active" id="app-inicio">
+  <div class="stories" id="stories"><div class="story own" id="ownStory"><div class="story-avatar" id="ownStoryAvatar">+</div><small>Publicar</small></div><div id="realStories" style="display:flex;gap:14px"></div></div>
+  <div id="feedList"><div class="empty-note">Carregando publicações...</div></div>
+ </div>
 
-    <div class="app-page" id="app-explorar"><div class="page-title-row"><div><h2>Explorar</h2><p>Encontre criadores e conteúdos.</p></div><input id="creatorSearch" class="search-inline" placeholder="Pesquisar criadores..." /></div><div class="explore-grid" id="exploreGrid">
-  <div class="empty-note" id="creatorsEmpty">Carregando criadores...</div>
-</div></div>
+ <div class="app-page" id="app-explorar"><div class="page-title-row"><div><h2>Explorar</h2><p class="muted">Encontre criadores reais e veja seus perfis.</p></div><input id="creatorSearch" class="search-inline" placeholder="Pesquisar criadores..."></div><div class="explore-grid" id="exploreGrid"><div class="empty-note">Carregando...</div></div></div>
 
-    <div class="app-page" id="app-mensagens"><div class="page-title-row"><div><h2>Mensagens</h2><p>Suas conversas aparecem aqui.</p></div><button class="btn primary" id="newMessage">+ Nova mensagem</button></div><div class="message-list"><div class="message-row"><div class="avatar">C</div><div><strong>Comunidade Secretyon</strong><small>Bem-vindo à plataforma! ✨</small></div><b>2</b></div><div class="message-row"><div class="avatar fake2">V</div><div><strong>Criador</strong><small>Envie uma mensagem para começar.</small></div></div><div class="empty-note">Quando você receber mensagens, elas aparecerão nesta área.</div></div></div>
+ <div class="app-page" id="app-mensagens"><div class="page-title-row"><div><h2>Mensagens</h2><p class="muted">Converse com criadores depois de assinar o conteúdo.</p></div></div><div id="messageList" class="message-list"><div class="empty-note">Você ainda não tem conversas.</div></div></div>
 
-    <div class="app-page" id="app-notificacoes"><h2>Notificações</h2><div class="notice"><span>♡</span><div><strong>Bem-vindo ao Secretyon!</strong><p>Seu perfil está pronto para receber conteúdos.</p></div><small>agora</small></div><div class="notice"><span>✦</span><div><strong>Complete seu perfil</strong><p>Adicione uma descrição para seus seguidores conhecerem você.</p></div><small>hoje</small></div><div class="notice"><span>🔒</span><div><strong>Publique seu primeiro conteúdo</strong><p>Use “Adicionar conteúdo” no menu lateral.</p></div><small>hoje</small></div></div>
+ <div class="app-page" id="app-notificacoes"><h2>Notificações</h2><p class="muted">Avisos da sua conta e da sua comunidade.</p><div id="notificationList"></div></div>
 
-    <div class="app-page" id="app-perfil"><div class="profile-hero"><div class="profile-cover"></div><div class="profile-main"><div class="profile-big-avatar" id="profileBigAvatar">S</div><div class="profile-info"><h2 id="profileDisplayName">Usuário <span class="verified">✓</span></h2><p id="profileDisplayHandle">@usuario</p><p id="profileDisplayBio">Seu perfil de criador no Secretyon.</p></div><button class="btn secondary" id="editProfileBtn">Editar perfil</button></div><div class="profile-stats"><span><b>0</b> publicações</span><span><b>0</b> seguidores</span><span><b>0</b> seguindo</span></div></div><div class="box profile-form"><h3>Dados do perfil</h3><div id="profileMsg" class="msg hidden"></div><div class="field"><label>Nome do criador</label><input id="profileName" placeholder="Seu nome público"></div><div class="field"><label>E-mail</label><input id="profileEmail" disabled></div><div class="field"><label>Bio</label><textarea id="profileBio" placeholder="Fale um pouco sobre você..."></textarea></div><button type="button" class="btn primary" id="btnSaveProfile">Salvar perfil</button></div></div>
+ <div class="app-page" id="app-perfil"><div class="profile-hero"><div class="profile-cover"></div><div class="profile-main"><div class="profile-big-avatar" id="profileBigAvatar">U</div><div class="profile-info"><h2 id="profileDisplayName">Usuário</h2><p id="profileDisplayHandle">@usuario</p><p id="profileDisplayBio">Seu perfil de criador no Secretyon.</p></div><button class="btn secondary" id="editProfileBtn">Editar perfil</button></div><div class="profile-stats"><span><b id="statPosts">0</b> publicações</span><span><b id="statFollowers">0</b> seguidores</span><span><b id="statSubscribers">0</b> assinantes</span></div></div><div class="box profile-form"><h3>Dados do perfil</h3><div id="profileMsg" class="msg hidden"></div><div class="field"><label>Nome do criador</label><input id="profileName" placeholder="Seu nome público"></div><div class="field"><label>E-mail</label><input id="profileEmail" disabled></div><div class="field"><label>Bio</label><textarea id="profileBio" placeholder="Sua biografia pública..."></textarea></div><div class="field"><label>Foto do perfil</label><input id="profileAvatarFile" type="file" accept="image/*"><small class="muted">A foto poderá aparecer na sua bolinha de perfil.</small></div><button class="btn primary" id="btnSaveProfile">Salvar perfil</button></div></div>
 
-    <div class="app-page" id="app-conteudo"><div class="page-title-row"><div><h2>Meu conteúdo</h2><p>Gerencie suas publicações.</p></div><button type="button" class="btn primary" id="btnAddContent2">+ Adicionar</button></div><div id="contentList" class="grid"></div></div>
+ <div class="app-page" id="app-conteudo"><div class="page-title-row"><div><h2>Meu conteúdo</h2><p class="muted">Tudo o que você publicou.</p></div><button class="btn primary" id="btnAddContent2">＋ Adicionar</button></div><div id="contentList" class="grid"></div></div>
 
-    <div class="app-page" id="app-assinaturas"><h2>Assinaturas</h2><p class="muted">Área para seus planos e assinaturas.</p><div class="plans"><div class="plan"><span>Plano mensal</span><strong>R$ 19,90</strong><small>por mês</small><button class="btn primary">Ativar plano</button></div><div class="plan"><span>Plano premium</span><strong>R$ 29,90</strong><small>por mês</small><button class="btn primary">Ativar plano</button></div></div><div class="box"><strong>Pagamentos</strong><p class="muted">A integração real de cobrança será feita com gateway e backend/webhook antes de receber pagamentos de clientes.</p></div></div>
+ <div class="app-page" id="app-assinaturas"><h2>Assinaturas</h2><p class="muted">Defina seus planos como criador ou veja suas assinaturas.</p><div class="plans"><div class="plan"><span>Plano semanal</span><strong id="myWeeklyPrice">R$ 19,99</strong><small>valor inicial</small><button class="btn secondary full" id="editWeekly">Alterar valor</button></div><div class="plan custom"><span>Plano mensal</span><strong id="myMonthlyPrice">R$ 39,90</strong><small>valor inicial</small><button class="btn primary full" id="editMonthly">Alterar valor</button></div></div><div class="box"><strong>Pagamento</strong><p class="muted">A plataforma está preparada para Pix e cartão. A cobrança real precisa de um gateway/backend com webhook para confirmar pagamentos e liberar assinaturas automaticamente.</p><div class="payment-options"><button id="payPixInfo">💜 Pix</button><button id="payCardInfo">💳 Cartão</button></div></div><div id="mySubscriptions" style="margin-top:20px"></div></div>
 
-    <div class="app-page" id="app-carteira"><h2>Carteira</h2><div class="wallet"><small>Saldo disponível</small><strong>R$ 0,00</strong><button class="btn primary">Solicitar saque</button></div><div class="box"><strong>Histórico</strong><p class="muted">Nenhuma movimentação registrada.</p></div></div>
+ <div class="app-page" id="app-carteira"><h2>Carteira</h2><p class="muted">Área do criador para acompanhar saldo e solicitar retirada.</p><div class="wallet"><small>Saldo disponível</small><strong id="walletBalance">R$ 0,00</strong><button class="btn primary" id="withdrawBtn">Solicitar saque</button></div><div class="box"><strong>Histórico de saques</strong><div id="withdrawHistory"><p class="muted">Nenhum saque registrado.</p></div></div></div>
 
-    <div class="app-page" id="app-config"><h2>Configurações</h2><div class="settings-list"><button id="btnChangePassword"><span>🔐</span><div><strong>Alterar senha</strong><small>Atualize sua senha de acesso</small></div><b>›</b></button><button><span>🔔</span><div><strong>Notificações</strong><small>Preferências de notificações</small></div><b>›</b></button><button><span>🛡️</span><div><strong>Privacidade</strong><small>Controle de privacidade e segurança</small></div><b>›</b></button><button id="settingsLogout"><span>↪</span><div><strong>Sair da conta</strong><small>Encerrar sessão neste dispositivo</small></div><b>›</b></button></div></div>
-  </main>
+ <div class="app-page" id="app-config"><h2>Configurações</h2><p class="muted">Controle sua conta e preferências.</p><div class="settings-list">
+  <button data-setting="notifications"><span>🔔</span><div><strong>Notificações</strong><small>Receber avisos de novas assinaturas e atividades</small></div><span class="toggle" id="notifToggle"></span></button>
+  <button data-setting="privacy"><span>🛡️</span><div><strong>Privacidade</strong><small>Controle quem pode encontrar seu perfil</small></div><b>›</b></button>
+  <button data-setting="profile-data"><span>👤</span><div><strong>Dados do perfil</strong><small>Nome, e-mail, bio e dados de pagamento</small></div><b>›</b></button>
+  <button data-setting="password"><span>🔐</span><div><strong>Alterar senha</strong><small>Receba um link para criar uma nova senha</small></div><b>›</b></button>
+  <button data-setting="email"><span>✉</span><div><strong>Meu e-mail</strong><small id="settingsEmail">—</small></div><b>›</b></button>
+  <button data-setting="theme"><span>☾</span><div><strong>Aparência</strong><small>Alternar entre modo noturno e claro</small></div><b id="themeLabel">Noturno</b></button>
+  <button id="settingsLogout"><span>↪</span><div><strong>Sair da conta</strong><small>Encerrar sessão neste dispositivo</small></div><b>›</b></button>
+ </div><div id="settingsDetail" class="box hidden" style="margin-top:15px"></div></div>
+</main>
 
-  <aside class="rightbar">
-    <div class="search-box"><span>⌕</span><input id="globalSearch" placeholder="Pesquisar criadores, posts..." /></div>
-    <div class="right-card">
-  <div class="right-title"><strong>Sugeridos para você</strong><a href="#" id="seeAllCreators">Ver todos</a></div>
-  <div id="suggestedCreators"><div class="empty-note" style="padding:20px 5px">Carregando...</div></div>
-</div>
-    <div class="right-card">
-  <div class="right-title"><strong>Mensagens</strong><a href="#" onclick="return false" id="rightMessages">Ver todas</a></div>
-  <div class="empty-note" style="padding:20px 5px">Suas conversas aparecerão aqui.</div>
-</div>
-    <div class="right-card trends"><div class="right-title"><strong>🔥 Em alta no Secretyon</strong></div><div><b>#conteudoexclusivo</b><small>Conteúdo em destaque</small></div><div><b>#secretyon</b><small>Comunidade</small></div><div><b>#criadores</b><small>Novos criadores</small></div></div>
-  </aside>
+<aside class="rightbar">
+ <div class="search-box"><span>⌕</span><input id="globalSearch" placeholder="Pesquisar criadores, posts..."></div>
+ <div class="right-card"><div class="right-title"><strong>Sugeridos para você</strong><a href="#" id="seeAllCreators">Ver todos</a></div><div id="suggestedCreators"><div class="empty-note" style="padding:20px 5px">Carregando...</div></div></div>
+ <div class="right-card"><div class="right-title"><strong>Mensagens</strong><a href="#" id="rightMessages">Ver todas</a></div><div id="rightMessageBox"><div class="empty-note" style="padding:20px 5px">Suas conversas aparecerão aqui.</div></div></div>
+ <div class="right-card trends"><div class="right-title"><strong>🔥 Em alta no Secretyon</strong></div><div><b>#conteudoexclusivo</b><small>Conteúdo em destaque</small></div><div><b>#secretyon</b><small>Comunidade</small></div><div><b>#criadores</b><small>Novos criadores</small></div></div>
+</aside>
 </div>
 <div class="mobile-bottom"><button data-app="inicio">⌂<small>Início</small></button><button data-app="explorar">⌕<small>Explorar</small></button><button id="mobileAdd">＋<small>Criar</small></button><button data-app="mensagens">✉<small>Mensagens</small></button><button data-app="perfil">◯<small>Perfil</small></button></div>
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-/* COLOQUE SEUS DADOS DO SUPABASE AQUI */
 const SUPABASE_URL = "https://xcxvwlbiubauwjxhjkyj.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_KFDSA_GITFGL0GXnQVBaPw_fk3fSQhs";
+let sb=null,currentUser=null,currentCreators=[],selectedCreator=null,selectedPlan=null,theme="dark";
 
-let sb = null;
-let currentUser = null;
+const $=id=>document.getElementById(id);
+const escapeHtml=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+const escapeAttr=escapeHtml;
+const handleFor=n=>"@"+(String(n||"usuario").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"").slice(0,20)||"usuario");
+const initialFor=n=>(String(n||"U").trim()[0]||"U").toUpperCase();
+function msg(id,text,type=""){const x=$(id);if(!x)return;x.textContent=text;x.className="msg"+(type?" "+type:"");x.classList.remove("hidden")}
+function clearMsg(id){const x=$(id);if(x)x.classList.add("hidden")}
+function openModal(id){closeAll();$(id)?.classList.remove("hidden")}
+function closeModal(id){$(id)?.classList.add("hidden")}
+function closeAll(){document.querySelectorAll(".modal").forEach(x=>x.classList.add("hidden"))}
+function supabaseReady(){return !!(window.supabase&&SUPABASE_URL&&!SUPABASE_URL.includes("__")&&SUPABASE_PUBLISHABLE_KEY&&!SUPABASE_PUBLISHABLE_KEY.includes("__"))}
+function initSupabase(){if(!supabaseReady())return false;if(!sb)sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);return true}
 
-function el(id){return document.getElementById(id)}
-function openModal(id){el(id).classList.remove("hidden")}
-function closeModal(id){el(id).classList.add("hidden")}
-function closeAll(){["loginModal","cadModal","recoverModal","newPasswordModal","contentModal"].forEach(closeModal)}
-function message(id,text,type=""){const x=el(id);x.textContent=text;x.className="msg"+(type?" "+type:"");x.classList.remove("hidden")}
-function clearMessage(id){el(id).classList.add("hidden")}
-
-function openLogin(){closeAll();clearMessage("loginMsg");openModal("loginModal");setTimeout(()=>el("loginEmail").focus(),100)}
-function openCadastro(){closeAll();clearMessage("cadMsg");openModal("cadModal");setTimeout(()=>el("cadNome").focus(),100)}
-function openRecover(){closeAll();clearMessage("recoverMsg");openModal("recoverModal");setTimeout(()=>el("recoverEmail").focus(),100)}
-function openContent(){if(!currentUser){openLogin();return}clearMessage("contentMsg");openModal("contentModal")}
-
-function supabaseReady(){
- if(!window.supabase){
-   console.error("Biblioteca Supabase não carregou.");
-   return false;
- }
- if(!SUPABASE_URL || SUPABASE_URL.includes("COLE_AQUI") ||
-    !SUPABASE_PUBLISHABLE_KEY || SUPABASE_PUBLISHABLE_KEY.includes("COLE_AQUI")){
-   return false;
- }
- if(!sb){
-   sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
- }
- return true;
+function publicProfileName(user){return user?.user_metadata?.nome||user?.email?.split("@")[0]||"Usuário"}
+function publicBio(user){return user?.user_metadata?.bio||""}
+function updateProfileUI(){
+ if(!currentUser)return;
+ const nome=publicProfileName(currentUser),handle=handleFor(nome),initial=initialFor(nome);
+ ["sideName","profileDisplayName"].forEach(id=>{if($(id))$(id).textContent=nome});
+ if($("sideHandle"))$("sideHandle").textContent=handle;
+ if($("profileDisplayHandle"))$("profileDisplayHandle").textContent=handle;
+ ["sideAvatar","profileBigAvatar","ownStoryAvatar"].forEach(id=>{if($(id)){if(id==="ownStoryAvatar")$(id).textContent="＋";else $(id).textContent=initial}});
+ if($("profileBio"))$("profileBio").value=publicBio(currentUser);
+ if($("profileDisplayBio"))$("profileDisplayBio").textContent=publicBio(currentUser)||"Seu perfil de criador no Secretyon.";
+ if($("profileEmail"))$("profileEmail").value=currentUser.email||"";
+ if($("settingsEmail"))$("settingsEmail").textContent=currentUser.email||"";
 }
-
-async function login(){
- if(!supabaseReady()){
-   message("loginMsg","O formulário está pronto, mas o Supabase não foi carregado/configurado.","error");
-   return;
- }
-
- const email=el("loginEmail").value.trim();
- const password=el("loginPassword").value;
-
- if(!email||!password){
-   message("loginMsg","Digite seu e-mail e sua senha.","error");
-   return;
- }
-
- const btn=el("btnEntrar");
- if(btn){btn.disabled=true;btn.textContent="Entrando...";}
- message("loginMsg","Entrando...");
-
- try{
-   const result=await Promise.race([
-     sb.auth.signInWithPassword({email,password}),
-     new Promise((_,reject)=>setTimeout(()=>reject(new Error("A conexão demorou demais. Atualize a página e tente novamente.")),15000))
-   ]);
-
-   if(result.error){
-     message("loginMsg",result.error.message||"Não foi possível entrar.","error");
-     return;
-   }
-
-   const ok=await loadUser();
-   if(!ok){
-     message("loginMsg","Login realizado, mas não foi possível carregar seu perfil. Atualize a página e tente novamente.","error");
-     return;
-   }
-
-   closeModal("loginModal");
-   showPanel();
-
- }catch(err){
-   console.error("Erro no login:",err);
-   message("loginMsg",err?.message||"Não foi possível entrar. Verifique sua conexão.","error");
- }finally{
-   if(btn){btn.disabled=false;btn.textContent="Entrar";}
- }
-}
-
-async function register(){
- if(!supabaseReady()){message("cadMsg","O cadastro está pronto, mas falta configurar o Supabase neste arquivo.","error");return}
- const nome=el("cadNome").value.trim(),email=el("cadEmail").value.trim(),password=el("cadPassword").value;
- if(!nome||!email||!password){message("cadMsg","Preencha nome, e-mail e senha.","error");return}
- if(password.length<6){message("cadMsg","A senha precisa ter pelo menos 6 caracteres.","error");return}
- message("cadMsg","Criando sua conta...");
- const {data,error}=await sb.auth.signUp({email,password,options:{data:{nome},emailRedirectTo:location.origin}});
- if(error){message("cadMsg",error.message,"error");return}
- if(data.session){currentUser=data.user;closeModal("cadModal");showPanel();loadUser()}
- else message("cadMsg","Conta criada! Confira seu e-mail para confirmar o cadastro.","success");
-}
-
-async function recover(){
- if(!supabaseReady()){message("recoverMsg","O formulário está funcionando, mas falta configurar o Supabase neste arquivo.","error");return}
- const email=el("recoverEmail").value.trim();
- if(!email){message("recoverMsg","Digite seu e-mail.","error");return}
- message("recoverMsg","Enviando...");
- const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:location.origin});
- if(error){message("recoverMsg",error.message,"error");return}
- message("recoverMsg","Link enviado! Confira seu e-mail.","success");
-}
-
-async function newPassword(){
- if(!supabaseReady())return;
- const a=el("newPassword").value,b=el("newPassword2").value;
- if(a.length<6){message("newPasswordMsg","A senha precisa ter pelo menos 6 caracteres.","error");return}
- if(a!==b){message("newPasswordMsg","As senhas não são iguais.","error");return}
- const {error}=await sb.auth.updateUser({password:a});
- if(error){message("newPasswordMsg",error.message,"error");return}
- message("newPasswordMsg","Senha alterada com sucesso!","success");
- setTimeout(()=>{closeModal("newPasswordModal");showPanel()},1000);
-}
-
 async function loadUser(){
- if(!sb)return false;
+ if(!initSupabase())return false;
  const {data,error}=await sb.auth.getUser();
  if(error||!data.user){currentUser=null;return false}
- currentUser=data.user;
-
- const email=currentUser.email||"";
- const metadata=currentUser.user_metadata||{};
- const nome=metadata.nome||email.split("@")[0]||"Usuário";
- const bio=metadata.bio||"";
-
- if(el("nomePainel")) el("nomePainel").textContent=nome;
- if(el("profileName")) el("profileName").value=nome;
- if(el("profileEmail")) el("profileEmail").value=email;
- if(el("profileBio")) el("profileBio").value=bio;
- if(el("profileDisplayBio")) el("profileDisplayBio").textContent=bio||"Seu perfil de criador no Secretyon.";
-
- updateDashboardProfile();
-
- // Mantém a tabela profiles compatível mesmo se ela não tiver coluna "bio".
- // Nome e e-mail são gravados na tabela; a bio fica no metadata do usuário.
+ currentUser=data.user;updateProfileUI();
+ try{await sb.from("profiles").upsert({id:currentUser.id,nome:publicProfileName(currentUser),email:currentUser.email},{onConflict:"id"})}catch(e){}
+ await refreshStats();return true;
+}
+async function login(){
+ if(!initSupabase()){msg("loginMsg","O Supabase não foi carregado ou configurado.","error");return}
+ const email=$("loginEmail").value.trim(),password=$("loginPassword").value,btn=$("btnEntrar");
+ if(!email||!password){msg("loginMsg","Digite seu e-mail e sua senha.","error");return}
+ btn.disabled=true;btn.textContent="Entrando...";clearMsg("loginMsg");
  try{
-   const {error:profileError}=await sb.from("profiles").upsert(
-     {id:currentUser.id,nome: nome,email: email},
-     {onConflict:"id"}
-   );
-   if(profileError) console.warn("Perfil não foi sincronizado na tabela profiles:",profileError.message);
- }catch(e){
-   console.warn("Sincronização de perfil ignorada:",e);
+  const {data,error}=await Promise.race([sb.auth.signInWithPassword({email,password}),new Promise((_,r)=>setTimeout(()=>r(new Error("A conexão demorou mais de 15 segundos.")),15000))]);
+  if(error){msg("loginMsg",error.message,"error");return}
+  currentUser=data.user;await loadUser();closeModal("loginModal");showPanel();
+ }catch(e){msg("loginMsg",e?.message||"Não foi possível entrar. Verifique sua conexão.","error")}finally{btn.disabled=false;btn.textContent="Entrar"}
+}
+async function register(){
+ if(!initSupabase()){msg("cadMsg","O Supabase não foi carregado ou configurado.","error");return}
+ const nome=$("cadNome").value.trim(),email=$("cadEmail").value.trim(),password=$("cadPassword").value;
+ if(!nome||!email||!password){msg("cadMsg","Preencha nome, e-mail e senha.","error");return}
+ if(password.length<6){msg("cadMsg","A senha precisa ter pelo menos 6 caracteres.","error");return}
+ msg("cadMsg","Criando sua conta...");
+ const {data,error}=await sb.auth.signUp({email,password,options:{data:{nome,bio:""}}});
+ if(error){msg("cadMsg",error.message,"error");return}
+ localStorage.setItem("secretyon_welcome_"+email,"1");
+ if(data.session){currentUser=data.user;await loadUser();await createLocalWelcome();closeModal("cadModal");showPanel()}
+ else msg("cadMsg","Conta criada! Confira seu e-mail para confirmar o cadastro.","success");
+}
+async function recover(){
+ if(!initSupabase()){msg("recoverMsg","Supabase não configurado.","error");return}
+ const email=$("recoverEmail").value.trim();if(!email){msg("recoverMsg","Digite seu e-mail.","error");return}
+ msg("recoverMsg","Enviando...");
+ const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:location.origin});
+ if(error)msg("recoverMsg",error.message,"error");else msg("recoverMsg","Link enviado! Confira seu e-mail.","success");
+}
+async function newPassword(){
+ if(!initSupabase())return;const a=$("newPassword").value,b=$("newPassword2").value;
+ if(a.length<6){msg("newPasswordMsg","A senha precisa ter pelo menos 6 caracteres.","error");return}
+ if(a!==b){msg("newPasswordMsg","As senhas não são iguais.","error");return}
+ const {error}=await sb.auth.updateUser({password:a});if(error)msg("newPasswordMsg",error.message,"error");else{msg("newPasswordMsg","Senha alterada com sucesso!","success");setTimeout(()=>closeModal("newPasswordModal"),1000)}
+}
+async function createLocalWelcome(){
+ const key="secretyon_notifications_"+currentUser.id;
+ let arr=JSON.parse(localStorage.getItem(key)||"[]");
+ if(!arr.some(n=>n.kind==="welcome")){arr.unshift({id:crypto.randomUUID(),kind:"welcome",icon:"💜",title:"Bem-vindo ao Secretyon!",text:"Sua conta foi criada. Complete seu perfil e publique seu primeiro conteúdo para aproveitar a plataforma.",time:new Date().toISOString(),read:false});localStorage.setItem(key,JSON.stringify(arr))}
+ await loadNotifications();
+}
+async function loadNotifications(){
+ const key=currentUser?"secretyon_notifications_"+currentUser.id:"";
+ let arr=key?JSON.parse(localStorage.getItem(key)||"[]"):[];
+ if(!arr.length&&currentUser){
+  arr=[
+   {id:"profile",kind:"profile",icon:"✦",title:"Complete seu perfil",text:"Adicione sua bio, foto e dados do perfil.",time:"agora",read:false},
+   {id:"content",kind:"content",icon:"🔒",title:"Publique seu primeiro conteúdo",text:"Publique uma foto, vídeo, link ou texto para começar.",time:"agora",read:false}
+  ];
+  localStorage.setItem(key,JSON.stringify(arr));
  }
- return true;
+ const list=$("notificationList");if(!list)return;
+ list.innerHTML=arr.length?arr.map(n=>`<div class="notice" data-notice="${escapeAttr(n.kind)}"><span>${n.icon||"✦"}</span><div><strong>${escapeHtml(n.title)}</strong><p>${escapeHtml(n.text)}</p></div><small>${escapeHtml(n.time||"agora")}</small></div>`).join(""):'<div class="empty-note">Você está em dia.</div>';
+ document.querySelectorAll(".notice").forEach(x=>x.onclick=()=>handleNotification(x.dataset.notice));
+ const unread=arr.filter(n=>!n.read).length;setBadge("notifBadge",unread);
 }
-
-function showPanel(){
- closeAll();
- el("home").classList.add("hidden");
- el("header").classList.add("hidden");
- el("footer").classList.add("hidden");
- el("painel").classList.remove("hidden");
- showAppPage("inicio");
- loadContents();
- loadCreators();
+function handleNotification(kind){
+ if(kind==="profile"){showAppPage("perfil");setSettingsDetail("profile-data")}
+ else if(kind==="content"){showAppPage("conteudo");openContent()}
+ else showAppPage("inicio");
+ markNotificationsRead();
 }
+function markNotificationsRead(){if(!currentUser)return;const k="secretyon_notifications_"+currentUser.id;let a=JSON.parse(localStorage.getItem(k)||"[]");a=a.map(n=>({...n,read:true}));localStorage.setItem(k,JSON.stringify(a));loadNotifications()}
+function setBadge(id,n){const x=$(id);if(!x)return;x.textContent=n;x.classList.toggle("hidden",!n)}
 
-function showHome(){
- el("painel").classList.add("hidden");el("home").classList.remove("hidden");el("header").classList.remove("hidden");el("footer").classList.remove("hidden");
+function showPanel(){closeAll();$("home").classList.add("hidden");$("publicHeader").classList.add("hidden");$("painel").classList.remove("hidden");showAppPage("inicio");loadFeed();loadCreators();loadNotifications();refreshStats()}
+function showHome(){$("painel").classList.add("hidden");$("home").classList.remove("hidden");$("publicHeader").classList.remove("hidden")}
+function showAppPage(id){
+ document.querySelectorAll(".app-page").forEach(x=>x.classList.remove("active"));
+ $("app-"+id)?.classList.add("active");
+ document.querySelectorAll(".side-item[data-app],.mobile-bottom button[data-app]").forEach(x=>x.classList.toggle("active",x.dataset.app===id));
+ const titles={inicio:"Início",explorar:"Explorar",mensagens:"Mensagens",notificacoes:"Notificações",perfil:"Meu perfil",conteudo:"Meu conteúdo",assinaturas:"Assinaturas",carteira:"Carteira",config:"Configurações"};
+ $("pageTitle").textContent=titles[id]||"Secretyon";
+ if(id==="conteudo")loadContents();
+ if(id==="explorar")loadCreators();
+ if(id==="notificacoes")loadNotifications();
+ if(id==="mensagens")loadMessages();
+ if(id==="perfil")loadUser();
+ if(window.innerWidth<=700)closeSidebar();
 }
-
-function showSection(id){
- document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
- el(id).classList.add("active");
-}
-
-async function saveProfile(){
- if(!currentUser||!supabaseReady())return;
-
- const nome=el("profileName").value.trim();
- const bio=el("profileBio")?el("profileBio").value.trim():"";
-
- if(!nome){
-   message("profileMsg","Digite seu nome.","error");
-   return;
- }
-
- const {error}=await sb.auth.updateUser({data:{nome,bio}});
- if(error){
-   message("profileMsg",error.message,"error");
-   return;
- }
-
- currentUser.user_metadata={...(currentUser.user_metadata||{}),nome,bio};
-
- try{
-   const {error:profileError}=await sb.from("profiles").upsert(
-     {id:currentUser.id,nome,email:currentUser.email},
-     {onConflict:"id"}
-   );
-   if(profileError) console.warn("Perfil salvo no Auth, mas não na tabela profiles:",profileError.message);
- }catch(e){
-   console.warn("Sincronização da tabela profiles ignorada:",e);
- }
-
- updateDashboardProfile();
- await loadCreators();
- if(el("profileDisplayBio"))el("profileDisplayBio").textContent=bio||"Seu perfil de criador no Secretyon.";
- message("profileMsg","Perfil salvo!","success");
-}
-
-async function publish(){
- if(!currentUser){openLogin();return}
- if(!supabaseReady()){message("contentMsg","Falta configurar o Supabase neste arquivo.","error");return}
- const title=el("contentTitle").value.trim(),description=el("contentDescription").value.trim(),file=el("contentFile").files[0];
- if(!title||!file){message("contentMsg","Informe o título e escolha um arquivo.","error");return}
- if(file.size>100*1024*1024){message("contentMsg","O arquivo deve ter no máximo 100 MB.","error");return}
- message("contentMsg","Enviando...");
- const ext=(file.name.split(".").pop()||"bin").toLowerCase(),path=currentUser.id+"/"+crypto.randomUUID()+"."+ext;
- const {error:up}=await sb.storage.from("content").upload(path,file,{contentType:file.type});
- if(up){message("contentMsg",up.message,"error");return}
- const {data}=sb.storage.from("content").getPublicUrl(path);
- const {error:db}=await sb.from("contents").insert({user_id:currentUser.id,title,description,file_path:path,file_url:data.publicUrl,mime_type:file.type});
- if(db){await sb.storage.from("content").remove([path]);message("contentMsg",db.message,"error");return}
- el("contentTitle").value="";el("contentDescription").value="";el("contentFile").value="";
- message("contentMsg","Conteúdo publicado!","success");await loadContents();setTimeout(()=>closeModal("contentModal"),800);
-}
-
-async function loadContents(){
- const list=el("contentList");
- if(!currentUser||!supabaseReady()){list.innerHTML='<div class="box">Configure o Supabase para carregar seus conteúdos.</div>';return}
- const {data,error}=await sb.from("contents").select("*").eq("user_id",currentUser.id).order("created_at",{ascending:false});
- if(error){list.innerHTML='<div class="box">'+escapeHtml(error.message)+'</div>';return}
- if(!data.length){list.innerHTML='<div class="box">Você ainda não publicou nenhum conteúdo.</div>';return}
- list.innerHTML=data.map(c=>{
-  const media=c.mime_type?.startsWith("video/")?'<video controls src="'+escapeAttr(c.file_url)+'"></video>':c.mime_type?.startsWith("image/")?'<img src="'+escapeAttr(c.file_url)+'" alt="">':'📄';
-  return '<article class="content"><div class="media">'+media+'</div><div class="info"><h3>'+escapeHtml(c.title)+'</h3><p>'+escapeHtml(c.description||"Sem descrição")+'</p><button type="button" class="btn secondary" style="margin-top:10px" onclick="deleteContent(\''+c.id+'\',\''+escapeAttr(c.file_path)+'\')">Excluir</button></div></article>'
- }).join("");
-}
-
-async function deleteContent(id,path){
- if(!confirm("Excluir este conteúdo?"))return;
- const {error}=await sb.from("contents").delete().eq("id",id).eq("user_id",currentUser.id);
- if(error){alert(error.message);return}
- await sb.storage.from("content").remove([path]);loadContents();
-}
-
 async function logout(){if(sb)await sb.auth.signOut();currentUser=null;showHome()}
 
-function escapeHtml(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
-function escapeAttr(v){return escapeHtml(v)}
-
-
-async function quickLogin(){
-  const email=el("quickEmail").value.trim();
-  const password=el("quickPassword").value;
-
-  if(!email || !password){
-    openLogin();
-    if(email) el("loginEmail").value=email;
-    if(password) el("loginPassword").value=password;
-    return;
-  }
-
-  el("loginEmail").value=email;
-  el("loginPassword").value=password;
-  openLogin();
-  await login();
-}
-
-
-
-function creatorHandle(nome){
-  return "@"+String(nome||"usuario")
-    .toLowerCase()
-    .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
-    .replace(/[^a-z0-9]+/g,"").slice(0,20) || "@usuario";
-}
-
-function creatorInitial(nome){
-  return (String(nome||"U").trim()[0]||"U").toUpperCase();
-}
-
-function creatorColorClass(index){
-  return ["fake1","fake2","fake3","fake4"][index%4];
-}
-
-function renderCreators(creators){
-  const grid=el("exploreGrid");
-  const stories=el("realStories");
-  const suggested=el("suggestedCreators");
-
-  if(!grid)return;
-
-  const list=(creators||[]).filter(c=>c && c.id && (!currentUser || c.id!==currentUser.id));
-
-  if(!list.length){
-    grid.innerHTML='<div class="empty-note">Ainda não há outros criadores cadastrados. Seja o primeiro a publicar!</div>';
-    if(stories)stories.innerHTML="";
-    if(suggested)suggested.innerHTML='<div class="empty-note" style="padding:20px 5px">Ainda não há criadores para sugerir.</div>';
-    return;
-  }
-
-  // Até 1000 criadores reais no Explorar.
-  grid.innerHTML=list.slice(0,1000).map((c,i)=>{
-    const nome=escapeHtml(c.nome||"Criador");
-    const handle=escapeHtml(creatorHandle(c.nome));
-    const initial=escapeHtml(creatorInitial(c.nome));
-    return `<article class="explore-tile" data-creator-name="${nome} ${handle}">
-      <div class="tile-cover ${creatorColorClass(i)}">${initial}</div>
-      <div>
-        <strong>${nome} <span class="verified">✓</span></strong>
-        <small>${handle}</small>
-        <button type="button" data-creator-id="${escapeAttr(c.id)}">Ver perfil</button>
-      </div>
-    </article>`;
-  }).join("");
-
-  if(stories){
-    stories.innerHTML=list.slice(0,20).map((c,i)=>{
-      const nome=escapeHtml(c.nome||"Criador");
-      const initial=escapeHtml(creatorInitial(c.nome));
-      return `<div class="story" title="${nome}">
-        <div class="story-avatar ${creatorColorClass(i)}">${initial}</div>
-        <small>${nome.slice(0,12)}</small>
-      </div>`;
-    }).join("");
-  }
-
-  if(suggested){
-    suggested.innerHTML=list.slice(0,3).map((c,i)=>{
-      const nome=escapeHtml(c.nome||"Criador");
-      const handle=escapeHtml(creatorHandle(c.nome));
-      const initial=escapeHtml(creatorInitial(c.nome));
-      return `<div class="suggest">
-        <div class="avatar ${creatorColorClass(i)}">${initial}</div>
-        <div><strong>${nome} <span class="verified">✓</span></strong><small>${handle}</small></div>
-        <button type="button" data-follow-id="${escapeAttr(c.id)}">Seguir</button>
-      </div>`;
-    }).join("");
-  }
-
-  // Pesquisa local dos criadores carregados.
-  document.querySelectorAll("[data-creator-id]").forEach(btn=>{
-    btn.addEventListener("click",()=>{
-      const creator=list.find(c=>c.id===btn.dataset.creatorId);
-      if(creator) showCreatorCard(creator);
-    });
-  });
-
-  document.querySelectorAll("[data-follow-id]").forEach(btn=>{
-    btn.addEventListener("click",()=>{
-      btn.textContent=btn.textContent==="Seguir"?"Seguindo":"Seguir";
-    });
-  });
-}
-
-function showCreatorCard(creator){
-  const nome=creator?.nome||"Criador";
-  alert("Perfil de "+nome+" selecionado. A página pública do criador será aberta quando o sistema de perfis públicos estiver conectado.");
-}
-
 async function loadCreators(){
-  if(!currentUser || !supabaseReady())return;
-
-  try{
-    // Limite de 1000 perfis reais para o diretório.
-    const {data,error}=await sb.from("profiles")
-      .select("id,nome,email")
-      .not("nome","is",null)
-      .order("created_at",{ascending:true})
-      .limit(1000);
-
-    if(error){
-      console.warn("Não foi possível carregar criadores:",error.message);
-      const empty=el("creatorsEmpty");
-      if(empty)empty.textContent="Não foi possível carregar os criadores agora.";
-      return;
-    }
-
-    renderCreators(data||[]);
-  }catch(err){
-    console.error("Erro ao carregar criadores:",err);
-  }
+ if(!initSupabase())return;
+ try{
+  const {data,error}=await sb.from("profiles").select("id,nome,email").not("nome","is",null).order("created_at",{ascending:true}).limit(1000);
+  if(error){console.warn(error);return}
+  currentCreators=(data||[]).filter(c=>c.id!==currentUser?.id);
+  renderCreators(currentCreators);renderPublicCreators(currentCreators);renderStories(currentCreators);renderSuggestions(currentCreators);
+ }catch(e){console.error(e)}
 }
+function renderPublicCreators(list){
+ const box=$("publicCreators");if(!box)return;
+ if(!list.length){box.innerHTML='<div class="empty-note">Ainda não há criadores cadastrados.</div>';return}
+ box.innerHTML=list.slice(0,12).map((c,i)=>creatorTile(c,i,true)).join("");
+}
+function creatorTile(c,i,publicMode=false){
+ const nome=escapeHtml(c.nome||"Criador"),h=escapeHtml(handleFor(c.nome)),ini=escapeHtml(initialFor(c.nome));
+ return `<article class="explore-tile" data-creator-name="${nome} ${h}"><div class="tile-cover">${ini}</div><div><strong>${nome} <span class="verified">✓</span></strong><small>${h}</small><button type="button" data-creator-id="${escapeAttr(c.id)}">${publicMode?"Ver perfil":"Assinar / ver perfil"}</button></div></article>`
+}
+function renderCreators(list){const box=$("exploreGrid");if(!box)return;box.innerHTML=list.length?list.slice(0,1000).map((c,i)=>creatorTile(c,i)).join(""):'<div class="empty-note">Ainda não há outros criadores cadastrados.</div>';bindCreatorButtons(box)}
+function bindCreatorButtons(box){box.querySelectorAll("[data-creator-id]").forEach(b=>b.onclick=()=>openCreator(b.dataset.creatorId))}
+function renderStories(list){const box=$("realStories");if(!box)return;box.innerHTML=list.slice(0,20).map(c=>`<div class="story" data-story="${escapeAttr(c.id)}"><div class="story-avatar">${escapeHtml(initialFor(c.nome))}</div><small>${escapeHtml(String(c.nome||"Criador").slice(0,12))}</small></div>`).join("");box.querySelectorAll(".story").forEach(x=>x.onclick=()=>openCreator(x.dataset.story))}
+function renderSuggestions(list){const box=$("suggestedCreators");if(!box)return;box.innerHTML=list.slice(0,3).map(c=>`<div class="suggest"><div class="avatar">${escapeHtml(initialFor(c.nome))}</div><div><strong>${escapeHtml(c.nome)}</strong><small>${escapeHtml(handleFor(c.nome))}</small></div><button data-follow="${escapeAttr(c.id)}">Seguir</button></div>`).join("")||'<div class="empty-note" style="padding:20px 5px">Ainda não há criadores.</div>';box.querySelectorAll("[data-follow]").forEach(b=>b.onclick=()=>b.textContent=b.textContent==="Seguir"?"Seguindo":"Seguir")}
+function openCreator(id){
+ const c=currentCreators.find(x=>x.id===id);if(!c)return;
+ selectedCreator=c;$("subscriptionTitle").textContent="Assinar "+(c.nome||"criador");$("weeklyPrice").textContent=getPlanPrice(c.id,"weekly");$("monthlyPrice").textContent=getPlanPrice(c.id,"monthly");$("paymentStep").classList.add("hidden");openModal("subscriptionModal");
+}
+function getPlanPrice(id,type){const k="secretyon_plan_"+id;const v=JSON.parse(localStorage.getItem(k)||"{}");return type==="weekly"?("R$ "+Number(v.weekly??19.99).toFixed(2).replace(".",",")):("R$ "+Number(v.monthly??39.90).toFixed(2).replace(".",","))}
+function setPlanPrice(type){
+ const value=prompt(type==="weekly"?"Valor semanal (R$):":"Valor mensal (R$):",type==="weekly"?"19,99":"39,90");if(value===null)return;
+ const n=Number(String(value).replace(",", "."));if(!Number.isFinite(n)||n<=0){alert("Digite um valor válido.");return}
+ const k="secretyon_plan_"+currentUser.id,v=JSON.parse(localStorage.getItem(k)||"{}");v[type]=n;localStorage.setItem(k,JSON.stringify(v));updatePlanUI()
+}
+function updatePlanUI(){$("myWeeklyPrice").textContent=getPlanPrice(currentUser.id,"weekly");$("myMonthlyPrice").textContent=getPlanPrice(currentUser.id,"monthly")}
+function selectPlan(type){selectedPlan=type;$("paymentStep").classList.remove("hidden");}
+function choosePayment(method){
+ if(!selectedCreator||!selectedPlan)return;
+ msg("paymentMsg",`Pagamento por ${method==="pix"?"Pix":"cartão"} selecionado. A cobrança real será concluída quando o gateway de pagamento estiver conectado.`,"success");
+ // Registro local para a experiência do protótipo.
+ const k="secretyon_subscriptions_"+currentUser.id,a=JSON.parse(localStorage.getItem(k)||"[]");a.unshift({creatorId:selectedCreator.id,creatorName:selectedCreator.nome,plan:selectedPlan,method,status:"aguardando_pagamento",date:new Date().toISOString()});localStorage.setItem(k,JSON.stringify(a));loadSubscriptions();setTimeout(()=>closeModal("subscriptionModal"),900)
+}
+function loadSubscriptions(){const box=$("mySubscriptions");if(!box)return;const a=JSON.parse(localStorage.getItem("secretyon_subscriptions_"+currentUser.id)||"[]");box.innerHTML='<h3>Minhas assinaturas</h3>'+(a.length?a.map(s=>`<div class="box" style="margin:10px 0"><strong>${escapeHtml(s.creatorName)}</strong><p class="muted">${s.plan==="weekly"?"Semanal":"Mensal"} · ${escapeHtml(s.method==="pix"?"Pix":"Cartão")} · ${escapeHtml(s.status)}</p><button class="btn secondary" data-msg-creator="${escapeAttr(s.creatorId)}">Mensagem</button></div>`).join(""):'<div class="box"><p class="muted">Nenhuma assinatura ainda.</p></div>');box.querySelectorAll("[data-msg-creator]").forEach(b=>b.onclick=()=>{const c=currentCreators.find(x=>x.id===b.dataset.msgCreator);if(c){selectedCreator=c;$("messageTitle").textContent="Mensagem para "+c.nome;openModal("messageModal")}})}
 
-function showAppPage(id){
- document.querySelectorAll('.app-page').forEach(x=>x.classList.remove('active'));
- const page=el('app-'+id); if(page) page.classList.add('active');
- document.querySelectorAll('.side-item[data-app],.mobile-bottom button[data-app]').forEach(x=>x.classList.toggle('active',x.dataset.app===id));
- const titles={inicio:'Início',explorar:'Explorar',mensagens:'Mensagens',notificacoes:'Notificações',perfil:'Meu perfil',conteudo:'Meu conteúdo',assinaturas:'Assinaturas',carteira:'Carteira',config:'Configurações'};
- el('pageTitle').textContent=titles[id]||'Secretyon';
- if(id==='conteudo') loadContents();
- if(id==='explorar' && currentUser) loadCreators();
- if(id==='perfil' && currentUser) loadUser();
- // Fecha o menu lateral no celular depois de navegar.
- if(window.innerWidth<=700) el('sidebar')?.classList.remove('open');
+async function loadFeed(){
+ if(!initSupabase())return;const box=$("feedList");
+ try{
+  const {data,error}=await sb.from("contents").select("*").order("created_at",{ascending:false}).limit(50);
+  if(error){box.innerHTML='<div class="empty-note">Não foi possível carregar as publicações agora.</div>';return}
+  if(!data?.length){box.innerHTML='<div class="empty-note">Ainda não há publicações. Clique no <b>＋ Publicar</b> para ser o primeiro.</div>';return}
+  const ids=[...new Set(data.map(x=>x.user_id))];
+  const profiles=await Promise.all(ids.map(id=>sb.from("profiles").select("id,nome,email").eq("id",id).maybeSingle()));
+  const map={};profiles.forEach(r=>{if(r.data)map[r.data.id]=r.data});
+  box.innerHTML=data.map(c=>renderPost(c,map[c.user_id])).join("");
+  box.querySelectorAll("[data-like]").forEach(b=>b.onclick=()=>{const n=b.querySelector("span");n.textContent=String(Number(n.textContent||0)+1);b.firstChild.textContent="♥ "});
+ }catch(e){console.error(e);box.innerHTML='<div class="empty-note">Não foi possível carregar o feed.</div>'}
 }
-function updateDashboardProfile(){
- if(!currentUser)return;
- const nome=currentUser.user_metadata?.nome||currentUser.email.split('@')[0];
- const handle='@'+nome.toLowerCase().replace(/[^a-z0-9]+/g,'').slice(0,20);
- ['sideName','profileDisplayName'].forEach(id=>{if(el(id))el(id).textContent=nome});
- if(el('sideHandle'))el('sideHandle').textContent=handle;
- if(el('profileDisplayHandle'))el('profileDisplayHandle').textContent=handle;
- ['sideAvatar','profileBigAvatar'].forEach(id=>{if(el(id))el(id).textContent=(nome[0]||'S').toUpperCase()});
+function renderPost(c,p){
+ const nome=escapeHtml(p?.nome||"Criador"),h=escapeHtml(handleFor(p?.nome||"Criador")),ini=escapeHtml(initialFor(p?.nome||"Criador"));
+ let media="";
+ if(c.mime_type?.startsWith("video/"))media=`<div class="post-media"><video controls src="${escapeAttr(c.file_url)}"></video></div>`;
+ else if(c.mime_type?.startsWith("image/"))media=`<div class="post-media"><img src="${escapeAttr(c.file_url)}" alt="${escapeAttr(c.title)}"></div>`;
+ else if(c.mime_type==="text/link")media=`<a class="post-link" href="${escapeAttr(c.file_url)}" target="_blank" rel="noopener"><strong>🔗 Abrir link</strong><small>${escapeHtml(c.file_url)}</small></a>`;
+ else media=`<div class="post-placeholder"><div class="lock-big">💜</div><strong>Publicação</strong></div>`;
+ return `<article class="post-card"><div class="post-head"><div class="avatar">${ini}</div><div><strong>${nome} <span class="verified">✓</span></strong><small>${h} · ${new Date(c.created_at).toLocaleString("pt-BR")}</small></div><button>•••</button></div>${c.title?`<div class="post-text"><b>${escapeHtml(c.title)}</b>${c.description?`<br>${escapeHtml(c.description)}`:""}</div>`:""}${media}<div class="post-actions"><button data-like>♡ <span>0</span></button><button>◯ <span>0</span></button><button>➤</button><button class="save-btn">♧</button></div></article>`
 }
+async function loadContents(){
+ const list=$("contentList");if(!list||!currentUser)return;
+ const {data,error}=await sb.from("contents").select("*").eq("user_id",currentUser.id).order("created_at",{ascending:false});
+ if(error){list.innerHTML='<div class="box">'+escapeHtml(error.message)+'</div>';return}
+ if(!data?.length){list.innerHTML='<div class="box">Você ainda não publicou nenhum conteúdo.</div>';return}
+ list.innerHTML=data.map(c=>{const media=c.mime_type?.startsWith("video/")?`<video controls src="${escapeAttr(c.file_url)}"></video>`:c.mime_type?.startsWith("image/")?`<img src="${escapeAttr(c.file_url)}">`:`<a href="${escapeAttr(c.file_url)}" target="_blank">🔗 Link</a>`;return `<article class="content"><div class="media">${media}</div><div class="info"><h3>${escapeHtml(c.title)}</h3><p>${escapeHtml(c.description||"Sem descrição")}</p><button class="btn danger" style="margin-top:10px" data-delete="${escapeAttr(c.id)}" data-path="${escapeAttr(c.file_path||"")}">Excluir</button></div></article>`}).join("");
+ list.querySelectorAll("[data-delete]").forEach(b=>b.onclick=()=>deleteContent(b.dataset.delete,b.dataset.path));
+}
+async function deleteContent(id,path){if(!confirm("Excluir este conteúdo?"))return;const {error}=await sb.from("contents").delete().eq("id",id).eq("user_id",currentUser.id);if(error){alert(error.message);return}if(path)await sb.storage.from("content").remove([path]);loadContents();loadFeed();refreshStats()}
+async function publish(){
+ if(!currentUser){openModal("loginModal");return}
+ if(!initSupabase()){msg("contentMsg","Supabase não configurado.","error");return}
+ const title=$("contentTitle").value.trim(),description=$("contentDescription").value.trim(),file=$("contentFile").files[0],link=$("contentLink").value.trim();
+ const mode=document.querySelector("[data-compose].active")?.dataset.compose||"media";
+ if(!title){msg("contentMsg","Digite um título.","error");return}
+ if(mode==="media"&&!file){msg("contentMsg","Escolha uma foto ou vídeo.","error");return}
+ if(mode==="link"&&!/^https?:\/\//i.test(link)){msg("contentMsg","Cole um link válido começando com http:// ou https://.","error");return}
+ msg("contentMsg","Publicando...");
+ try{
+  let path="",fileUrl="",mime="";
+  if(mode==="media"){
+   if(file.size>100*1024*1024){msg("contentMsg","O arquivo deve ter no máximo 100 MB.","error");return}
+   const ext=(file.name.split(".").pop()||"bin").toLowerCase();path=currentUser.id+"/"+crypto.randomUUID()+"."+ext;
+   const {error:up}=await sb.storage.from("content").upload(path,file,{contentType:file.type});if(up){msg("contentMsg",up.message,"error");return}
+   const {data}=sb.storage.from("content").getPublicUrl(path);fileUrl=data.publicUrl;mime=file.type;
+  }else if(mode==="link"){fileUrl=link;mime="text/link"}
+  else{fileUrl="";mime="text/plain"}
+  const {error:db}=await sb.from("contents").insert({user_id:currentUser.id,title,description,file_path:path,file_url:fileUrl,mime_type:mime});
+  if(db){if(path)await sb.storage.from("content").remove([path]);msg("contentMsg",db.message,"error");return}
+  $("contentTitle").value="";$("contentDescription").value="";$("contentFile").value="";$("contentLink").value="";
+  msg("contentMsg","Publicado com sucesso!","success");await loadContents();await loadFeed();await refreshStats();setTimeout(()=>closeModal("contentModal"),700)
+ }catch(e){msg("contentMsg",e.message||"Erro ao publicar.","error")}
+}
+function setCompose(mode){
+ document.querySelectorAll("[data-compose]").forEach(b=>b.classList.toggle("active",b.dataset.compose===mode));
+ $("fileField").classList.toggle("hidden",mode!=="media");$("linkField").classList.toggle("hidden",mode!=="link");
+}
+function openContent(){if(!currentUser){openModal("loginModal");return}clearMsg("contentMsg");setCompose("media");openModal("contentModal")}
+
+async function refreshStats(){
+ if(!currentUser||!initSupabase())return;
+ try{
+  const {count}=await sb.from("contents").select("id",{count:"exact",head:true}).eq("user_id",currentUser.id);
+  $("statPosts").textContent=count||0;
+ }catch(e){}
+ $("statFollowers").textContent=localStorage.getItem("secretyon_followers_"+currentUser.id)||"0";
+ $("statSubscribers").textContent=localStorage.getItem("secretyon_subscribers_"+currentUser.id)||"0";
+}
+function sendMessage(){
+ if(!selectedCreator)return;
+ const subs=JSON.parse(localStorage.getItem("secretyon_subscriptions_"+currentUser.id)||"[]");
+ if(!subs.some(s=>s.creatorId===selectedCreator.id)){msg("messageMsg","Assine o conteúdo deste criador antes de enviar uma mensagem.","error");return}
+ const text=$("messageText").value.trim();if(!text){msg("messageMsg","Escreva sua mensagem.","error");return}
+ const k="secretyon_messages_"+currentUser.id,a=JSON.parse(localStorage.getItem(k)||"[]");a.push({creatorId:selectedCreator.id,creatorName:selectedCreator.nome,text,date:new Date().toISOString()});localStorage.setItem(k,JSON.stringify(a));$("messageText").value="";msg("messageMsg","Mensagem enviada!","success");loadMessages();setTimeout(()=>closeModal("messageModal"),700)
+}
+function loadMessages(){
+ const box=$("messageList");if(!box)return;const a=JSON.parse(localStorage.getItem("secretyon_messages_"+currentUser.id)||"[]");
+ box.innerHTML=a.length?a.map(m=>`<div class="message-row"><div class="avatar">${escapeHtml(initialFor(m.creatorName))}</div><div><strong>${escapeHtml(m.creatorName)}</strong><small>${escapeHtml(m.text)}</small></div></div>`).join(""):'<div class="empty-note">Depois de assinar um criador, você poderá enviar mensagens.</div>';
+}
+function loadWallet(){const balance=Number(localStorage.getItem("secretyon_balance_"+currentUser.id)||0);$("walletBalance").textContent="R$ "+balance.toFixed(2).replace(".",",");const a=JSON.parse(localStorage.getItem("secretyon_withdraw_"+currentUser.id)||"[]");$("withdrawHistory").innerHTML=a.length?a.map(x=>`<div class="notice" style="cursor:default"><span>💸</span><div><strong>R$ ${Number(x.amount).toFixed(2).replace(".",",")}</strong><p>${escapeHtml(x.pix)} · ${escapeHtml(x.status)}</p></div></div>`).join(""):'<p class="muted">Nenhum saque registrado.</p>'}
+function requestWithdraw(){openModal("withdrawModal");clearMsg("withdrawMsg")}
+function sendWithdraw(){
+ const amount=Number($("withdrawAmount").value),pix=$("withdrawPix").value.trim(),balance=Number(localStorage.getItem("secretyon_balance_"+currentUser.id)||0);
+ if(!amount||amount<=0||!pix){msg("withdrawMsg","Informe valor e chave Pix.","error");return}
+ if(amount>balance){msg("withdrawMsg","O valor é maior que seu saldo disponível.","error");return}
+ const k="secretyon_withdraw_"+currentUser.id,a=JSON.parse(localStorage.getItem(k)||"[]");a.unshift({amount,pix,status:"solicitação criada",date:new Date().toISOString()});localStorage.setItem(k,JSON.stringify(a));localStorage.setItem("secretyon_balance_"+currentUser.id,String(balance-amount));loadWallet();msg("withdrawMsg","Solicitação registrada. O processamento real depende da integração financeira.","success");setTimeout(()=>closeModal("withdrawModal"),800)
+}
+function setSettingsDetail(type){
+ const box=$("settingsDetail");if(!box)return;box.classList.remove("hidden");
+ if(type==="profile-data"){box.innerHTML='<h3>Dados do perfil</h3><p class="muted">Esses dados são visíveis para você. Sua bio é pública no perfil.</p><button class="btn primary" id="goProfile">Editar meu perfil</button>';$("goProfile").onclick=()=>showAppPage("perfil")}
+ else if(type==="privacy"){box.innerHTML='<h3>Privacidade</h3><div class="field"><label>Perfil público</label><select id="privacySelect"><option value="public">Público</option><option value="private">Privado</option></select></div><button class="btn primary" id="savePrivacy">Salvar</button>';$("savePrivacy").onclick=()=>{localStorage.setItem("secretyon_privacy_"+currentUser.id,$("privacySelect").value);msg("profileMsg","Privacidade salva.","success")}}
+ else if(type==="password"){openModal("recoverModal");$("recoverEmail").value=currentUser.email||""}
+ else if(type==="email"){box.innerHTML=`<h3>Meu e-mail</h3><p>${escapeHtml(currentUser.email||"")}</p><p class="muted">Para alterar o e-mail, use a confirmação enviada pelo Supabase.</p>`}
+ else if(type==="theme"){toggleTheme()}
+}
+function toggleTheme(){theme=document.body.classList.contains("light")?"dark":"light";document.body.classList.toggle("light",theme==="light");localStorage.setItem("secretyon_theme",theme);$("themeToggle").textContent=theme==="light"?"☀":"☾";$("themeToggle").title=theme==="light"?"Modo noturno":"Modo claro";$("themeLabel").textContent=theme==="light"?"Claro":"Noturno"}
+function loadTheme(){theme=localStorage.getItem("secretyon_theme")||"dark";document.body.classList.toggle("light",theme==="light");if($("themeToggle"))$("themeToggle").textContent=theme==="light"?"☀":"☾";if($("themeLabel"))$("themeLabel").textContent=theme==="light"?"Claro":"Noturno"}
+function closeSidebar(){$("sidebar")?.classList.remove("open");$("sidebarOverlay")?.classList.remove("show")}
+function openSidebar(){$("sidebar")?.classList.add("open");$("sidebarOverlay")?.classList.add("show")}
 
 document.addEventListener("DOMContentLoaded",()=>{
+ loadTheme();
 
-  const ql=el("quickLogin");
-  if(ql) ql.addEventListener("click",quickLogin);
-  const qg=el("socialGoogle");
-  if(qg) qg.onclick=()=>alert("O login com Google será ativado quando o provedor social for configurado no Supabase.");
-  const qa=el("socialApple");
-  if(qa) qa.onclick=()=>alert("O login com Apple será ativado quando o provedor social for configurado no Supabase.");
-
- // Button events are attached safely: missing optional buttons cannot stop the rest of the panel.
- const on=(id,event,fn)=>{const x=el(id);if(x)x.addEventListener(event,fn)};
- on("btnCadastroTopo","click",openCadastro);
- on("btnLoginTopo","click",openLogin);
- on("btnComecar","click",openCadastro);
- on("btnEntrarHero","click",openLogin);
- on("closeLogin","click",e=>{e.preventDefault();closeModal("loginModal")});
- on("closeCad","click",e=>{e.preventDefault();closeModal("cadModal")});
- on("closeRecover","click",e=>{e.preventDefault();closeModal("recoverModal")});
- on("closeContent","click",e=>{e.preventDefault();closeModal("contentModal")});
- on("btnEntrar","click",login);
- on("btnCadastrar","click",register);
- on("btnEsqueci","click",openRecover);
- on("btnCadastroLogin","click",openCadastro);
- on("btnLoginCad","click",openLogin);
- on("btnRecover","click",recover);
- on("btnBackLogin","click",openLogin);
- on("btnNewPassword","click",newPassword);
- on("btnAddPanel","click",openContent);
- on("btnAddContent2","click",openContent);
- on("btnPublish","click",publish);
- on("btnSaveProfile","click",saveProfile);
- on("btnChangePassword","click",openRecover);
- on("btnSair","click",logout);
- document.querySelectorAll(".nav button[data-section]").forEach(b=>b.addEventListener("click",()=>showSection(b.dataset.section)));
+ document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>closeModal(b.dataset.close));
  document.querySelectorAll(".modal").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)closeModal(m.id)}));
+ $("btnEntrar").onclick=login;$("btnCadastrar").onclick=register;$("btnEsqueci").onclick=()=>openModal("recoverModal");$("btnCadastroLogin").onclick=()=>openModal("cadModal");$("btnLoginCad").onclick=()=>openModal("loginModal");$("btnRecover").onclick=recover;$("btnNewPassword").onclick=newPassword;
+ $("sideAdd").onclick=openContent;$("sideCreate").onclick=openContent;$("btnAddContent2").onclick=openContent;$("mobileAdd").onclick=openContent;$("ownStory").onclick=openContent;
+ $("btnPublish").onclick=publish;$("btnSaveProfile").onclick=saveProfile;$("editProfileBtn").onclick=()=>{showAppPage("perfil");$("profileName").focus()};
+ $("logoutTop").onclick=logout;$("settingsLogout").onclick=logout;$("withdrawBtn").onclick=requestWithdraw;$("sendWithdraw").onclick=sendWithdraw;$("sendMessage").onclick=sendMessage;
+ $("themeToggle").onclick=toggleTheme;$("mobileMenu").onclick=openSidebar;$("sidebarOverlay").onclick=closeSidebar;
+ $("editWeekly").onclick=()=>setPlanPrice("weekly");$("editMonthly").onclick=()=>setPlanPrice("monthly");$("payPixInfo").onclick=()=>alert("Pix será disponibilizado no checkout quando o gateway estiver conectado.");$("payCardInfo").onclick=()=>alert("Cartão será disponibilizado no checkout quando o gateway estiver conectado.");
+ document.querySelectorAll("[data-sub-plan]").forEach(b=>b.onclick=()=>selectPlan(b.dataset.subPlan));document.querySelectorAll("[data-pay]").forEach(b=>b.onclick=()=>choosePayment(b.dataset.pay));
+ document.querySelectorAll("[data-compose]").forEach(b=>b.onclick=()=>setCompose(b.dataset.compose));
+ document.querySelectorAll(".side-item[data-app],.mobile-bottom button[data-app]").forEach(b=>b.onclick=()=>showAppPage(b.dataset.app));
+ $("rightMessages").onclick=e=>{e.preventDefault();showAppPage("mensagens")};$("seeAllCreators").onclick=e=>{e.preventDefault();showAppPage("explorar")};
+ document.querySelectorAll("[data-setting]").forEach(b=>b.onclick=()=>setSettingsDetail(b.dataset.setting));
 
+ const search= $("creatorSearch");if(search)search.oninput=()=>{const q=search.value.toLowerCase();document.querySelectorAll("#exploreGrid .explore-tile").forEach(x=>x.style.display=x.dataset.creatorName.toLowerCase().includes(q)?"":"none")};
+ const global=$("globalSearch");if(global)global.oninput=()=>{const q=global.value.toLowerCase();showAppPage("explorar");if($("creatorSearch")){$("creatorSearch").value=global.value;$("creatorSearch").dispatchEvent(new Event("input"))}};
+ loadTheme();
 
- document.querySelectorAll('.side-item[data-app],.mobile-bottom button[data-app]').forEach(b=>b.addEventListener('click',()=>showAppPage(b.dataset.app)));
- on('sideAdd','click',openContent); on('sideCreate','click',openContent); on('btnAddContent2','click',openContent); on('mobileAdd','click',openContent);
- on('logoutTop','click',logout); on('settingsLogout','click',logout);
- on('mobileMenu','click',()=>el('sidebar')?.classList.toggle('open'));
- on('newMessage','click',()=>alert('A caixa de mensagens está pronta para receber a integração de conversas em tempo real.'));
- on('rightMessages','click',e=>{e.preventDefault();showAppPage('mensagens')});
- on('editProfileBtn','click',()=>showAppPage('perfil'));
- const gs=el('globalSearch'); if(gs) gs.addEventListener('input',()=>{const q=gs.value.toLowerCase();document.querySelectorAll('.explore-tile').forEach(x=>x.style.display=x.textContent.toLowerCase().includes(q)?'':'none')});
- const cs=el('creatorSearch'); if(cs) cs.addEventListener('input',()=>{const q=cs.value.toLowerCase();document.querySelectorAll('.explore-tile').forEach(x=>x.style.display=x.textContent.toLowerCase().includes(q)?'':'none')});
- document.querySelectorAll('.like-btn').forEach(b=>b.addEventListener('click',()=>{const n=b.querySelector('span');n.textContent=String(Number(n.textContent||0)+1);b.firstChild.textContent='♥ '}));
- document.querySelectorAll('.save-btn').forEach(b=>b.addEventListener('click',()=>b.textContent=b.textContent==='♧'?'▣':'♧'));
-
- // Supabase initialization is optional for the visual/button test.
- if(supabaseReady()){
-  sb.auth.onAuthStateChange(async(event,session)=>{
-   if(event==="PASSWORD_RECOVERY")openModal("newPasswordModal");
-   if(event==="SIGNED_OUT")showHome();
-  });
-  sb.auth.getSession().then(async({data})=>{if(data.session){await loadUser();showPanel()}});
+ if(initSupabase()){
+  sb.auth.onAuthStateChange((event,session)=>{if(event==="PASSWORD_RECOVERY")openModal("newPasswordModal");if(event==="SIGNED_OUT")showHome()});
+  sb.auth.getSession().then(async({data})=>{if(data?.session){currentUser=data.session.user;await loadUser();showPanel()}});
  }
 });
 </script>

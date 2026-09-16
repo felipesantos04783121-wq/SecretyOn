@@ -2,576 +2,340 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Secretyon — plataforma para criadores publicarem conteúdo exclusivo e gerenciarem assinantes.">
-<meta name="theme-color" content="#111111">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Secretyon — sua plataforma de conteúdo exclusivo.">
 <title>Secretyon</title>
-
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,Helvetica,sans-serif;background:#0b0b0d;color:#fff;line-height:1.5}
-button,input,textarea{font:inherit}
-button{cursor:pointer;border:0}
-a{color:inherit;text-decoration:none}
+*{box-sizing:border-box}html,body{margin:0;padding:0;font-family:Arial,sans-serif;background:#09090b;color:#fff}
+button,input,textarea{font:inherit}button{cursor:pointer}
+header{height:70px;padding:0 6%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #24242a;background:#0d0d10}
+.logo{font-size:27px;font-weight:800}.logo span{color:#b78cff}
+.actions{display:flex;gap:10px}.btn{border:0;border-radius:10px;padding:12px 18px;font-weight:700}
+.primary{background:#b78cff;color:#09090b}.secondary{background:#1b1b20;color:#fff;border:1px solid #33333b}
+.hero{min-height:calc(100vh - 70px);display:flex;align-items:center;justify-content:center;text-align:center;padding:50px 20px;background:radial-gradient(circle at 50% 10%,#291b40,#09090b 55%)}
+.hero-inner{max-width:760px}.badge{display:inline-block;border:1px solid #4b3b60;background:#17121e;color:#dbc9f5;padding:7px 13px;border-radius:30px;font-size:13px;margin-bottom:20px}
+h1{font-size:clamp(44px,8vw,76px);line-height:1;letter-spacing:-3px;margin:0 0 20px}.purple{color:#b78cff}
+.hero p{color:#b5b5be;font-size:18px;line-height:1.6;margin-bottom:28px}.hero-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.features{padding:65px 6%;background:#101014}.features h2{text-align:center;margin:0 0 32px;font-size:32px}
+.cards{max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:#17171c;border:1px solid #2a2a31;border-radius:16px;padding:23px}.card p{color:#aaaab3}
+footer{text-align:center;padding:30px;color:#777;border-top:1px solid #25252b}
 .hidden{display:none!important}
-
-header{height:72px;padding:0 6%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #242429;background:#0d0d10;position:sticky;top:0;z-index:20}
-.logo{font-size:27px;font-weight:800;letter-spacing:-1px}
-.logo span{color:#b78cff}
-.header-actions{display:flex;gap:10px}
-.btn{padding:12px 19px;border-radius:10px;font-weight:700;transition:.2s}
-.btn:hover{transform:translateY(-1px)}
-.btn-primary{background:#b78cff;color:#09090b}
-.btn-dark{background:#1b1b20;color:#fff;border:1px solid #303038}
-.btn-danger{background:#9d3030;color:#fff}
-
-.hero{min-height:calc(100vh - 72px);display:flex;align-items:center;justify-content:center;text-align:center;padding:70px 20px;background:radial-gradient(circle at 50% 10%,#24183b 0,#0b0b0d 48%)}
-.hero-content{max-width:820px}
-.badge{display:inline-block;padding:7px 13px;border:1px solid #4a3b61;border-radius:99px;color:#d9c8f3;background:#17121e;margin-bottom:22px;font-size:13px}
-h1{font-size:clamp(42px,8vw,76px);line-height:1.02;letter-spacing:-3px;margin-bottom:22px}
-h1 span{color:#b78cff}
-.hero p{font-size:19px;color:#b9b9c2;max-width:650px;margin:0 auto 30px}
-.hero-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-
-.features{padding:65px 6%;background:#101014}
-.section-title{text-align:center;font-size:32px;margin-bottom:35px}
-.cards{max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.card{background:#17171c;border:1px solid #292930;border-radius:16px;padding:25px}
-.card h3{margin-bottom:8px}
-.card p{color:#aaaab3;font-size:15px}
-
-footer{padding:30px 6%;text-align:center;color:#777;border-top:1px solid #25252a;background:#0b0b0d}
-
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.78);display:flex;align-items:center;justify-content:center;padding:20px;z-index:100}
-.modal-box{width:100%;max-width:450px;background:#151519;border:1px solid #303039;border-radius:18px;padding:27px;position:relative;box-shadow:0 20px 70px rgba(0,0,0,.5)}
-.modal-box h2{margin-bottom:6px}
-.modal-sub{color:#9999a3;font-size:14px;margin-bottom:20px}
-.close{position:absolute;right:15px;top:12px;background:transparent;color:#aaa;font-size:26px}
-.field{margin-bottom:14px}
-.field label{display:block;font-size:13px;color:#bbb;margin-bottom:6px}
-.field input,.field textarea{width:100%;background:#0d0d10;color:#fff;border:1px solid #35353e;border-radius:10px;padding:12px;outline:none}
-.field input:focus,.field textarea:focus{border-color:#b78cff}
-.field textarea{min-height:100px;resize:vertical}
-.full{width:100%}
-.switch{margin-top:15px;text-align:center;color:#aaa;font-size:14px}
-.switch button,.link-btn{background:none;color:#caa8ff;font-weight:700}
-.message{margin:12px 0;padding:10px;border-radius:9px;background:#202027;color:#ddd;font-size:14px}
-.message.success{border:1px solid #315d43}
-.message.error{border:1px solid #733636}
-
-#painel{min-height:100vh;background:#0b0b0d}
-.panel-head{padding:35px 6% 20px;background:#101014;border-bottom:1px solid #25252b}
-.panel-head h1{font-size:38px;letter-spacing:-1px;margin:0 0 6px}
-.panel-head p{color:#999}
-.panel-nav{display:flex;gap:8px;overflow-x:auto;padding:14px 6%;background:#101014;border-bottom:1px solid #25252b}
-.panel-nav button{white-space:nowrap;background:#1a1a20;color:#ccc;border:1px solid #2e2e36;padding:10px 14px;border-radius:9px}
-.panel-nav button.active{background:#b78cff;color:#09090b;border-color:#b78cff}
-.panel-body{max-width:1100px;margin:auto;padding:30px 6% 70px}
-.section{display:none}
-.section.active{display:block}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.content-card{background:#16161b;border:1px solid #292930;border-radius:14px;overflow:hidden}
-.content-media{width:100%;height:190px;background:#0d0d10;display:flex;align-items:center;justify-content:center;color:#666}
-.content-media img,.content-media video{width:100%;height:100%;object-fit:cover}
-.content-info{padding:15px}
-.content-info h3{margin-bottom:5px}
-.content-info p{font-size:13px;color:#999}
-.content-actions{display:flex;gap:8px;margin-top:13px}
-.content-actions button{padding:8px 10px;border-radius:8px;background:#24242b;color:#fff;font-size:12px}
-.empty{padding:35px;text-align:center;background:#151519;border:1px dashed #383841;border-radius:14px;color:#999}
-.profile-box,.subscription-box,.settings-box{max-width:700px;background:#151519;border:1px solid #292930;border-radius:16px;padding:24px}
-.status{display:inline-block;padding:6px 10px;border-radius:99px;background:#1d4d31;color:#b8e4c8;font-size:12px}
-.plan{background:#19151f;border:1px solid #4a3a5c;padding:20px;border-radius:14px;margin-top:15px}
-.plan h3{color:#d0b3ff}
-.small{font-size:12px;color:#777;margin-top:12px}
-
-@media(max-width:800px){
-.cards,.grid{grid-template-columns:1fr}
-header{padding:0 4%}
-.panel-nav,.panel-body,.panel-head{padding-left:4%;padding-right:4%}
-h1{letter-spacing:-2px}
-}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal-box{width:100%;max-width:440px;background:#151519;border:1px solid #34343c;border-radius:18px;padding:26px;position:relative;box-shadow:0 20px 80px #000}
+.close{position:absolute;right:13px;top:9px;background:none;border:0;color:#aaa;font-size:28px}
+.modal h2{margin:0 0 5px}.sub{color:#9999a3;font-size:14px;margin:0 0 20px}
+.field{margin-bottom:14px}.field label{display:block;color:#bbb;font-size:13px;margin-bottom:6px}
+.field input,.field textarea{width:100%;background:#0d0d10;color:#fff;border:1px solid #383840;border-radius:10px;padding:12px;outline:0}
+.field textarea{min-height:100px}.field input:focus,.field textarea:focus{border-color:#b78cff}
+.full{width:100%}.switch{text-align:center;margin-top:14px;color:#999;font-size:14px}.link{background:none;border:0;color:#c8a6ff;font-weight:700;padding:0}
+.msg{padding:10px;border-radius:9px;background:#202027;color:#ddd;font-size:14px;margin-bottom:14px}.success{border:1px solid #315d43}.error{border:1px solid #733636}
+#painel{min-height:100vh;background:#0b0b0d}.panel-head{padding:35px 6% 20px;background:#101014;border-bottom:1px solid #25252b}.panel-head h2{margin:0}.panel-head p{color:#999}
+.nav{display:flex;gap:8px;overflow:auto;padding:14px 6%;background:#101014;border-bottom:1px solid #25252b}.nav button{white-space:nowrap;background:#1a1a20;color:#ccc;border:1px solid #303039;padding:10px 14px;border-radius:9px}
+.body{max-width:1100px;margin:auto;padding:30px 6%}.section{display:none}.section.active{display:block}
+.box{background:#151519;border:1px solid #292930;border-radius:16px;padding:22px;max-width:700px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.content{background:#16161b;border:1px solid #292930;border-radius:14px;overflow:hidden}.media{height:180px;background:#0d0d10;display:flex;align-items:center;justify-content:center}.media img,.media video{width:100%;height:100%;object-fit:cover}.info{padding:14px}.info p{color:#999;font-size:13px}
+@media(max-width:800px){.cards,.grid{grid-template-columns:1fr}header{padding:0 4%}.body,.nav,.panel-head{padding-left:4%;padding-right:4%}}
 </style>
 </head>
-
 <body>
 
-<header id="siteHeader">
+<header id="header">
   <div class="logo">Secrety<span>on</span></div>
-  <div class="header-actions">
-    <button class="btn btn-dark" onclick="abrirCadastro()">Criar conta</button>
-    <button class="btn btn-primary" onclick="abrirLogin()">Entrar</button>
+  <div class="actions">
+    <button type="button" class="btn secondary" id="btnCadastroTopo">Criar conta</button>
+    <button type="button" class="btn primary" id="btnLoginTopo">Entrar</button>
   </div>
 </header>
 
-<main id="inicio">
+<main id="home">
 <section class="hero">
-  <div class="hero-content">
-    <div class="badge">Sua área exclusiva começa aqui</div>
-    <h1>Crie. Publique.<br><span>Conecte-se.</span></h1>
-    <p>Uma plataforma para você compartilhar conteúdos exclusivos, organizar seu perfil e construir sua comunidade.</p>
-    <div class="hero-buttons">
-      <button class="btn btn-primary" onclick="abrirCadastro()">Começar agora</button>
-      <button class="btn btn-dark" onclick="abrirLogin()">Já tenho uma conta</button>
-    </div>
-  </div>
+<div class="hero-inner">
+<div class="badge">Sua área exclusiva começa aqui</div>
+<h1>Crie. Publique.<br><span class="purple">Conecte-se.</span></h1>
+<p>Compartilhe seus conteúdos, organize seu perfil e construa sua comunidade dentro do Secretyon.</p>
+<div class="hero-actions">
+<button type="button" class="btn primary" id="btnComecar">Começar agora</button>
+<button type="button" class="btn secondary" id="btnEntrarHero">Já tenho uma conta</button>
+</div>
+</div>
 </section>
-
 <section class="features">
-  <h2 class="section-title">Tudo em um só lugar</h2>
-  <div class="cards">
-    <div class="card"><h3>📸 Conteúdo exclusivo</h3><p>Publique fotos, vídeos e outros materiais para sua comunidade.</p></div>
-    <div class="card"><h3>👤 Seu perfil</h3><p>Organize suas informações e mantenha seu espaço personalizado.</p></div>
-    <div class="card"><h3>🔐 Área protegida</h3><p>Login, recuperação de senha e estrutura de acesso por conta.</p></div>
-  </div>
+<h2>Tudo em um só lugar</h2>
+<div class="cards">
+<div class="card"><h3>📸 Conteúdo exclusivo</h3><p>Publique fotos, vídeos e materiais para sua comunidade.</p></div>
+<div class="card"><h3>👤 Seu perfil</h3><p>Organize suas informações e mantenha seu espaço personalizado.</p></div>
+<div class="card"><h3>🔐 Área protegida</h3><p>Login e recuperação de senha integrados ao Supabase.</p></div>
+</div>
 </section>
 </main>
+<footer id="footer">© 2026 Secretyon. Todos os direitos reservados.</footer>
 
-<footer id="siteFooter">© 2026 Secretyon. Todos os direitos reservados.</footer>
-
-<!-- LOGIN -->
-<div id="modalLogin" class="modal hidden">
+<div class="modal hidden" id="loginModal">
 <div class="modal-box">
-<button class="close" onclick="fecharLogin()">×</button>
-<h2>Entrar</h2><p class="modal-sub">Acesse sua conta Secretyon.</p>
-<div id="loginMsg" class="message hidden"></div>
+<button type="button" class="close" id="closeLogin">×</button>
+<h2>Entrar</h2><p class="sub">Acesse sua conta Secretyon.</p>
+<div id="loginMsg" class="msg hidden"></div>
 <div class="field"><label>E-mail</label><input id="loginEmail" type="email" autocomplete="email"></div>
-<div class="field"><label>Senha</label><input id="loginSenha" type="password" autocomplete="current-password"></div>
-<button class="btn btn-primary full" onclick="entrar()">Entrar</button>
-<div class="switch"><button onclick="abrirRecuperacao()">Esqueci minha senha</button></div>
-<div class="switch">Ainda não tem conta? <button onclick="abrirCadastro()">Criar conta</button></div>
-</div></div>
+<div class="field"><label>Senha</label><input id="loginPassword" type="password" autocomplete="current-password"></div>
+<button type="button" class="btn primary full" id="btnEntrar">Entrar</button>
+<div class="switch"><button type="button" class="link" id="btnEsqueci">Esqueci minha senha</button></div>
+<div class="switch">Não tem conta? <button type="button" class="link" id="btnCadastroLogin">Criar conta</button></div>
+</div>
+</div>
 
-<!-- CADASTRO -->
-<div id="modalCadastro" class="modal hidden">
+<div class="modal hidden" id="cadModal">
 <div class="modal-box">
-<button class="close" onclick="fecharCadastro()">×</button>
-<h2>Criar conta</h2><p class="modal-sub">Crie seu acesso gratuitamente.</p>
-<div id="cadMsg" class="message hidden"></div>
+<button type="button" class="close" id="closeCad">×</button>
+<h2>Criar conta</h2><p class="sub">Crie seu acesso ao Secretyon.</p>
+<div id="cadMsg" class="msg hidden"></div>
 <div class="field"><label>Nome</label><input id="cadNome" type="text" autocomplete="name"></div>
 <div class="field"><label>E-mail</label><input id="cadEmail" type="email" autocomplete="email"></div>
-<div class="field"><label>Senha</label><input id="cadSenha" type="password" autocomplete="new-password"></div>
-<button class="btn btn-primary full" onclick="cadastrar()">Criar minha conta</button>
-<div class="switch">Já possui conta? <button onclick="abrirLogin()">Entrar</button></div>
-</div></div>
+<div class="field"><label>Senha</label><input id="cadPassword" type="password" autocomplete="new-password"></div>
+<button type="button" class="btn primary full" id="btnCadastrar">Criar minha conta</button>
+<div class="switch">Já tem conta? <button type="button" class="link" id="btnLoginCad">Entrar</button></div>
+</div>
+</div>
 
-<!-- RECUPERAÇÃO -->
-<div id="modalRecuperacao" class="modal hidden">
+<div class="modal hidden" id="recoverModal">
 <div class="modal-box">
-<button class="close" onclick="fecharRecuperacao()">×</button>
-<h2>Recuperar senha</h2><p class="modal-sub">Informe seu e-mail para receber o link de recuperação.</p>
-<div id="recMsg" class="message hidden"></div>
-<div class="field"><label>E-mail</label><input id="recEmail" type="email"></div>
-<button class="btn btn-primary full" onclick="enviarRecuperacao()">Enviar link</button>
-<div class="switch"><button onclick="abrirLogin()">Voltar para o login</button></div>
-</div></div>
+<button type="button" class="close" id="closeRecover">×</button>
+<h2>Recuperar senha</h2><p class="sub">Digite seu e-mail para receber o link.</p>
+<div id="recoverMsg" class="msg hidden"></div>
+<div class="field"><label>E-mail</label><input id="recoverEmail" type="email"></div>
+<button type="button" class="btn primary full" id="btnRecover">Enviar link</button>
+<div class="switch"><button type="button" class="link" id="btnBackLogin">Voltar para o login</button></div>
+</div>
+</div>
 
-<!-- NOVA SENHA -->
-<div id="modalNovaSenha" class="modal hidden">
+<div class="modal hidden" id="newPasswordModal">
 <div class="modal-box">
-<h2>Nova senha</h2><p class="modal-sub">Digite sua nova senha.</p>
-<div id="novaMsg" class="message hidden"></div>
-<div class="field"><label>Nova senha</label><input id="novaSenha" type="password"></div>
-<div class="field"><label>Confirmar senha</label><input id="novaSenha2" type="password"></div>
-<button class="btn btn-primary full" onclick="salvarNovaSenha()">Salvar nova senha</button>
-</div></div>
+<h2>Nova senha</h2><p class="sub">Digite sua nova senha.</p>
+<div id="newPasswordMsg" class="msg hidden"></div>
+<div class="field"><label>Nova senha</label><input id="newPassword" type="password"></div>
+<div class="field"><label>Confirmar senha</label><input id="newPassword2" type="password"></div>
+<button type="button" class="btn primary full" id="btnNewPassword">Salvar nova senha</button>
+</div>
+</div>
 
-<!-- ADICIONAR CONTEÚDO -->
-<div id="modalConteudo" class="modal hidden">
+<div class="modal hidden" id="contentModal">
 <div class="modal-box">
-<button class="close" onclick="fecharAdicionarConteudo()">×</button>
-<h2>Adicionar conteúdo</h2><p class="modal-sub">Envie uma foto ou vídeo para sua biblioteca.</p>
-<div id="contentMsg" class="message hidden"></div>
-<div class="field"><label>Título</label><input id="conteudoTitulo" type="text"></div>
-<div class="field"><label>Descrição</label><textarea id="conteudoDescricao"></textarea></div>
-<div class="field"><label>Arquivo</label><input id="conteudoArquivo" type="file" accept="image/*,video/*"></div>
-<button class="btn btn-primary full" onclick="publicarConteudo()">Publicar conteúdo</button>
-</div></div>
+<button type="button" class="close" id="closeContent">×</button>
+<h2>Adicionar conteúdo</h2><p class="sub">Envie uma foto ou vídeo.</p>
+<div id="contentMsg" class="msg hidden"></div>
+<div class="field"><label>Título</label><input id="contentTitle"></div>
+<div class="field"><label>Descrição</label><textarea id="contentDescription"></textarea></div>
+<div class="field"><label>Arquivo</label><input id="contentFile" type="file" accept="image/*,video/*"></div>
+<button type="button" class="btn primary full" id="btnPublish">Publicar conteúdo</button>
+</div>
+</div>
 
-<!-- PAINEL -->
 <section id="painel" class="hidden">
-<div class="panel-head">
-  <h1>Olá, <span id="nomePainel">usuário</span> 👋</h1>
-  <p>Gerencie sua conta e seus conteúdos.</p>
+<div class="panel-head"><h2>Olá, <span id="nomePainel">usuário</span> 👋</h2><p>Gerencie sua conta e seus conteúdos.</p></div>
+<div class="nav">
+<button type="button" data-section="perfil">Meu perfil</button>
+<button type="button" data-section="conteudo">Meu conteúdo</button>
+<button type="button" id="btnAddPanel">Adicionar conteúdo</button>
+<button type="button" data-section="assinaturas">Assinaturas</button>
+<button type="button" data-section="config">Configurações</button>
+<button type="button" id="btnSair">Sair</button>
 </div>
-
-<nav class="panel-nav">
-<button id="navPerfil" onclick="mostrarSecao('perfil',this)">Meu perfil</button>
-<button id="navConteudo" onclick="mostrarSecao('conteudo',this)">Meu conteúdo</button>
-<button onclick="abrirAdicionarConteudo()">Adicionar conteúdo</button>
-<button onclick="mostrarSecao('assinaturas',this)">Assinaturas</button>
-<button onclick="mostrarSecao('config',this)">Configurações</button>
-<button onclick="sairSecretyon()">Sair</button>
-</nav>
-
-<div class="panel-body">
-
-<div id="secaoPerfil" class="section">
-<h2>Meu perfil</h2><br>
-<div class="profile-box">
-<div id="perfilMsg" class="message hidden"></div>
-<div class="field"><label>Nome</label><input id="perfilNome" type="text"></div>
-<div class="field"><label>E-mail</label><input id="perfilEmail" type="email" disabled></div>
-<button class="btn btn-primary" onclick="salvarPerfil()">Salvar perfil</button>
+<div class="body">
+<div class="section" id="perfil">
+<h2>Meu perfil</h2><br><div class="box"><div id="profileMsg" class="msg hidden"></div>
+<div class="field"><label>Nome</label><input id="profileName"></div>
+<div class="field"><label>E-mail</label><input id="profileEmail" disabled></div>
+<button type="button" class="btn primary" id="btnSaveProfile">Salvar perfil</button></div>
 </div>
+<div class="section" id="conteudo">
+<div style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap"><h2>Meu conteúdo</h2><button type="button" class="btn primary" id="btnAddContent2">+ Adicionar</button></div><br>
+<div id="contentList" class="grid"></div>
 </div>
-
-<div id="secaoConteudo" class="section">
-<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap">
-<h2>Meu conteúdo</h2>
-<button class="btn btn-primary" onclick="abrirAdicionarConteudo()">+ Adicionar</button>
-</div>
-<div id="listaConteudos" class="grid"></div>
-</div>
-
-<div id="secaoAssinaturas" class="section">
-<h2>Assinaturas</h2><br>
-<div class="subscription-box">
-<span class="status">Área preparada</span>
-<h3 style="margin-top:12px">Plano do criador</h3>
-<p style="color:#aaa;margin-top:7px">A estrutura de assinaturas está pronta para receber um gateway de pagamento e regras reais de acesso.</p>
-<div class="plan">
-<h3>Plano Secretyon</h3>
-<p style="color:#aaa">Configure preço, período e benefícios quando o pagamento estiver integrado.</p>
-<button class="btn btn-primary" style="margin-top:14px" onclick="mostrarAviso('Pagamento ainda precisa ser conectado a um gateway.')">Configurar assinatura</button>
-</div>
-<p class="small">Importante: esta versão não cobra pagamentos automaticamente.</p>
-</div>
-</div>
-
-<div id="secaoConfig" class="section">
-<h2>Configurações</h2><br>
-<div class="settings-box">
-<h3>Conta</h3>
-<p style="color:#aaa;margin:7px 0 20px">Use as opções abaixo para administrar seu acesso.</p>
-<button class="btn btn-dark" onclick="abrirRecuperacao()">Alterar senha</button>
-<button class="btn btn-danger" style="margin-left:8px" onclick="sairSecretyon()">Sair da conta</button>
-</div>
-</div>
-
+<div class="section" id="assinaturas"><h2>Assinaturas</h2><br><div class="box"><p>Área preparada para integração de planos e pagamentos.</p><p style="color:#999;margin-top:10px">O pagamento real precisa de um gateway e backend/webhook.</p></div></div>
+<div class="section" id="config"><h2>Configurações</h2><br><div class="box"><button type="button" class="btn secondary" id="btnChangePassword">Alterar senha</button></div></div>
 </div>
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-/* =========================================================
-   CONFIGURAÇÃO DO SUPABASE
-   Cole aqui os dados do seu projeto.
-   NÃO publique sua chave em mensagens ou redes sociais.
-   ========================================================= */
+/* COLOQUE SEUS DADOS DO SUPABASE AQUI */
 const SUPABASE_URL = https://xcxvwlbiubauwjxhjkyj.supabase.co/rest/v1/;
 const SUPABASE_PUBLISHABLE_KEY = sb_publishable_KFDSA_GITFGL0GXnQVBaPw_fk3fSQhs;
 
-let supabaseClient = null;
-let usuarioAtual = null;
+let sb = null;
+let currentUser = null;
 
-function supabasePronto(){
-  if(!SUPABASE_URL.startsWith("http") || SUPABASE_URL.includes("COLE_AQUI") ||
-     SUPABASE_PUBLISHABLE_KEY.includes("COLE_AQUI")){
-    alert("Primeiro coloque a URL e a chave publishable do Supabase no início deste arquivo.");
-    return false;
-  }
-  if(!supabaseClient){
-    supabaseClient = window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
-  }
-  return true;
+function el(id){return document.getElementById(id)}
+function openModal(id){el(id).classList.remove("hidden")}
+function closeModal(id){el(id).classList.add("hidden")}
+function closeAll(){["loginModal","cadModal","recoverModal","newPasswordModal","contentModal"].forEach(closeModal)}
+function message(id,text,type=""){const x=el(id);x.textContent=text;x.className="msg"+(type?" "+type:"");x.classList.remove("hidden")}
+function clearMessage(id){el(id).classList.add("hidden")}
+
+function openLogin(){closeAll();clearMessage("loginMsg");openModal("loginModal");setTimeout(()=>el("loginEmail").focus(),100)}
+function openCadastro(){closeAll();clearMessage("cadMsg");openModal("cadModal");setTimeout(()=>el("cadNome").focus(),100)}
+function openRecover(){closeAll();clearMessage("recoverMsg");openModal("recoverModal");setTimeout(()=>el("recoverEmail").focus(),100)}
+function openContent(){if(!currentUser){openLogin();return}clearMessage("contentMsg");openModal("contentModal")}
+
+function supabaseReady(){
+ if(SUPABASE_URL.includes("COLE_AQUI")||SUPABASE_PUBLISHABLE_KEY.includes("COLE_AQUI")){
+   return false;
+ }
+ if(!sb)sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+ return true;
 }
 
-function $(id){return document.getElementById(id)}
-function show(id){$(id).classList.remove("hidden")}
-function hide(id){$(id).classList.add("hidden")}
-
-function msg(id,text,type=""){
-  const el=$(id); el.textContent=text; el.className="message"+(type?" "+type:"");
-  el.classList.remove("hidden");
+async function login(){
+ if(!supabaseReady()){message("loginMsg","O formulário está funcionando, mas falta configurar o Supabase neste arquivo.","error");return}
+ const email=el("loginEmail").value.trim(),password=el("loginPassword").value;
+ if(!email||!password){message("loginMsg","Digite seu e-mail e sua senha.","error");return}
+ message("loginMsg","Entrando...");
+ const {error}=await sb.auth.signInWithPassword({email,password});
+ if(error){message("loginMsg",error.message,"error");return}
+ closeModal("loginModal");await loadUser();showPanel();
 }
 
-function limparMsg(id){$(id).classList.add("hidden")}
-
-function fecharTodosModais(){
-  ["modalLogin","modalCadastro","modalRecuperacao","modalNovaSenha","modalConteudo"].forEach(hide);
+async function register(){
+ if(!supabaseReady()){message("cadMsg","O cadastro está pronto, mas falta configurar o Supabase neste arquivo.","error");return}
+ const nome=el("cadNome").value.trim(),email=el("cadEmail").value.trim(),password=el("cadPassword").value;
+ if(!nome||!email||!password){message("cadMsg","Preencha nome, e-mail e senha.","error");return}
+ if(password.length<6){message("cadMsg","A senha precisa ter pelo menos 6 caracteres.","error");return}
+ message("cadMsg","Criando sua conta...");
+ const {data,error}=await sb.auth.signUp({email,password,options:{data:{nome},emailRedirectTo:location.origin}});
+ if(error){message("cadMsg",error.message,"error");return}
+ if(data.session){currentUser=data.user;closeModal("cadModal");showPanel();loadUser()}
+ else message("cadMsg","Conta criada! Confira seu e-mail para confirmar o cadastro.","success");
 }
 
-function abrirLogin(){
-  fecharTodosModais(); show("modalLogin"); limparMsg("loginMsg");
-}
-function fecharLogin(){hide("modalLogin")}
-function abrirCadastro(){
-  fecharTodosModais(); show("modalCadastro"); limparMsg("cadMsg");
-}
-function fecharCadastro(){hide("modalCadastro")}
-function abrirRecuperacao(){
-  fecharTodosModais(); show("modalRecuperacao"); limparMsg("recMsg");
-}
-function fecharRecuperacao(){hide("modalRecuperacao")}
-function abrirAdicionarConteudo(){
-  if(!usuarioAtual){abrirLogin();return}
-  fecharTodosModais(); show("modalConteudo"); limparMsg("contentMsg");
-}
-function fecharAdicionarConteudo(){hide("modalConteudo")}
-
-async function cadastrar(){
-  if(!supabasePronto()) return;
-  const nome=$("cadNome").value.trim();
-  const email=$("cadEmail").value.trim();
-  const senha=$("cadSenha").value;
-
-  if(!nome || !email || !senha){msg("cadMsg","Preencha todos os campos.","error");return}
-  if(senha.length<6){msg("cadMsg","A senha precisa ter pelo menos 6 caracteres.","error");return}
-
-  msg("cadMsg","Criando sua conta...");
-  const {data,error}=await supabaseClient.auth.signUp({
-    email,senha,
-    options:{
-      data:{nome},
-      emailRedirectTo:window.location.origin
-    }
-  });
-
-  if(error){msg("cadMsg",error.message,"error");return}
-
-  if(data.user && data.session){
-    await carregarUsuario();
-    fecharCadastro();
-    abrirPainel();
-  }else{
-    msg("cadMsg","Conta criada! Verifique seu e-mail para confirmar o cadastro.","success");
-  }
+async function recover(){
+ if(!supabaseReady()){message("recoverMsg","O formulário está funcionando, mas falta configurar o Supabase neste arquivo.","error");return}
+ const email=el("recoverEmail").value.trim();
+ if(!email){message("recoverMsg","Digite seu e-mail.","error");return}
+ message("recoverMsg","Enviando...");
+ const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:location.origin});
+ if(error){message("recoverMsg",error.message,"error");return}
+ message("recoverMsg","Link enviado! Confira seu e-mail.","success");
 }
 
-async function entrar(){
-  if(!supabasePronto()) return;
-  const email=$("loginEmail").value.trim();
-  const senha=$("loginSenha").value;
-  if(!email || !senha){msg("loginMsg","Informe e-mail e senha.","error");return}
-
-  msg("loginMsg","Entrando...");
-  const {error}=await supabaseClient.auth.signInWithPassword({email,password:senha});
-  if(error){msg("loginMsg",error.message,"error");return}
-
-  fecharLogin();
-  await carregarUsuario();
-  abrirPainel();
+async function newPassword(){
+ if(!supabaseReady())return;
+ const a=el("newPassword").value,b=el("newPassword2").value;
+ if(a.length<6){message("newPasswordMsg","A senha precisa ter pelo menos 6 caracteres.","error");return}
+ if(a!==b){message("newPasswordMsg","As senhas não são iguais.","error");return}
+ const {error}=await sb.auth.updateUser({password:a});
+ if(error){message("newPasswordMsg",error.message,"error");return}
+ message("newPasswordMsg","Senha alterada com sucesso!","success");
+ setTimeout(()=>{closeModal("newPasswordModal");showPanel()},1000);
 }
 
-async function enviarRecuperacao(){
-  if(!supabasePronto()) return;
-  const email=$("recEmail").value.trim();
-  if(!email){msg("recMsg","Informe seu e-mail.","error");return}
-
-  msg("recMsg","Enviando...");
-  const {error}=await supabaseClient.auth.resetPasswordForEmail(email,{
-    redirectTo:window.location.origin
-  });
-
-  if(error){msg("recMsg",error.message,"error");return}
-  msg("recMsg","Link enviado! Verifique seu e-mail.","success");
+async function loadUser(){
+ if(!sb)return;
+ const {data,error}=await sb.auth.getUser();
+ if(error||!data.user){currentUser=null;return}
+ currentUser=data.user;
+ const nome=currentUser.user_metadata?.nome||currentUser.email.split("@")[0];
+ el("nomePainel").textContent=nome;el("profileName").value=nome;el("profileEmail").value=currentUser.email;
+ await sb.from("profiles").upsert({id:currentUser.id,nome,email:currentUser.email},{onConflict:"id"});
 }
 
-async function salvarNovaSenha(){
-  if(!supabasePronto()) return;
-  const s1=$("novaSenha").value;
-  const s2=$("novaSenha2").value;
-  if(s1.length<6){msg("novaMsg","A senha precisa ter pelo menos 6 caracteres.","error");return}
-  if(s1!==s2){msg("novaMsg","As senhas não são iguais.","error");return}
-
-  const {error}=await supabaseClient.auth.updateUser({password:s1});
-  if(error){msg("novaMsg",error.message,"error");return}
-  msg("novaMsg","Senha alterada com sucesso!","success");
-  setTimeout(()=>{hide("modalNovaSenha");abrirPainel()},1200);
+function showPanel(){
+ closeAll();el("home").classList.add("hidden");el("header").classList.add("hidden");el("footer").classList.add("hidden");el("painel").classList.remove("hidden");
+ showSection("perfil");loadContents();
 }
 
-async function carregarUsuario(){
-  if(!supabasePronto()) return null;
-  const {data,error}=await supabaseClient.auth.getUser();
-  if(error || !data.user){usuarioAtual=null;return null}
-  usuarioAtual=data.user;
-
-  const nome=usuarioAtual.user_metadata?.nome || usuarioAtual.user_metadata?.name || usuarioAtual.email?.split("@")[0] || "usuário";
-  $("nomePainel").textContent=nome;
-  $("perfilNome").value=nome;
-  $("perfilEmail").value=usuarioAtual.email || "";
-
-  await garantirPerfil(nome);
-  return usuarioAtual;
+function showHome(){
+ el("painel").classList.add("hidden");el("home").classList.remove("hidden");el("header").classList.remove("hidden");el("footer").classList.remove("hidden");
 }
 
-async function garantirPerfil(nome){
-  if(!usuarioAtual)return;
-  const {error}=await supabaseClient.from("profiles").upsert({
-    id:usuarioAtual.id,
-    nome,
-    email:usuarioAtual.email
-  },{onConflict:"id"});
-  if(error) console.log("Perfil:",error.message);
+function showSection(id){
+ document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+ el(id).classList.add("active");
 }
 
-function abrirPainel(){
-  hide("inicio");hide("siteHeader");hide("siteFooter");show("painel");
-  mostrarSecao("perfil",$("navPerfil"));
-  carregarConteudos();
+async function saveProfile(){
+ if(!currentUser||!supabaseReady())return;
+ const nome=el("profileName").value.trim();if(!nome){message("profileMsg","Digite seu nome.","error");return}
+ const {error}=await sb.from("profiles").upsert({id:currentUser.id,nome,email:currentUser.email},{onConflict:"id"});
+ if(error){message("profileMsg",error.message,"error");return}
+ await sb.auth.updateUser({data:{nome}});
+ el("nomePainel").textContent=nome;message("profileMsg","Perfil salvo!","success");
 }
 
-function mostrarSecao(nome,botao){
-  document.querySelectorAll(".section").forEach(x=>x.classList.remove("active"));
-  const alvo=$("secao"+nome.charAt(0).toUpperCase()+nome.slice(1));
-  if(alvo) alvo.classList.add("active");
-  document.querySelectorAll(".panel-nav button").forEach(x=>x.classList.remove("active"));
-  if(botao) botao.classList.add("active");
+async function publish(){
+ if(!currentUser){openLogin();return}
+ if(!supabaseReady()){message("contentMsg","Falta configurar o Supabase neste arquivo.","error");return}
+ const title=el("contentTitle").value.trim(),description=el("contentDescription").value.trim(),file=el("contentFile").files[0];
+ if(!title||!file){message("contentMsg","Informe o título e escolha um arquivo.","error");return}
+ if(file.size>100*1024*1024){message("contentMsg","O arquivo deve ter no máximo 100 MB.","error");return}
+ message("contentMsg","Enviando...");
+ const ext=(file.name.split(".").pop()||"bin").toLowerCase(),path=currentUser.id+"/"+crypto.randomUUID()+"."+ext;
+ const {error:up}=await sb.storage.from("content").upload(path,file,{contentType:file.type});
+ if(up){message("contentMsg",up.message,"error");return}
+ const {data}=sb.storage.from("content").getPublicUrl(path);
+ const {error:db}=await sb.from("contents").insert({user_id:currentUser.id,title,description,file_path:path,file_url:data.publicUrl,mime_type:file.type});
+ if(db){await sb.storage.from("content").remove([path]);message("contentMsg",db.message,"error");return}
+ el("contentTitle").value="";el("contentDescription").value="";el("contentFile").value="";
+ message("contentMsg","Conteúdo publicado!","success");await loadContents();setTimeout(()=>closeModal("contentModal"),800);
 }
 
-async function salvarPerfil(){
-  if(!usuarioAtual || !supabasePronto())return;
-  const nome=$("perfilNome").value.trim();
-  if(!nome){msg("perfilMsg","Digite seu nome.","error");return}
-
-  const {error}=await supabaseClient.from("profiles").upsert({
-    id:usuarioAtual.id,nome,email:usuarioAtual.email
-  },{onConflict:"id"});
-
-  if(error){msg("perfilMsg",error.message,"error");return}
-
-  const {error:authError}=await supabaseClient.auth.updateUser({data:{nome}});
-  if(authError){msg("perfilMsg",authError.message,"error");return}
-
-  $("nomePainel").textContent=nome;
-  msg("perfilMsg","Perfil salvo com sucesso!","success");
+async function loadContents(){
+ const list=el("contentList");
+ if(!currentUser||!supabaseReady()){list.innerHTML='<div class="box">Configure o Supabase para carregar seus conteúdos.</div>';return}
+ const {data,error}=await sb.from("contents").select("*").eq("user_id",currentUser.id).order("created_at",{ascending:false});
+ if(error){list.innerHTML='<div class="box">'+escapeHtml(error.message)+'</div>';return}
+ if(!data.length){list.innerHTML='<div class="box">Você ainda não publicou nenhum conteúdo.</div>';return}
+ list.innerHTML=data.map(c=>{
+  const media=c.mime_type?.startsWith("video/")?'<video controls src="'+escapeAttr(c.file_url)+'"></video>':c.mime_type?.startsWith("image/")?'<img src="'+escapeAttr(c.file_url)+'" alt="">':'📄';
+  return '<article class="content"><div class="media">'+media+'</div><div class="info"><h3>'+escapeHtml(c.title)+'</h3><p>'+escapeHtml(c.description||"Sem descrição")+'</p><button type="button" class="btn secondary" style="margin-top:10px" onclick="deleteContent(\''+c.id+'\',\''+escapeAttr(c.file_path)+'\')">Excluir</button></div></article>'
+ }).join("");
 }
 
-async function publicarConteudo(){
-  if(!usuarioAtual || !supabasePronto())return;
-
-  const titulo=$("conteudoTitulo").value.trim();
-  const descricao=$("conteudoDescricao").value.trim();
-  const arquivo=$("conteudoArquivo").files[0];
-
-  if(!titulo || !arquivo){msg("contentMsg","Informe o título e selecione um arquivo.","error");return}
-
-  const max=100*1024*1024;
-  if(arquivo.size>max){msg("contentMsg","O arquivo ultrapassa 100 MB.","error");return}
-
-  msg("contentMsg","Enviando arquivo...");
-
-  const ext=(arquivo.name.split(".").pop()||"bin").toLowerCase();
-  const nomeArquivo=crypto.randomUUID()+"."+ext;
-  const caminho=usuarioAtual.id+"/"+nomeArquivo;
-
-  const {error:uploadError}=await supabaseClient.storage.from("content").upload(caminho,arquivo,{
-    contentType:arquivo.type,
-    upsert:false
-  });
-
-  if(uploadError){msg("contentMsg","Erro no upload: "+uploadError.message,"error");return}
-
-  const {data:urlData}=supabaseClient.storage.from("content").getPublicUrl(caminho);
-  const fileUrl=urlData.publicUrl;
-
-  const {error:dbError}=await supabaseClient.from("contents").insert({
-    user_id:usuarioAtual.id,
-    title:titulo,
-    description:descricao,
-    file_path:caminho,
-    file_url:fileUrl,
-    mime_type:arquivo.type
-  });
-
-  if(dbError){
-    await supabaseClient.storage.from("content").remove([caminho]);
-    msg("contentMsg","Erro ao salvar conteúdo: "+dbError.message,"error");
-    return;
-  }
-
-  $("conteudoTitulo").value="";
-  $("conteudoDescricao").value="";
-  $("conteudoArquivo").value="";
-  msg("contentMsg","Conteúdo publicado com sucesso!","success");
-  await carregarConteudos();
-
-  setTimeout(fecharAdicionarConteudo,900);
+async function deleteContent(id,path){
+ if(!confirm("Excluir este conteúdo?"))return;
+ const {error}=await sb.from("contents").delete().eq("id",id).eq("user_id",currentUser.id);
+ if(error){alert(error.message);return}
+ await sb.storage.from("content").remove([path]);loadContents();
 }
 
-async function carregarConteudos(){
-  if(!usuarioAtual || !supabasePronto())return;
-  const lista=$("listaConteudos");
-  lista.innerHTML='<div class="empty">Carregando conteúdos...</div>';
+async function logout(){if(sb)await sb.auth.signOut();currentUser=null;showHome()}
 
-  const {data,error}=await supabaseClient.from("contents")
-    .select("*").eq("user_id",usuarioAtual.id)
-    .order("created_at",{ascending:false});
-
-  if(error){lista.innerHTML='<div class="empty">Erro ao carregar: '+escapeHtml(error.message)+'</div>';return}
-
-  if(!data || !data.length){
-    lista.innerHTML='<div class="empty">Você ainda não publicou nenhum conteúdo.</div>';
-    return;
-  }
-
-  lista.innerHTML=data.map(c=>{
-    const media=c.mime_type?.startsWith("video/")
-      ? `<video src="${escapeAttr(c.file_url)}" controls preload="metadata"></video>`
-      : c.mime_type?.startsWith("image/")
-      ? `<img src="${escapeAttr(c.file_url)}" alt="${escapeAttr(c.title)}">`
-      : `<span>📄 Arquivo</span>`;
-
-    return `<article class="content-card">
-      <div class="content-media">${media}</div>
-      <div class="content-info">
-        <h3>${escapeHtml(c.title)}</h3>
-        <p>${escapeHtml(c.description||"Sem descrição")}</p>
-        <div class="content-actions">
-          <button onclick="abrirArquivo('${escapeAttr(c.file_url)}')">Abrir</button>
-          <button onclick="excluirConteudo('${c.id}','${escapeAttr(c.file_path)}')">Excluir</button>
-        </div>
-      </div>
-    </article>`;
-  }).join("");
-}
-
-function abrirArquivo(url){window.open(url,"_blank","noopener,noreferrer")}
-
-async function excluirConteudo(id,path){
-  if(!confirm("Excluir este conteúdo?"))return;
-  if(!supabasePronto())return;
-
-  const {error:dbError}=await supabaseClient.from("contents")
-    .delete().eq("id",id).eq("user_id",usuarioAtual.id);
-
-  if(dbError){alert("Não foi possível excluir: "+dbError.message);return}
-
-  await supabaseClient.storage.from("content").remove([path]);
-  await carregarConteudos();
-}
-
-async function sairSecretyon(){
-  if(supabaseClient) await supabaseClient.auth.signOut();
-  usuarioAtual=null;
-  hide("painel");show("inicio");show("siteHeader");show("siteFooter");
-}
-
-function mostrarAviso(texto){alert(texto)}
-
-function escapeHtml(v){
-  return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
-}
+function escapeHtml(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
 function escapeAttr(v){return escapeHtml(v)}
 
-window.addEventListener("DOMContentLoaded",async()=>{
-  if(!supabasePronto())return;
+document.addEventListener("DOMContentLoaded",()=>{
+ // Button events are attached directly and do NOT depend on Supabase.
+ el("btnCadastroTopo").onclick=openCadastro;
+ el("btnLoginTopo").onclick=openLogin;
+ el("btnComecar").onclick=openCadastro;
+ el("btnEntrarHero").onclick=openLogin;
+ el("closeLogin").onclick=()=>closeModal("loginModal");
+ el("closeCad").onclick=()=>closeModal("cadModal");
+ el("closeRecover").onclick=()=>closeModal("recoverModal");
+ el("closeContent").onclick=()=>closeModal("contentModal");
+ el("btnEntrar").onclick=login;
+ el("btnCadastrar").onclick=register;
+ el("btnEsqueci").onclick=openRecover;
+ el("btnCadastroLogin").onclick=openCadastro;
+ el("btnLoginCad").onclick=openLogin;
+ el("btnRecover").onclick=recover;
+ el("btnBackLogin").onclick=openLogin;
+ el("btnNewPassword").onclick=newPassword;
+ el("btnAddPanel").onclick=openContent;
+ el("btnAddContent2").onclick=openContent;
+ el("btnPublish").onclick=publish;
+ el("btnSaveProfile").onclick=saveProfile;
+ el("btnChangePassword").onclick=openRecover;
+ el("btnSair").onclick=logout;
+ document.querySelectorAll(".nav button[data-section]").forEach(b=>b.onclick=()=>showSection(b.dataset.section));
+ document.querySelectorAll(".modal").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)closeModal(m.id)}));
 
-  supabaseClient.auth.onAuthStateChange(async(event,session)=>{
-    if(event==="PASSWORD_RECOVERY"){
-      show("modalNovaSenha");
-    }
-    if(event==="SIGNED_OUT"){
-      hide("painel");show("inicio");show("siteHeader");show("siteFooter");
-    }
+ // Supabase initialization is optional for the visual/button test.
+ if(supabaseReady()){
+  sb.auth.onAuthStateChange(async(event,session)=>{
+   if(event==="PASSWORD_RECOVERY")openModal("newPasswordModal");
+   if(event==="SIGNED_OUT")showHome();
   });
-
-  const {data}=await supabaseClient.auth.getSession();
-  if(data.session){
-    await carregarUsuario();
-    abrirPainel();
-  }
+  sb.auth.getSession().then(async({data})=>{if(data.session){await loadUser();showPanel()}});
+ }
 });
 </script>
 </body>

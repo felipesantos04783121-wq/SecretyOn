@@ -522,7 +522,12 @@ async function openCreator(id){
  $("creatorMessageBtn").onclick=()=>{if(!isSubscribedTo(c.id))return;closeModal("creatorProfileModal");openConversation(c.id,c.nome,c.avatar_url)};
  const box=$("creatorModalContent");box.innerHTML='<div class="empty-note">Carregando publicações...</div>';openModal("creatorProfileModal");
  try{const {data,error}=await sb.from("contents").select("*").eq("user_id",c.id).order("created_at",{ascending:false}).limit(30);if(error)throw error;if(!data?.length){box.innerHTML='<div class="empty-note">Este criador ainda não publicou conteúdo.</div>';return}
- const visible=data.filter(x=>x.visibility!=="subscriber" || isSubscribedTo(c.id));if(!visible.length){box.innerHTML='<div class="empty-note">Este criador ainda não publicou conteúdo público. Assine para acessar o conteúdo exclusivo.</div>';return}box.innerHTML=visible.map(x=>{let media=x.mime_type?.startsWith("video/")?`<video controls src="${escapeAttr(x.file_url)}"></video>`:x.mime_type?.startsWith("image/")?`<img src="${escapeAttr(x.file_url)}">`:x.mime_type==="text/link"?`<a href="${escapeAttr(x.file_url)}" target="_blank" rel="noopener">🔗 Abrir link</a>`:`<div>📝 Publicação</div>`;return `<article class="content"><div class="media">${isSubscribedTo(c.id)?media:'<div class="post-placeholder"><div class="lock-big">🔒</div><strong>Conteúdo exclusivo</strong></div>'}</div><div class="info"><h3>${escapeHtml(x.title||"Publicação")}</h3><p>${escapeHtml(x.description||"")}</p></div></article>`}).join("")}catch(e){box.innerHTML='<div class="empty-note">Não foi possível carregar as publicações deste criador.</div>'}
+ const visible=data.filter(x=>x.visibility!=="subscriber" || isSubscribedTo(c.id));if(!visible.length){box.innerHTML='<div class="empty-note">Este criador ainda não publicou conteúdo público. Assine para acessar o conteúdo exclusivo.</div>';return}
+  const cards=await Promise.all(visible.map(async x=>{
+    const url=await contentFileUrl(x);
+    const media=x.mime_type?.startsWith("video/")?`<video controls playsinline src="${escapeAttr(url)}"></video>`:x.mime_type?.startsWith("image/")?`<img src="${escapeAttr(url)}">`:x.mime_type==="text/link"?`<a href="${escapeAttr(x.file_url||"")}" target="_blank" rel="noopener">🔗 Abrir link</a>`:`<div>📝 Publicação</div>`;
+    return `<article class="content"><div class="media">${media}</div><div class="info"><h3>${escapeHtml(x.title||"Publicação")}</h3><p>${escapeHtml(x.description||"")}</p></div></article>`;
+  }));box.innerHTML=cards.join("")}catch(e){box.innerHTML='<div class="empty-note">Não foi possível carregar as publicações deste criador.</div>'}
 }
 function getPlanPrice(id,type){const k="secretyon_plan_"+id;const v=JSON.parse(localStorage.getItem(k)||"{}");return type==="weekly"?("R$ "+Number(v.weekly??19.99).toFixed(2).replace(".",",")):("R$ "+Number(v.monthly??39.90).toFixed(2).replace(".",","))}
 function setPlanPrice(type){
@@ -561,9 +566,9 @@ async function publishStory(){
   let media_url="",mime_type="";
   if(file){
    const ext=(file.name.split(".").pop()||"bin").toLowerCase(),path=currentUser.id+"/story-"+crypto.randomUUID()+"."+ext;
-   const {error}=await sb.storage.from("content").upload(path,file,{contentType:file.type});
+   const {error}=await sb.storage.from("FOTOS").upload(path,file,{contentType:file.type});
    if(error){msg("storyMsg","Não foi possível publicar: "+error.message,"error");return}
-   media_url=sb.storage.from("content").getPublicUrl(path).data.publicUrl;mime_type=file.type;
+   media_url=sb.storage.from("FOTOS").getPublicUrl(path).data.publicUrl;mime_type=file.type;
   }
   const {error}=await sb.from("stories").insert({user_id:currentUser.id,text,media_url,mime_type});
   if(error){msg("storyMsg",error.message,"error");return}
@@ -584,6 +589,22 @@ async function loadStories(){
   box.innerHTML=list.map(s=>{const c=map[s.user_id]||{nome:"Criador"};const av=c.avatar_url?`<img src="${escapeAttr(c.avatar_url)}" alt="">`:escapeHtml(initialFor(c.nome));return `<div class="story has-story" title="${escapeAttr(c.nome||"Criador")}"><div class="story-avatar">${av}</div><small>${escapeHtml(String(c.nome||"Criador").slice(0,12))}</small></div>`}).join("");
  }catch(e){console.warn("Stories indisponíveis",e)}
 }
+function contentBucket(c){
+  if(c?.file_url && c.file_url.includes("/content/")) return "content";
+  return c?.visibility==="subscriber" ? "FOTOS_PRIVADAS" : "FOTOS";
+}
+async function contentFileUrl(c){
+  if(!c?.file_path) return c?.file_url||"";
+  const bucket=contentBucket(c);
+  if(bucket==="content") return c.file_url||"";
+  if(bucket==="FOTOS") return sb.storage.from(bucket).getPublicUrl(c.file_path).data.publicUrl;
+  const {data,error}=await sb.storage.from(bucket).createSignedUrl(c.file_path,3600);
+  if(error){console.warn("Não foi possível gerar URL privada:",error.message);return ""}
+  return data?.signedUrl||"";
+}
+function canViewContent(c){
+  return c?.visibility!=="subscriber" || c?.user_id===currentUser?.id || isSubscribedTo(c.user_id);
+}
 async function loadFeed(){
  if(!initSupabase())return;const box=$("feedList");
  try{
@@ -599,28 +620,44 @@ async function loadFeed(){
   const ids=[...new Set(feedPool.map(x=>x.user_id))];
   const profiles=await Promise.all(ids.map(id=>sb.from("profiles").select("id,nome,email").eq("id",id).maybeSingle()));
   const map={};profiles.forEach(r=>{if(r.data)map[r.data.id]=r.data});
-  box.innerHTML=feedPool.map(c=>renderPost(c,map[c.user_id])).join("");
+  box.innerHTML=(await Promise.all(feedPool.map(c=>renderPost(c,map[c.user_id])))).join("");
   box.querySelectorAll("[data-like]").forEach(b=>b.onclick=()=>{const n=b.querySelector("span");n.textContent=String(Number(n.textContent||0)+1);b.firstChild.textContent="♥ "});
  }catch(e){console.error(e);box.innerHTML='<div class="empty-note">Não foi possível carregar o feed.</div>'}
 }
-function renderPost(c,p){
- const nome=escapeHtml(p?.nome||"Criador"),h=escapeHtml(handleFor(p?.nome||"Criador")),ini=escapeHtml(initialFor(p?.nome||"Criador"));
- let media="";
- if(c.mime_type?.startsWith("video/"))media=`<div class="post-media"><video controls src="${escapeAttr(c.file_url)}"></video></div>`;
- else if(c.mime_type?.startsWith("image/"))media=`<div class="post-media"><img src="${escapeAttr(c.file_url)}" alt="${escapeAttr(c.title)}"></div>`;
- else if(c.mime_type==="text/link")media=`<a class="post-link" href="${escapeAttr(c.file_url)}" target="_blank" rel="noopener"><strong>🔗 Abrir link</strong><small>${escapeHtml(c.file_url)}</small></a>`;
- else media=`<div class="post-placeholder"><div class="lock-big">💜</div><strong>Publicação</strong></div>`;
- return `<article class="post-card"><div class="post-head"><div class="avatar">${ini}</div><div><strong>${nome} <span class="verified">✓</span></strong><small>${h} · ${new Date(c.created_at).toLocaleString("pt-BR")}</small></div><button>•••</button></div>${c.title?`<div class="post-text"><b>${escapeHtml(c.title)}</b>${c.description?`<br>${escapeHtml(c.description)}`:""}</div>`:""}${c.visibility==="subscriber"?'<div class="visibility-pill">🔒 Exclusivo para assinantes</div>':""}${media}<div class="post-actions"><button data-like>♡ <span>0</span></button><button>◯ <span>0</span></button><button>➤</button><button class="save-btn">♧</button></div></article>`
+async function renderPost(c,p){
+  const nome=escapeHtml(p?.nome||"Criador"),h=escapeHtml(handleFor(p?.nome||"Criador")),ini=escapeHtml(initialFor(p?.nome||"Criador"));
+  let media="";
+  if(!canViewContent(c)){
+    media=`<div class="post-placeholder"><div class="lock-big">🔒</div><strong>Conteúdo exclusivo</strong><small>Assine para acessar esta publicação.</small></div>`;
+  }else{
+    const fileUrl=await contentFileUrl(c);
+    if(c.mime_type?.startsWith("video/") && fileUrl)media=`<div class="post-media"><video controls playsinline src="${escapeAttr(fileUrl)}"></video></div>`;
+    else if(c.mime_type?.startsWith("image/") && fileUrl)media=`<div class="post-media"><img src="${escapeAttr(fileUrl)}" alt="${escapeAttr(c.title||"")}"></div>`;
+    else if(c.mime_type==="text/link")media=`<a class="post-link" href="${escapeAttr(c.file_url||"")}" target="_blank" rel="noopener"><strong>🔗 Abrir link</strong><small>${escapeHtml(c.file_url||"")}</small></a>`;
+    else media=`<div class="post-placeholder"><div class="lock-big">💜</div><strong>Publicação</strong></div>`;
+  }
+  return `<article class="post-card"><div class="post-head"><div class="avatar">${ini}</div><div><strong>${nome} <span class="verified">✓</span></strong><small>${h} · ${new Date(c.created_at).toLocaleString("pt-BR")}</small></div><button>•••</button></div>${c.title?`<div class="post-text"><b>${escapeHtml(c.title)}</b>${c.description?`<br>${escapeHtml(c.description)}`:""}</div>`:""}${c.visibility==="subscriber"?'<div class="visibility-pill">🔒 Exclusivo para assinantes</div>':""}${media}<div class="post-actions"><button data-like>♡ <span>0</span></button><button>◯ <span>0</span></button><button>➤</button><button class="save-btn">♧</button></div></article>`;
 }
 async function loadContents(){
- const list=$("contentList");if(!list||!currentUser)return;
- const {data,error}=await sb.from("contents").select("*").eq("user_id",currentUser.id).order("created_at",{ascending:false});
- if(error){list.innerHTML='<div class="box">'+escapeHtml(error.message)+'</div>';return}
- if(!data?.length){list.innerHTML='<div class="box">Você ainda não publicou nenhum conteúdo.</div>';return}
- list.innerHTML=data.map(c=>{const media=c.mime_type?.startsWith("video/")?`<video controls src="${escapeAttr(c.file_url)}"></video>`:c.mime_type?.startsWith("image/")?`<img src="${escapeAttr(c.file_url)}">`:`<a href="${escapeAttr(c.file_url)}" target="_blank">🔗 Link</a>`;return `<article class="content"><div class="media">${media}</div><div class="info"><h3>${escapeHtml(c.title)}</h3><p>${escapeHtml(c.description||"Sem descrição")}</p><button class="btn danger" style="margin-top:10px" data-delete="${escapeAttr(c.id)}" data-path="${escapeAttr(c.file_path||"")}">Excluir</button></div></article>`}).join("");
- list.querySelectorAll("[data-delete]").forEach(b=>b.onclick=()=>deleteContent(b.dataset.delete,b.dataset.path));
+  const list=$("contentList");if(!list||!currentUser)return;
+  const {data,error}=await sb.from("contents").select("*").eq("user_id",currentUser.id).order("created_at",{ascending:false});
+  if(error){list.innerHTML='<div class="box">'+escapeHtml(error.message)+'</div>';return}
+  if(!data?.length){list.innerHTML='<div class="box">Você ainda não publicou nenhum conteúdo.</div>';return}
+  const cards=await Promise.all(data.map(async c=>{
+    const url=await contentFileUrl(c);
+    const media=c.mime_type?.startsWith("video/")?`<video controls playsinline src="${escapeAttr(url)}"></video>`:c.mime_type?.startsWith("image/")?`<img src="${escapeAttr(url)}">`:c.mime_type==="text/link"?`<a href="${escapeAttr(c.file_url||"")}" target="_blank" rel="noopener">🔗 Link</a>`:"<div>📝 Publicação</div>";
+    return `<article class="content"><div class="media">${media}</div><div class="info"><h3>${escapeHtml(c.title||"Publicação")}</h3><p>${escapeHtml(c.description||"Sem descrição")}</p><small class="muted">${c.visibility==="subscriber"?"🔒 Assinantes":"🌐 Público"}</small><br><button class="btn danger" style="margin-top:10px" data-delete="${escapeAttr(c.id)}" data-path="${escapeAttr(c.file_path||"")}" data-bucket="${escapeAttr(contentBucket(c))}">Excluir</button></div></article>`;
+  }));
+  list.innerHTML=cards.join("");
+  list.querySelectorAll("[data-delete]").forEach(b=>b.onclick=()=>deleteContent(b.dataset.delete,b.dataset.path,b.dataset.bucket));
 }
-async function deleteContent(id,path){if(!confirm("Excluir este conteúdo?"))return;const {error}=await sb.from("contents").delete().eq("id",id).eq("user_id",currentUser.id);if(error){alert(error.message);return}if(path)await sb.storage.from("content").remove([path]);loadContents();loadFeed();refreshStats()}
+async function deleteContent(id,path,bucket){
+  if(!confirm("Excluir este conteúdo?"))return;
+  const {error}=await sb.from("contents").delete().eq("id",id).eq("user_id",currentUser.id);
+  if(error){alert(error.message);return}
+  if(path&&bucket)await sb.storage.from(bucket).remove([path]);
+  loadContents();loadFeed();refreshStats()
+}
 async function publish(){
  if(!currentUser){openModal("loginModal");return}
  if(!initSupabase()){msg("contentMsg","Supabase não configurado.","error");return}
@@ -638,12 +675,13 @@ async function publish(){
    if(mode==="photo"&&!file.type.startsWith("image/")){msg("contentMsg","Escolha uma imagem.","error");return}
    if(mode==="video"&&!file.type.startsWith("video/")){msg("contentMsg","Escolha um vídeo.","error");return}
    const ext=(file.name.split(".").pop()||"bin").toLowerCase();path=currentUser.id+"/"+crypto.randomUUID()+"."+ext;
-   const {error:up}=await sb.storage.from("content").upload(path,file,{contentType:file.type});if(up){msg("contentMsg",up.message,"error");return}
-   const {data}=sb.storage.from("content").getPublicUrl(path);fileUrl=data.publicUrl;mime=file.type;
+   const bucket=visibility==="subscriber"?"FOTOS_PRIVADAS":"FOTOS";
+    const {error:up}=await sb.storage.from(bucket).upload(path,file,{contentType:file.type});if(up){msg("contentMsg",up.message,"error");return}
+   if(bucket==="FOTOS"){const {data}=sb.storage.from(bucket).getPublicUrl(path);fileUrl=data.publicUrl}else{fileUrl=""};mime=file.type;
   }else if(mode==="link"){fileUrl=link;mime="text/link"}
   else{fileUrl="";mime="text/plain"}
   const {error:db}=await sb.from("contents").insert({user_id:currentUser.id,title,description,file_path:path,file_url:fileUrl,mime_type:mime,visibility});
-  if(db){if(path)await sb.storage.from("content").remove([path]);msg("contentMsg",db.message,"error");return}
+  if(db){if(path)await sb.storage.from(visibility==="subscriber"?"FOTOS_PRIVADAS":"FOTOS").remove([path]);msg("contentMsg",db.message,"error");return}
   $("contentTitle").value="";$("contentDescription").value="";$("contentFile").value="";$("contentLink").value="";$("contentPreview").innerHTML="";$("contentPreview").classList.remove("show");if($("contentVisibility"))$("contentVisibility").value="public";
   msg("contentMsg","Publicado com sucesso!","success");await loadContents();await loadFeed();await refreshStats();setTimeout(()=>closeModal("contentModal"),700)
  }catch(e){msg("contentMsg",e.message||"Erro ao publicar.","error")}
@@ -696,17 +734,17 @@ async function saveProfile(){
      if(!avatarFile.type.startsWith("image/")){msg("profileMsg","Escolha uma imagem para a foto do perfil.","error");return}
      if(avatarFile.size>10*1024*1024){msg("profileMsg","A foto deve ter no máximo 10 MB.","error");return}
      const ext=(avatarFile.name.split(".").pop()||"jpg").toLowerCase(),path=currentUser.id+"/avatar-"+crypto.randomUUID()+"."+ext;
-     const {error:up}=await sb.storage.from("content").upload(path,avatarFile,{contentType:avatarFile.type});
+     const {error:up}=await sb.storage.from("FOTOS").upload(path,avatarFile,{contentType:avatarFile.type});
      if(up){msg("profileMsg","Não foi possível enviar a foto: "+up.message,"error");return}
-     avatar_url=sb.storage.from("content").getPublicUrl(path).data.publicUrl;
+     avatar_url=sb.storage.from("FOTOS").getPublicUrl(path).data.publicUrl;
    }
    if(coverFile){
      if(!coverFile.type.startsWith("image/")){msg("profileMsg","Escolha uma imagem para a capa.","error");return}
      if(coverFile.size>10*1024*1024){msg("profileMsg","A capa deve ter no máximo 10 MB.","error");return}
      const ext=(coverFile.name.split(".").pop()||"jpg").toLowerCase(),path=currentUser.id+"/cover-"+crypto.randomUUID()+"."+ext;
-     const {error:up}=await sb.storage.from("content").upload(path,coverFile,{contentType:coverFile.type});
+     const {error:up}=await sb.storage.from("FOTOS").upload(path,coverFile,{contentType:coverFile.type});
      if(up){msg("profileMsg","Não foi possível enviar a capa: "+up.message,"error");return}
-     cover_url=sb.storage.from("content").getPublicUrl(path).data.publicUrl;
+     cover_url=sb.storage.from("FOTOS").getPublicUrl(path).data.publicUrl;
    }
    const {error}=await sb.auth.updateUser({data:{nome,bio,telefone,pix,avatar_url,cover_url}});
    if(error){msg("profileMsg",error.message,"error");return}

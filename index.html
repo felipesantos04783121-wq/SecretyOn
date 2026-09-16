@@ -103,7 +103,7 @@ body.light .app-shell,body.light .feed-area,body.light .sidebar,body.light .righ
 .notice{cursor:pointer;transition:.18s}.notice:hover{border-color:#6b2a89;transform:translateY(-1px)}.notice.unread{box-shadow:0 0 0 1px rgba(165,0,255,.10)}.notice.read{opacity:.72}
 .profile-avatar-wrap{position:relative;width:90px;height:90px;margin-top:-45px;flex:none}.profile-avatar-wrap .profile-big-avatar{margin-top:0;width:90px;height:90px}.avatar-edit-badge{position:absolute;right:-3px;bottom:2px;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--purple);border:3px solid #0e0a12;color:#fff;font-size:14px;box-shadow:0 5px 15px rgba(0,0,0,.35)}
 .message-row{cursor:pointer}.message-row:hover{background:#120c17}.message-unread{border-left:3px solid var(--purple);background:#100a15}.message-system{border-left:3px solid #d86bff}.suggest button.following{background:#1a0d24;color:#fff}
-.creator-profile-actions{display:flex;gap:10px;flex-wrap:wrap}.creator-profile-actions button{flex:1;min-width:150px}
+.creator-profile-actions{display:flex;gap:10px;flex-wrap:wrap}.creator-profile-actions button{flex:1;min-width:150px}.explore-tile .tile-cover{overflow:hidden;position:relative}.explore-tile .tile-cover img{border-radius:50%;box-shadow:0 0 0 4px rgba(190,57,255,.25)}.explore-tile button{width:100%;margin-top:10px}
 @media(max-width:700px){.profile-main{align-items:flex-start}.profile-avatar-wrap{width:78px;height:78px;margin-top:-39px}.profile-avatar-wrap .profile-big-avatar{width:78px;height:78px}.avatar-edit-badge{width:27px;height:27px}}
 
 
@@ -170,7 +170,7 @@ body.light .app-shell,body.light .feed-area,body.light .sidebar,body.light .righ
   <div class="landing-art"><div class="art-badge">🔒 <b>Área exclusiva</b> · para assinantes</div><div class="art-copy"><small>SEU PERFIL DE CRIADOR</small><h2>Mais que conteúdo.<br>É conexão.</h2><p>Seu espaço para criar, publicar e se conectar.</p></div></div>
  </div>
 </section>
-<section id="publicExplore" class="explore" style="padding:70px 5%;background:#070509;border-top:1px solid #1b1022"><div class="section-inner" style="max-width:1180px;margin:auto"><div class="section-title" style="text-align:center;margin-bottom:28px"><h2>Explore criadores</h2><p class="muted">Somente perfis reais cadastrados no Secretyon.</p></div><div id="publicCreators" class="explore-grid"><div class="empty-note">Entre para explorar os criadores.</div></div></div></section>
+<section id="publicExplore" class="explore" style="padding:70px 5%;background:#070509;border-top:1px solid #1b1022"><div class="section-inner" style="max-width:1180px;margin:auto"><div class="section-title" style="text-align:center;margin-bottom:28px"><h2>Explore criadores</h2><p class="muted">Somente perfis reais cadastrados no Secretyon.</p></div><div id="publicCreators" class="explore-grid"><div class="empty-note">Carregando perfis do Secretyon...</div></div></div></section>
 <section id="publicBenefits" style="padding:70px 5%;background:#0b0710"><div class="benefit-grid" style="max-width:1050px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:15px"><div class="benefit" style="background:#120d18;border:1px solid #2b1835;border-radius:16px;padding:23px"><h3>🔐 Privacidade</h3><p class="muted">Controle seu perfil e seus conteúdos.</p></div><div class="benefit" style="background:#120d18;border:1px solid #2b1835;border-radius:16px;padding:23px"><h3>💎 Conteúdo premium</h3><p class="muted">Crie experiências exclusivas para sua comunidade.</p></div><div class="benefit" style="background:#120d18;border:1px solid #2b1835;border-radius:16px;padding:23px"><h3>📱 Em qualquer dispositivo</h3><p class="muted">Experiência adaptada para celular e computador.</p></div></div></section>
 <section id="publicPlans" style="padding:70px 5%;text-align:center;background:#060407"><h2>Planos para sua comunidade</h2><p class="muted">O criador pode personalizar os valores antes de ativar o pagamento.</p></section>
 </main>
@@ -445,17 +445,29 @@ async function logout(){if(sb)await sb.auth.signOut();currentUser=null;showHome(
 async function loadCreators(){
  if(!initSupabase())return;
  try{
-  let {data,error}=await sb.from("profiles").select("id,nome,email,bio,avatar_url").not("nome","is",null).order("created_at",{ascending:true}).limit(1000);
+  let {data,error}=await sb.from("profiles").select("id,nome,bio,avatar_url,cover_url,created_at").not("nome","is",null).order("created_at",{ascending:false}).limit(1000);
   if(error){
-   const fallback=await sb.from("profiles").select("id,nome,email,avatar_url").not("nome","is",null).order("created_at",{ascending:true}).limit(1000);
+   const fallback=await sb.from("profiles").select("id,nome,bio,avatar_url,cover_url").not("nome","is",null).order("created_at",{ascending:false}).limit(1000);
    data=fallback.data; error=fallback.error;
   }
-  if(error){console.warn(error);return}
-  currentCreators=(data||[]).filter(c=>c.id!==currentUser?.id);
+  if(error){console.warn("Não foi possível carregar os perfis:",error.message);return}
+  currentCreators=(data||[]).filter(c=>String(c.nome||"").trim());
   const query=($("creatorSearch")?.value||"").trim();
-  renderCreators(query?currentCreators:[],query);
-  renderPublicCreators(currentCreators);renderStories(currentCreators);renderSuggestions(currentCreators);
+  const others=currentCreators.filter(c=>String(c.id)!==String(currentUser?.id));
+  renderCreators(query?others:[],query);
+  renderPublicCreators(currentCreators);
+  renderStories(others);
+  renderSuggestions(others);
  }catch(e){console.error(e)}
+}
+async function loadPublicCreators(){
+ if(!initSupabase())return;
+ const box=$("publicCreators");if(!box)return;
+ try{
+  const r=await sb.from("public_profiles").select("id,nome,bio,avatar_url,cover_url,created_at").order("created_at",{ascending:false}).limit(1000);
+  if(!r.error&&r.data){renderPublicCreators(r.data.filter(c=>String(c.nome||"").trim()));return}
+ }catch(e){console.warn("View público de perfis indisponível",e)}
+ if(currentCreators.length)renderPublicCreators(currentCreators);
 }
 function renderPublicCreators(list){
  const box=$("publicCreators");if(!box)return;
@@ -463,15 +475,16 @@ function renderPublicCreators(list){
  box.innerHTML=list.slice(0,12).map((c,i)=>creatorTile(c,i,true)).join("");
 }
 function creatorTile(c,i,publicMode=false){
- const nome=escapeHtml(c.nome||"Criador"),h=escapeHtml(handleFor(c.nome)),ini=escapeHtml(initialFor(c.nome));
- const avatar=c.avatar_url?`<img src="${escapeAttr(c.avatar_url)}" alt="${nome}" style="width:100%;height:100%;object-fit:cover">`:ini;
- return `<article class="explore-tile" data-creator-name="${nome} ${h}"><div class="tile-cover">${avatar}</div><div><strong>${nome} <span class="verified">✓</span></strong><small>${h}</small>${c.bio?`<small>${escapeHtml(String(c.bio).slice(0,70))}</small>`:""}<button type="button" data-creator-id="${escapeAttr(c.id)}">${publicMode?"Ver perfil":"Assinar / ver perfil"}</button></div></article>`
+ const nome=escapeHtml(c.nome||"Usuário"),h=escapeHtml(handleFor(c.nome)),ini=escapeHtml(initialFor(c.nome));
+ const avatar=c.avatar_url?`<img src="${escapeAttr(c.avatar_url)}" alt="Foto de ${nome}" style="width:100%;height:100%;object-fit:cover">`:ini;
+ const cover=c.cover_url?` style="background-image:linear-gradient(180deg,rgba(7,5,9,.10),rgba(7,5,9,.80)),url('${escapeAttr(c.cover_url)}');background-size:cover;background-position:center"`:"";
+ return `<article class="explore-tile" data-creator-name="${nome} ${h}"><div class="tile-cover"${cover}>${avatar}</div><div><strong>${nome}</strong><small>${h}</small>${c.bio?`<small>${escapeHtml(String(c.bio).slice(0,90))}</small>`:""}<button type="button" data-creator-id="${escapeAttr(c.id)}">Ver perfil</button></div></article>`
 }
 function renderCreators(list,query=""){
  const box=$("exploreGrid");if(!box)return;
  const q=String(query||"").trim().toLowerCase();
  if(!q){box.innerHTML='<div class="empty-note">Digite o nome de um perfil para pesquisar.</div>';return}
- const filtered=(list||[]).filter(c=>{
+ const filtered=(list||[]).filter(c=>String(c.id)!==String(currentUser?.id)).filter(c=>{
    const nome=String(c.nome||"").toLowerCase(), handle=String(handleFor(c.nome)||"").toLowerCase();
    return nome.includes(q)||handle.includes(q);
  });
@@ -900,13 +913,14 @@ document.addEventListener("DOMContentLoaded",()=>{
   };
   loadTheme();
   if(window.__secretyonCreatorRefresh)clearInterval(window.__secretyonCreatorRefresh);
-  window.__secretyonCreatorRefresh=setInterval(()=>{if(currentUser){loadCreators();loadStories();loadNotifications();loadMessages()}},5000);
+  window.__secretyonCreatorRefresh=setInterval(()=>{loadCreators();loadPublicCreators();if(currentUser){loadStories();loadNotifications();loadMessages()}},5000);
  document.addEventListener("visibilitychange",()=>{if(!document.hidden&&currentUser){loadCreators();loadStories();loadNotifications();loadMessages()}});
  window.addEventListener("focus",()=>{if(currentUser){loadCreators();loadNotifications();loadMessages()}});
 
  if(initSupabase()){
+  loadPublicCreators();
   sb.auth.onAuthStateChange((event,session)=>{if(event==="PASSWORD_RECOVERY")openModal("newPasswordModal");if(event==="SIGNED_OUT")showHome();if(event==="SIGNED_IN"&&session){currentUser=session.user;loadCreators();loadNotifications();loadMessages()}});
-  try{sb.channel("secretyon-profiles-live").on("postgres_changes",{event:"*",schema:"public",table:"profiles"},()=>{if(currentUser)loadCreators()}).subscribe()}catch(e){console.warn("Sincronização em tempo real de perfis indisponível",e)}
+  try{sb.channel("secretyon-profiles-live").on("postgres_changes",{event:"*",schema:"public",table:"profiles"},()=>{loadCreators();loadPublicCreators()}).subscribe()}catch(e){console.warn("Sincronização em tempo real de perfis indisponível",e)}
   sb.auth.getSession().then(async({data})=>{if(data?.session){currentUser=data.session.user;await loadUser();showPanel()}});
  }
 });

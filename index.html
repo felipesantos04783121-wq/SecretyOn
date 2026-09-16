@@ -43,6 +43,7 @@ button,input,textarea,select{font:inherit}button{cursor:pointer}a{text-decoratio
 .notice{display:flex;align-items:flex-start;gap:13px;padding:17px;border:1px solid #281731;background:#0e0a12;border-radius:15px;margin:10px 0;cursor:pointer}.notice>span{font-size:21px;color:#cf73ff}.notice div{flex:1}.notice p{margin:4px 0 0;color:#817686;font-size:13px}.notice>small{color:#6d6371}
 .profile-hero{border:1px solid #2a1833;border-radius:18px;overflow:hidden;background:#0e0a12;margin-bottom:18px}.profile-cover{height:160px;background:radial-gradient(circle at 50% 50%,rgba(165,0,255,.3),transparent 30%),linear-gradient(135deg,#291136,#0a070d 60%,#3d102e)}.profile-main{display:flex;align-items:center;gap:15px;padding:0 20px 18px;position:relative}.profile-big-avatar{width:90px;height:90px;margin-top:-45px;border:4px solid #0e0a12;border-radius:50%;background:linear-gradient(135deg,#b528ff,#df3bb3);display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:900;overflow:hidden}.profile-info{flex:1}.profile-info h2{margin:7px 0 2px}.profile-info p{margin:2px 0;color:#8d8293;font-size:12px}.profile-stats{display:flex;gap:28px;padding:14px 20px;border-top:1px solid #23142b;color:#8e8493;font-size:12px}.profile-stats b{color:#fff}.profile-form{max-width:none}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.content{background:#120e16;border:1px solid #2a1933;border-radius:16px;overflow:hidden}.media{height:190px;background:#09070b;display:flex;align-items:center;justify-content:center;color:#777}.media img,.media video{width:100%;height:100%;object-fit:cover}.info{padding:15px}.info h3{margin:0 0 5px}.info p{color:#999;font-size:13px;margin:0}
 .plans{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:20px 0}.plan{border:1px solid #382044;background:#100c14;border-radius:16px;padding:20px}.plan span,.plan strong,.plan small{display:block}.plan strong{font-size:30px;margin:9px 0 0}.plan small{color:#817687;margin-bottom:18px}.plan.custom{border-color:#a52ee2}.payment-options{display:grid;grid-template-columns:1fr 1fr;gap:10px}.payment-options button{background:#100c14;border:1px solid #3a2445;color:#ddd;border-radius:12px;padding:14px}.wallet{padding:25px;border:1px solid #382044;border-radius:18px;background:linear-gradient(135deg,#170d20,#0d0911);margin:18px 0}.wallet small,.wallet strong{display:block}.wallet strong{font-size:36px;margin:5px 0 20px}.settings-list button{width:100%;display:flex;align-items:center;gap:13px;padding:17px;background:#0e0a12;border:0;border-bottom:1px solid #211329;color:#fff;text-align:left}.settings-list button:last-child{border-bottom:0}.settings-list button>span{font-size:20px;width:28px}.settings-list button div{flex:1}.settings-list strong,.settings-list small{display:block}.settings-list small{color:#7d7383;margin-top:3px}.settings-list button>b{color:#7b7180}.toggle{width:44px;height:24px;border-radius:99px;background:#33253b;position:relative;display:inline-block}.toggle:after{content:"";width:18px;height:18px;position:absolute;top:3px;left:3px;border-radius:50%;background:#aaa;transition:.2s}.toggle.on{background:var(--purple)}.toggle.on:after{left:23px;background:#fff}
+.profile-private-note{font-size:11px;color:#7f7488;margin-top:5px}
 .rightbar{padding:18px 14px;background:#050306}.search-box{display:flex;align-items:center;gap:8px;background:#0d0a11;border:1px solid #2e1b38;border-radius:999px;padding:0 14px}.search-box span{font-size:22px;color:#9c8fa4}.search-box input{border:0;border-radius:0;background:transparent;color:#fff;width:100%;padding:13px 0;outline:0}.right-card{margin-top:16px;padding:16px;border:1px solid #25152e;border-radius:17px;background:#0b080e}.right-title{display:flex;justify-content:space-between;gap:10px;margin-bottom:14px}.right-title a{color:#bd72e9;font-size:12px}.suggest,.right-message{display:flex;align-items:center;gap:9px;margin:14px 0}.suggest>div:nth-child(2),.right-message>div:nth-child(2){flex:1}.suggest strong,.suggest small,.right-message strong,.right-message small{display:block}.suggest small,.right-message small{color:#766c7b;font-size:11px;margin-top:2px}.suggest button{border:1px solid #7e24a9;color:#d78eff;background:transparent;border-radius:999px;padding:6px 10px;font-size:11px}.trends>div:not(.right-title){padding:10px 0;border-bottom:1px solid #1e1226}.trends>div:last-child{border-bottom:0}.trends b,.trends small{display:block}.trends small{color:#766c7b;margin-top:2px}
 .mobile-top,.mobile-bottom,.sidebar-overlay{display:none}
 body.light{--bg:#f7f7fa;--bg2:#fff;--panel:#fff;--panel2:#f2eff5;--line:#ddd4e4;--text:#17121c;--muted:#6e6475;--card:#fff}
@@ -92,7 +93,7 @@ body.light .app-shell,body.light .feed-area,body.light .sidebar,body.light .righ
 
 <div class="modal hidden" id="contentModal"><div class="modal-box"><button class="close" data-close="contentModal">×</button><h2>Criar publicação</h2><p class="sub">Publique foto, vídeo ou link. O conteúdo será associado ao seu perfil.</p><div class="choice-row"><button class="active" data-compose="media">📷 Foto/Vídeo</button><button data-compose="link">🔗 Link</button><button data-compose="text">📝 Texto</button></div><div id="contentMsg" class="msg hidden"></div><div class="field"><label>Título</label><input id="contentTitle" placeholder="Título da publicação"></div><div class="field"><label>Descrição</label><textarea id="contentDescription" placeholder="Escreva algo para sua comunidade..."></textarea></div><div class="field" id="fileField"><label>Foto ou vídeo</label><input id="contentFile" type="file" accept="image/*,video/*"></div><div class="field hidden" id="linkField"><label>Link</label><input id="contentLink" type="url" placeholder="https://..."></div><button class="btn primary full" id="btnPublish">Publicar</button></div></div>
 
-<div class="modal hidden" id="subscriptionModal"><div class="modal-box"><button class="close" data-close="subscriptionModal">×</button><h2 id="subscriptionTitle">Assinar criador</h2><p class="sub">Escolha um plano e uma forma de pagamento.</p><div class="plans" style="grid-template-columns:1fr 1fr"><div class="plan"><span>Semanal</span><strong id="weeklyPrice">R$ 19,99</strong><small>por semana</small><button class="btn primary full" data-sub-plan="weekly">Escolher</button></div><div class="plan"><span>Mensal</span><strong id="monthlyPrice">R$ 39,90</strong><small>por mês</small><button class="btn primary full" data-sub-plan="monthly">Escolher</button></div></div><div id="paymentStep" class="hidden"><h3>Forma de pagamento</h3><div class="payment-options"><button data-pay="pix">💜 Pix</button><button data-pay="card">💳 Cartão</button></div><div id="paymentMsg" class="msg hidden"></div></div></div></div>
+<div class="modal hidden" id="subscriptionModal"><div class="modal-box"><button class="close" data-close="subscriptionModal">×</button><h2 id="subscriptionTitle">Assinar criador</h2><p id="creatorBioPreview" class="sub">Escolha um plano e uma forma de pagamento.</p><div class="plans" style="grid-template-columns:1fr 1fr"><div class="plan"><span>Semanal</span><strong id="weeklyPrice">R$ 19,99</strong><small>por semana</small><button class="btn primary full" data-sub-plan="weekly">Escolher</button></div><div class="plan"><span>Mensal</span><strong id="monthlyPrice">R$ 39,90</strong><small>por mês</small><button class="btn primary full" data-sub-plan="monthly">Escolher</button></div></div><div id="paymentStep" class="hidden"><h3>Forma de pagamento</h3><div class="payment-options"><button data-pay="pix">💜 Pix</button><button data-pay="card">💳 Cartão</button></div><div id="paymentMsg" class="msg hidden"></div></div></div></div>
 
 <div class="modal hidden" id="messageModal"><div class="modal-box"><button class="close" data-close="messageModal">×</button><h2 id="messageTitle">Mensagem</h2><p class="sub">Envie uma mensagem após assinar o conteúdo do criador.</p><div id="messageMsg" class="msg hidden"></div><div class="field"><textarea id="messageText" placeholder="Escreva sua mensagem..."></textarea></div><button class="btn primary full" id="sendMessage">Enviar mensagem</button></div></div>
 
@@ -120,7 +121,7 @@ body.light .app-shell,body.light .feed-area,body.light .sidebar,body.light .righ
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
 <main class="feed-area">
- <div class="mobile-top"><div class="side-logo"><span class="side-mark">♡</span><span>Secrety<b>on</b></span></div><button id="mobileMenu">☰</button></div>
+ <div class="mobile-top"><div class="side-logo"><span class="side-mark">♡</span><span>Secrety<b>on</b></span></div><button id="mobileMenu" title="Abrir menu">☰</button></div>
  <div class="feed-header"><h1 id="pageTitle">Início</h1><div class="feed-tools"><button id="themeToggle" title="Modo claro">☾</button><button id="logoutTop" title="Sair">↪</button></div></div>
 
  <div class="app-page active" id="app-inicio">
@@ -134,7 +135,7 @@ body.light .app-shell,body.light .feed-area,body.light .sidebar,body.light .righ
 
  <div class="app-page" id="app-notificacoes"><h2>Notificações</h2><p class="muted">Avisos da sua conta e da sua comunidade.</p><div id="notificationList"></div></div>
 
- <div class="app-page" id="app-perfil"><div class="profile-hero"><div class="profile-cover"></div><div class="profile-main"><div class="profile-big-avatar" id="profileBigAvatar">U</div><div class="profile-info"><h2 id="profileDisplayName">Usuário</h2><p id="profileDisplayHandle">@usuario</p><p id="profileDisplayBio">Seu perfil de criador no Secretyon.</p></div><button class="btn secondary" id="editProfileBtn">Editar perfil</button></div><div class="profile-stats"><span><b id="statPosts">0</b> publicações</span><span><b id="statFollowers">0</b> seguidores</span><span><b id="statSubscribers">0</b> assinantes</span></div></div><div class="box profile-form"><h3>Dados do perfil</h3><div id="profileMsg" class="msg hidden"></div><div class="field"><label>Nome do criador</label><input id="profileName" placeholder="Seu nome público"></div><div class="field"><label>E-mail</label><input id="profileEmail" disabled></div><div class="field"><label>Bio</label><textarea id="profileBio" placeholder="Sua biografia pública..."></textarea></div><div class="field"><label>Foto do perfil</label><input id="profileAvatarFile" type="file" accept="image/*"><small class="muted">A foto poderá aparecer na sua bolinha de perfil.</small></div><button class="btn primary" id="btnSaveProfile">Salvar perfil</button></div></div>
+ <div class="app-page" id="app-perfil"><div class="profile-hero"><div class="profile-cover"></div><div class="profile-main"><div class="profile-big-avatar" id="profileBigAvatar">U</div><div class="profile-info"><h2 id="profileDisplayName">Usuário</h2><p id="profileDisplayHandle">@usuario</p><p id="profileDisplayBio">Seu perfil de criador no Secretyon.</p></div><button class="btn secondary" id="editProfileBtn">Editar perfil</button></div><div class="profile-stats"><span><b id="statPosts">0</b> publicações</span><span><b id="statFollowers">0</b> seguidores</span><span><b id="statSubscribers">0</b> assinantes</span></div></div><div class="box profile-form"><h3>Dados do perfil</h3><div id="profileMsg" class="msg hidden"></div><div class="field"><label>Nome do criador</label><input id="profileName" placeholder="Seu nome público"></div><div class="field"><label>E-mail</label><input id="profileEmail" disabled></div><div class="field"><label>Bio pública</label><textarea id="profileBio" placeholder="Sua biografia pública..."></textarea><small class="muted">A bio pode ser exibida no seu perfil público.</small></div><div class="field"><label>Telefone</label><input id="profilePhone" type="tel" placeholder="(00) 00000-0000"><small class="muted">Dado privado, visível somente para você.</small></div><div class="field"><label>Chave Pix</label><input id="profilePix" placeholder="Sua chave Pix"><small class="muted">Dado privado usado para recebimentos/saques.</small></div><div class="field"><label>Foto do perfil</label><input id="profileAvatarFile" type="file" accept="image/*"><small class="muted">A foto poderá aparecer na sua bolinha de perfil.</small></div><button class="btn primary" id="btnSaveProfile">Salvar perfil</button></div></div>
 
  <div class="app-page" id="app-conteudo"><div class="page-title-row"><div><h2>Meu conteúdo</h2><p class="muted">Tudo o que você publicou.</p></div><button class="btn primary" id="btnAddContent2">＋ Adicionar</button></div><div id="contentList" class="grid"></div></div>
 
@@ -192,6 +193,8 @@ function updateProfileUI(){
  if($("profileDisplayHandle"))$("profileDisplayHandle").textContent=handle;
  ["sideAvatar","profileBigAvatar","ownStoryAvatar"].forEach(id=>{if($(id)){if(id==="ownStoryAvatar")$(id).textContent="＋";else $(id).textContent=initial}});
  if($("profileBio"))$("profileBio").value=publicBio(currentUser);
+ if($("profilePhone"))$("profilePhone").value=currentUser.user_metadata?.telefone||"";
+ if($("profilePix"))$("profilePix").value=currentUser.user_metadata?.pix||"";
  if($("profileDisplayBio"))$("profileDisplayBio").textContent=publicBio(currentUser)||"Seu perfil de criador no Secretyon.";
  if($("profileEmail"))$("profileEmail").value=currentUser.email||"";
  if($("settingsEmail"))$("settingsEmail").textContent=currentUser.email||"";
@@ -202,7 +205,11 @@ async function loadUser(){
  if(error||!data.user){currentUser=null;return false}
  currentUser=data.user;updateProfileUI();
  try{await sb.from("profiles").upsert({id:currentUser.id,nome:publicProfileName(currentUser),email:currentUser.email},{onConflict:"id"})}catch(e){}
- await refreshStats();return true;
+ await createLocalWelcome();
+ await refreshStats();
+ loadSubscriptions();
+ loadWallet();
+ return true;
 }
 async function login(){
  if(!initSupabase()){msg("loginMsg","O Supabase não foi carregado ou configurado.","error");return}
@@ -278,6 +285,7 @@ function showAppPage(id){
  document.querySelectorAll(".side-item[data-app],.mobile-bottom button[data-app]").forEach(x=>x.classList.toggle("active",x.dataset.app===id));
  const titles={inicio:"Início",explorar:"Explorar",mensagens:"Mensagens",notificacoes:"Notificações",perfil:"Meu perfil",conteudo:"Meu conteúdo",assinaturas:"Assinaturas",carteira:"Carteira",config:"Configurações"};
  $("pageTitle").textContent=titles[id]||"Secretyon";
+ if(id==="inicio")loadFeed();
  if(id==="conteudo")loadContents();
  if(id==="explorar")loadCreators();
  if(id==="notificacoes")loadNotifications();
@@ -290,7 +298,11 @@ async function logout(){if(sb)await sb.auth.signOut();currentUser=null;showHome(
 async function loadCreators(){
  if(!initSupabase())return;
  try{
-  const {data,error}=await sb.from("profiles").select("id,nome,email").not("nome","is",null).order("created_at",{ascending:true}).limit(1000);
+  let {data,error}=await sb.from("profiles").select("id,nome,email,bio").not("nome","is",null).order("created_at",{ascending:true}).limit(1000);
+  if(error){
+   const fallback=await sb.from("profiles").select("id,nome,email").not("nome","is",null).order("created_at",{ascending:true}).limit(1000);
+   data=fallback.data; error=fallback.error;
+  }
   if(error){console.warn(error);return}
   currentCreators=(data||[]).filter(c=>c.id!==currentUser?.id);
   renderCreators(currentCreators);renderPublicCreators(currentCreators);renderStories(currentCreators);renderSuggestions(currentCreators);
@@ -303,7 +315,7 @@ function renderPublicCreators(list){
 }
 function creatorTile(c,i,publicMode=false){
  const nome=escapeHtml(c.nome||"Criador"),h=escapeHtml(handleFor(c.nome)),ini=escapeHtml(initialFor(c.nome));
- return `<article class="explore-tile" data-creator-name="${nome} ${h}"><div class="tile-cover">${ini}</div><div><strong>${nome} <span class="verified">✓</span></strong><small>${h}</small><button type="button" data-creator-id="${escapeAttr(c.id)}">${publicMode?"Ver perfil":"Assinar / ver perfil"}</button></div></article>`
+ return `<article class="explore-tile" data-creator-name="${nome} ${h}"><div class="tile-cover">${ini}</div><div><strong>${nome} <span class="verified">✓</span></strong><small>${h}</small>${c.bio?`<small>${escapeHtml(String(c.bio).slice(0,70))}</small>`:""}<button type="button" data-creator-id="${escapeAttr(c.id)}">${publicMode?"Ver perfil":"Assinar / ver perfil"}</button></div></article>`
 }
 function renderCreators(list){const box=$("exploreGrid");if(!box)return;box.innerHTML=list.length?list.slice(0,1000).map((c,i)=>creatorTile(c,i)).join(""):'<div class="empty-note">Ainda não há outros criadores cadastrados.</div>';bindCreatorButtons(box)}
 function bindCreatorButtons(box){box.querySelectorAll("[data-creator-id]").forEach(b=>b.onclick=()=>openCreator(b.dataset.creatorId))}
@@ -311,7 +323,7 @@ function renderStories(list){const box=$("realStories");if(!box)return;box.inner
 function renderSuggestions(list){const box=$("suggestedCreators");if(!box)return;box.innerHTML=list.slice(0,3).map(c=>`<div class="suggest"><div class="avatar">${escapeHtml(initialFor(c.nome))}</div><div><strong>${escapeHtml(c.nome)}</strong><small>${escapeHtml(handleFor(c.nome))}</small></div><button data-follow="${escapeAttr(c.id)}">Seguir</button></div>`).join("")||'<div class="empty-note" style="padding:20px 5px">Ainda não há criadores.</div>';box.querySelectorAll("[data-follow]").forEach(b=>b.onclick=()=>b.textContent=b.textContent==="Seguir"?"Seguindo":"Seguir")}
 function openCreator(id){
  const c=currentCreators.find(x=>x.id===id);if(!c)return;
- selectedCreator=c;$("subscriptionTitle").textContent="Assinar "+(c.nome||"criador");$("weeklyPrice").textContent=getPlanPrice(c.id,"weekly");$("monthlyPrice").textContent=getPlanPrice(c.id,"monthly");$("paymentStep").classList.add("hidden");openModal("subscriptionModal");
+ selectedCreator=c;$("subscriptionTitle").textContent="Assinar "+(c.nome||"criador");$("creatorBioPreview").textContent=c.bio||"Conheça o conteúdo exclusivo deste criador.";$("weeklyPrice").textContent=getPlanPrice(c.id,"weekly");$("monthlyPrice").textContent=getPlanPrice(c.id,"monthly");$("paymentStep").classList.add("hidden");openModal("subscriptionModal");
 }
 function getPlanPrice(id,type){const k="secretyon_plan_"+id;const v=JSON.parse(localStorage.getItem(k)||"{}");return type==="weekly"?("R$ "+Number(v.weekly??19.99).toFixed(2).replace(".",",")):("R$ "+Number(v.monthly??39.90).toFixed(2).replace(".",","))}
 function setPlanPrice(type){
@@ -323,9 +335,10 @@ function updatePlanUI(){$("myWeeklyPrice").textContent=getPlanPrice(currentUser.
 function selectPlan(type){selectedPlan=type;$("paymentStep").classList.remove("hidden");}
 function choosePayment(method){
  if(!selectedCreator||!selectedPlan)return;
- msg("paymentMsg",`Pagamento por ${method==="pix"?"Pix":"cartão"} selecionado. A cobrança real será concluída quando o gateway de pagamento estiver conectado.`,"success");
+ msg("paymentMsg",`Pagamento por ${method==="pix"?"Pix":"cartão"} selecionado. No modo de teste, a assinatura fica ativa para você experimentar a plataforma.`,"success");
  // Registro local para a experiência do protótipo.
- const k="secretyon_subscriptions_"+currentUser.id,a=JSON.parse(localStorage.getItem(k)||"[]");a.unshift({creatorId:selectedCreator.id,creatorName:selectedCreator.nome,plan:selectedPlan,method,status:"aguardando_pagamento",date:new Date().toISOString()});localStorage.setItem(k,JSON.stringify(a));loadSubscriptions();setTimeout(()=>closeModal("subscriptionModal"),900)
+ const k="secretyon_subscriptions_"+currentUser.id,a=JSON.parse(localStorage.getItem(k)||"[]");a.unshift({creatorId:selectedCreator.id,creatorName:selectedCreator.nome,plan:selectedPlan,method,status:"ativa (modo teste)",date:new Date().toISOString()});localStorage.setItem(k,JSON.stringify(a));
+ const mk="secretyon_messages_"+currentUser.id,ma=JSON.parse(localStorage.getItem(mk)||"[]");ma.unshift({creatorId:selectedCreator.id,creatorName:selectedCreator.nome,text:"Olá! Obrigado por assinar meu conteúdo 💜 Aproveite seu acesso e fique de olho nas próximas publicações!",date:new Date().toISOString(),system:true});localStorage.setItem(mk,JSON.stringify(ma));loadSubscriptions();loadMessages();setTimeout(()=>closeModal("subscriptionModal"),900)
 }
 function loadSubscriptions(){const box=$("mySubscriptions");if(!box)return;const a=JSON.parse(localStorage.getItem("secretyon_subscriptions_"+currentUser.id)||"[]");box.innerHTML='<h3>Minhas assinaturas</h3>'+(a.length?a.map(s=>`<div class="box" style="margin:10px 0"><strong>${escapeHtml(s.creatorName)}</strong><p class="muted">${s.plan==="weekly"?"Semanal":"Mensal"} · ${escapeHtml(s.method==="pix"?"Pix":"Cartão")} · ${escapeHtml(s.status)}</p><button class="btn secondary" data-msg-creator="${escapeAttr(s.creatorId)}">Mensagem</button></div>`).join(""):'<div class="box"><p class="muted">Nenhuma assinatura ainda.</p></div>');box.querySelectorAll("[data-msg-creator]").forEach(b=>b.onclick=()=>{const c=currentCreators.find(x=>x.id===b.dataset.msgCreator);if(c){selectedCreator=c;$("messageTitle").textContent="Mensagem para "+c.nome;openModal("messageModal")}})}
 
@@ -334,11 +347,16 @@ async function loadFeed(){
  try{
   const {data,error}=await sb.from("contents").select("*").order("created_at",{ascending:false}).limit(50);
   if(error){box.innerHTML='<div class="empty-note">Não foi possível carregar as publicações agora.</div>';return}
-  if(!data?.length){box.innerHTML='<div class="empty-note">Ainda não há publicações. Clique no <b>＋ Publicar</b> para ser o primeiro.</div>';return}
-  const ids=[...new Set(data.map(x=>x.user_id))];
+  if(!data?.length){box.innerHTML='<div class="empty-note">Ainda não há publicações de outros usuários. Clique no <b>＋ Publicar</b> para publicar a primeira.</div>';return}
+  const others=data.filter(x=>x.user_id!==currentUser?.id);
+  const mine=data.filter(x=>x.user_id===currentUser?.id);
+  // Prioriza publicações de outras pessoas; se ainda não existirem, mostra as suas.
+  const feedPool=(others.length?others:mine).slice();
+  for(let i=feedPool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[feedPool[i],feedPool[j]]=[feedPool[j],feedPool[i]]}
+  const ids=[...new Set(feedPool.map(x=>x.user_id))];
   const profiles=await Promise.all(ids.map(id=>sb.from("profiles").select("id,nome,email").eq("id",id).maybeSingle()));
   const map={};profiles.forEach(r=>{if(r.data)map[r.data.id]=r.data});
-  box.innerHTML=data.map(c=>renderPost(c,map[c.user_id])).join("");
+  box.innerHTML=feedPool.map(c=>renderPost(c,map[c.user_id])).join("");
   box.querySelectorAll("[data-like]").forEach(b=>b.onclick=()=>{const n=b.querySelector("span");n.textContent=String(Number(n.textContent||0)+1);b.firstChild.textContent="♥ "});
  }catch(e){console.error(e);box.innerHTML='<div class="empty-note">Não foi possível carregar o feed.</div>'}
 }
@@ -390,6 +408,20 @@ function setCompose(mode){
 }
 function openContent(){if(!currentUser){openModal("loginModal");return}clearMsg("contentMsg");setCompose("media");openModal("contentModal")}
 
+async function saveProfile(){
+ if(!currentUser||!initSupabase())return;
+ const nome=$("profileName").value.trim();
+ const bio=$("profileBio")?.value.trim()||"";
+ const telefone=$("profilePhone")?.value.trim()||"";
+ const pix=$("profilePix")?.value.trim()||"";
+ if(!nome){msg("profileMsg","Digite seu nome.","error");return}
+ const {error}=await sb.auth.updateUser({data:{nome,bio,telefone,pix}});
+ if(error){msg("profileMsg",error.message,"error");return}
+ currentUser.user_metadata={...(currentUser.user_metadata||{}),nome,bio,telefone,pix};
+ try{await sb.from("profiles").upsert({id:currentUser.id,nome,email:currentUser.email},{onConflict:"id"})}catch(e){}
+ updateProfileUI();await loadCreators();await refreshStats();msg("profileMsg","Perfil salvo com sucesso!","success");
+}
+
 async function refreshStats(){
  if(!currentUser||!initSupabase())return;
  try{
@@ -402,7 +434,7 @@ async function refreshStats(){
 function sendMessage(){
  if(!selectedCreator)return;
  const subs=JSON.parse(localStorage.getItem("secretyon_subscriptions_"+currentUser.id)||"[]");
- if(!subs.some(s=>s.creatorId===selectedCreator.id)){msg("messageMsg","Assine o conteúdo deste criador antes de enviar uma mensagem.","error");return}
+ if(!subs.some(s=>s.creatorId===selectedCreator.id && (s.status||"").startsWith("ativa"))){msg("messageMsg","Assine o conteúdo deste criador antes de enviar uma mensagem.","error");return}
  const text=$("messageText").value.trim();if(!text){msg("messageMsg","Escreva sua mensagem.","error");return}
  const k="secretyon_messages_"+currentUser.id,a=JSON.parse(localStorage.getItem(k)||"[]");a.push({creatorId:selectedCreator.id,creatorName:selectedCreator.nome,text,date:new Date().toISOString()});localStorage.setItem(k,JSON.stringify(a));$("messageText").value="";msg("messageMsg","Mensagem enviada!","success");loadMessages();setTimeout(()=>closeModal("messageModal"),700)
 }
@@ -420,14 +452,26 @@ function sendWithdraw(){
 }
 function setSettingsDetail(type){
  const box=$("settingsDetail");if(!box)return;box.classList.remove("hidden");
- if(type==="profile-data"){box.innerHTML='<h3>Dados do perfil</h3><p class="muted">Esses dados são visíveis para você. Sua bio é pública no perfil.</p><button class="btn primary" id="goProfile">Editar meu perfil</button>';$("goProfile").onclick=()=>showAppPage("perfil")}
- else if(type==="privacy"){box.innerHTML='<h3>Privacidade</h3><div class="field"><label>Perfil público</label><select id="privacySelect"><option value="public">Público</option><option value="private">Privado</option></select></div><button class="btn primary" id="savePrivacy">Salvar</button>';$("savePrivacy").onclick=()=>{localStorage.setItem("secretyon_privacy_"+currentUser.id,$("privacySelect").value);msg("profileMsg","Privacidade salva.","success")}}
- else if(type==="password"){openModal("recoverModal");$("recoverEmail").value=currentUser.email||""}
- else if(type==="email"){box.innerHTML=`<h3>Meu e-mail</h3><p>${escapeHtml(currentUser.email||"")}</p><p class="muted">Para alterar o e-mail, use a confirmação enviada pelo Supabase.</p>`}
- else if(type==="theme"){toggleTheme()}
+ if(type==="notifications"){
+   const enabled=localStorage.getItem("secretyon_notifications_enabled_"+currentUser.id)!=="0";
+   box.innerHTML=`<h3>Notificações</h3><p class="muted">Receba avisos quando alguém assinar seu conteúdo, novas atividades e mensagens.</p><button class="btn ${enabled?"primary":"secondary"}" id="toggleNotifications">${enabled?"Notificações ativadas":"Notificações desativadas"}</button>`;
+   $("toggleNotifications").onclick=()=>{const next=localStorage.getItem("secretyon_notifications_enabled_"+currentUser.id)==="0";localStorage.setItem("secretyon_notifications_enabled_"+currentUser.id,next?"1":"0");setSettingsDetail("notifications");updateNotificationToggle()};
+ }else if(type==="profile-data"){
+   box.innerHTML=`<h3>Dados do perfil</h3><p class="muted">Nome, telefone, e-mail e chave Pix são privados. A bio pode ser pública.</p><button class="btn primary" id="goProfile">Editar meu perfil</button>`;
+   $("goProfile").onclick=()=>showAppPage("perfil");
+ }else if(type==="privacy"){
+   const value=localStorage.getItem("secretyon_privacy_"+currentUser.id)||"public";
+   box.innerHTML=`<h3>Privacidade</h3><div class="field"><label>Visibilidade do perfil</label><select id="privacySelect"><option value="public" ${value==="public"?"selected":""}>Público</option><option value="private" ${value==="private"?"selected":""}>Privado</option></select></div><button class="btn primary" id="savePrivacy">Salvar privacidade</button>`;
+   $("savePrivacy").onclick=()=>{localStorage.setItem("secretyon_privacy_"+currentUser.id,$("privacySelect").value);msg("profileMsg","Privacidade salva.","success")};
+ }else if(type==="password"){
+   openModal("recoverModal");$("recoverEmail").value=currentUser.email||"";
+ }else if(type==="email"){
+   box.innerHTML=`<h3>Meu e-mail</h3><p>${escapeHtml(currentUser.email||"")}</p><p class="muted">Para alterar o e-mail, o Supabase solicitará confirmação.</p>`;
+ }else if(type==="theme"){toggleTheme()}
 }
+function updateNotificationToggle(){const x=$("notifToggle");if(!x||!currentUser)return;const on=localStorage.getItem("secretyon_notifications_enabled_"+currentUser.id)!=="0";x.classList.toggle("on",on)}
 function toggleTheme(){theme=document.body.classList.contains("light")?"dark":"light";document.body.classList.toggle("light",theme==="light");localStorage.setItem("secretyon_theme",theme);$("themeToggle").textContent=theme==="light"?"☀":"☾";$("themeToggle").title=theme==="light"?"Modo noturno":"Modo claro";$("themeLabel").textContent=theme==="light"?"Claro":"Noturno"}
-function loadTheme(){theme=localStorage.getItem("secretyon_theme")||"dark";document.body.classList.toggle("light",theme==="light");if($("themeToggle"))$("themeToggle").textContent=theme==="light"?"☀":"☾";if($("themeLabel"))$("themeLabel").textContent=theme==="light"?"Claro":"Noturno"}
+function loadTheme(){theme=localStorage.getItem("secretyon_theme")||"dark";document.body.classList.toggle("light",theme==="light");if($("themeToggle"))$("themeToggle").textContent=theme==="light"?"☀":"☾";if($("themeToggle"))$("themeToggle").title=theme==="light"?"Modo noturno":"Modo claro";if($("themeLabel"))$("themeLabel").textContent=theme==="light"?"Claro":"Noturno"}
 function closeSidebar(){$("sidebar")?.classList.remove("open");$("sidebarOverlay")?.classList.remove("show")}
 function openSidebar(){$("sidebar")?.classList.add("open");$("sidebarOverlay")?.classList.add("show")}
 
@@ -448,12 +492,14 @@ document.addEventListener("DOMContentLoaded",()=>{
  $("btnPublish").onclick=publish;$("btnSaveProfile").onclick=saveProfile;$("editProfileBtn").onclick=()=>{showAppPage("perfil");$("profileName").focus()};
  $("logoutTop").onclick=logout;$("settingsLogout").onclick=logout;$("withdrawBtn").onclick=requestWithdraw;$("sendWithdraw").onclick=sendWithdraw;$("sendMessage").onclick=sendMessage;
  $("themeToggle").onclick=toggleTheme;$("mobileMenu").onclick=openSidebar;$("sidebarOverlay").onclick=closeSidebar;
+ [".feed-area",".rightbar"].forEach(sel=>document.querySelector(sel)?.addEventListener("click",()=>{if(window.innerWidth<=700)closeSidebar()}));
  $("editWeekly").onclick=()=>setPlanPrice("weekly");$("editMonthly").onclick=()=>setPlanPrice("monthly");$("payPixInfo").onclick=()=>alert("Pix será disponibilizado no checkout quando o gateway estiver conectado.");$("payCardInfo").onclick=()=>alert("Cartão será disponibilizado no checkout quando o gateway estiver conectado.");
  document.querySelectorAll("[data-sub-plan]").forEach(b=>b.onclick=()=>selectPlan(b.dataset.subPlan));document.querySelectorAll("[data-pay]").forEach(b=>b.onclick=()=>choosePayment(b.dataset.pay));
  document.querySelectorAll("[data-compose]").forEach(b=>b.onclick=()=>setCompose(b.dataset.compose));
- document.querySelectorAll(".side-item[data-app],.mobile-bottom button[data-app]").forEach(b=>b.onclick=()=>showAppPage(b.dataset.app));
+ document.querySelectorAll(".side-item[data-app],.mobile-bottom button[data-app]").forEach(b=>b.onclick=()=>{showAppPage(b.dataset.app);if(b.dataset.app==="inicio"){window.scrollTo({top:0,behavior:"smooth"});loadFeed()}});
  $("rightMessages").onclick=e=>{e.preventDefault();showAppPage("mensagens")};$("seeAllCreators").onclick=e=>{e.preventDefault();showAppPage("explorar")};
  document.querySelectorAll("[data-setting]").forEach(b=>b.onclick=()=>setSettingsDetail(b.dataset.setting));
+ updateNotificationToggle();
 
  const search= $("creatorSearch");if(search)search.oninput=()=>{const q=search.value.toLowerCase();document.querySelectorAll("#exploreGrid .explore-tile").forEach(x=>x.style.display=x.dataset.creatorName.toLowerCase().includes(q)?"":"none")};
  const global=$("globalSearch");if(global)global.oninput=()=>{const q=global.value.toLowerCase();showAppPage("explorar");if($("creatorSearch")){$("creatorSearch").value=global.value;$("creatorSearch").dispatchEvent(new Event("input"))}};

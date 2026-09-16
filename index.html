@@ -211,8 +211,9 @@ function fecharCadastro() {
     mensagem.innerText = "Login realizado com sucesso!";
 
     setTimeout(() => {
-      fecharLogin();
-    }, 1000);
+  fecharLogin();
+  document.getElementById("painelSecretyon").style.display = "block";
+}, 1000);
   }
 async function cadastrar() {
   const nome = document.getElementById("cadastroNome").value.trim();
@@ -261,6 +262,40 @@ async function cadastrar() {
   document.getElementById("cadastroSenha").value = "";
   document.getElementById("cadastroSenhaConfirmacao").value = "";
 }</script>
+<div id="painelSecretyon" style="display:none; min-height:100vh; padding:30px; box-sizing:border-box; background:#111; color:white; font-family:Arial,sans-serif;">
+  <div style="max-width:900px; margin:auto;">
+    
+    <h1 style="font-size:32px;">Secretyon</h1>
+    <p style="opacity:.8;">Bem-vindo ao seu painel!</p>
 
+    <div style="display:grid; gap:15px; margin-top:30px;">
+      
+      <button style="padding:18px; font-size:18px; border:0; border-radius:12px;">
+        👤 Meu perfil
+      </button>
+
+      <button style="padding:18px; font-size:18px; border:0; border-radius:12px;">
+        📁 Meu conteúdo
+      </button>
+
+      <button style="padding:18px; font-size:18px; border:0; border-radius:12px;">
+        ➕ Adicionar conteúdo
+      </button>
+
+      <button style="padding:18px; font-size:18px; border:0; border-radius:12px;">
+        💰 Assinaturas
+      </button>
+
+      <button style="padding:18px; font-size:18px; border:0; border-radius:12px;">
+        ⚙️ Configurações
+      </button>
+
+      <button onclick="sairSecretyon()" style="padding:18px; font-size:18px; border:0; border-radius:12px;">
+        🚪 Sair
+      </button>
+
+    </div>
+  </div>
+</div>
 </body>
 </html>

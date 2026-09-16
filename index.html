@@ -131,11 +131,31 @@
       <input type="password" id="senha" placeholder="Sua senha">
 
       <button onclick="entrar()">Entrar</button>
+      <button onclick="abrirCadastro()">Criar conta</button>
       <button class="close" onclick="fecharLogin()">Fechar</button>
 
       <div class="message" id="mensagem"></div>
     </div>
   </div>
+  <div class="modal" id="cadastroModal">
+  <div class="box">
+    <h2>Criar conta no Secretyon</h2>
+
+    <input type="text" id="cadastroNome" placeholder="Seu nome">
+
+    <input type="email" id="cadastroEmail" placeholder="Seu e-mail">
+
+    <input type="password" id="cadastroSenha" placeholder="Sua senha">
+
+    <input type="password" id="cadastroSenhaConfirmacao" placeholder="Confirme sua senha">
+
+    <button onclick="cadastrar()">Criar conta</button>
+
+    <button class="close" onclick="fecharCadastro()">Fechar</button>
+
+    <div class="message" id="mensagemCadastro"></div>
+  </div>
+</div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -187,7 +207,53 @@
       fecharLogin();
     }, 1000);
   }
-</script>
+async function cadastrar() {
+  const nome = document.getElementById("cadastroNome").value.trim();
+  const email = document.getElementById("cadastroEmail").value.trim();
+  const senha = document.getElementById("cadastroSenha").value;
+  const confirmacao = document.getElementById("cadastroSenhaConfirmacao").value;
+  const mensagem = document.getElementById("mensagemCadastro");
+
+  if (!nome || !email || !senha || !confirmacao) {
+    mensagem.innerText = "Preencha todos os campos.";
+    return;
+  }
+
+  if (senha !== confirmacao) {
+    mensagem.innerText = "As senhas não conferem.";
+    return;
+  }
+
+  if (senha.length < 6) {
+    mensagem.innerText = "A senha precisa ter pelo menos 6 caracteres.";
+    return;
+  }
+
+  mensagem.innerText = "Criando sua conta...";
+
+  const { data, error } = await supabaseClient.auth.signUp({
+    email: email,
+    password: senha,
+    options: {
+      data: {
+        nome: nome
+      }
+    }
+  });
+
+  if (error) {
+    mensagem.innerText = error.message;
+    return;
+  }
+
+  mensagem.innerText =
+    "Conta criada com sucesso! Verifique seu e-mail para confirmar a conta.";
+
+  document.getElementById("cadastroNome").value = "";
+  document.getElementById("cadastroEmail").value = "";
+  document.getElementById("cadastroSenha").value = "";
+  document.getElementById("cadastroSenhaConfirmacao").value = "";
+}</script>
 
 </body>
 </html>

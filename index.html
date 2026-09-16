@@ -80,7 +80,7 @@ header{
 .cta{padding:80px 5%;text-align:center;background:radial-gradient(circle at 50% 0,rgba(165,0,255,.18),transparent 42%),#060407;border-top:1px solid #21102b}.cta h2{font-size:40px;margin:0 0 10px}.cta p{color:#918798;max-width:600px;margin:0 auto 25px}
 footer{padding:35px 5%;background:#040306;border-top:1px solid #1b1023;color:#756d7c;font-size:12px}.footer-grid{max-width:1180px;margin:auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px}.footer-brand{font-size:25px;font-weight:900;color:#eee}.footer-brand b{color:var(--purple)}.footer-col h4{color:#cfc5d4;margin:0 0 12px}.footer-col a{display:block;color:#776e7e;margin:7px 0}.copyright{max-width:1180px;margin:35px auto 0;padding-top:20px;border-top:1px solid #19131e}
 
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.86);z-index:9999;align-items:center;justify-content:center;padding:20px}.modal-box{width:100%;max-width:450px;background:#0e0b12;border:1px solid #5a2471;border-radius:20px;padding:27px;position:relative;box-shadow:0 25px 90px #000;color:#fff}.close{position:absolute;right:13px;top:8px;background:none;border:0;color:#aaa;font-size:28px}.modal h2{margin:0 0 5px}.sub{color:#9990a0;font-size:14px;margin:0 0 20px}.modal .field input,.modal .field textarea{background:#08070b;color:#fff;border-color:#4b3a55}.modal .primary{background:linear-gradient(135deg,#b523ff,#8516df);color:#fff}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.86);z-index:9999;align-items:center;justify-content:center;padding:20px}.modal-box{width:100%;max-width:450px;background:#0e0b12;border:1px solid #5a2471;border-radius:20px;padding:27px;position:relative;box-shadow:0 25px 90px #000;color:#fff}.close{position:absolute;right:13px;top:8px;background:none;border:0;color:#aaa;font-size:28px}.modal h2{margin:0 0 5px}.sub{color:#9990a0;font-size:14px;margin:0 0 20px}.modal .field input,.modal .field textarea{background:#08070b;color:#fff;border-color:#4b3a55}.modal .primary{background:linear-gradient(135deg,#b523ff,#8516df);color:#fff}\n.btn:disabled{opacity:.65;cursor:wait;transform:none!important;filter:none!important}
 
 #painel{min-height:100vh;background:#08060a}.panel-head{padding:38px 5% 22px;background:#0e0a12;border-bottom:1px solid #25152e}.panel-head h2{margin:0;font-size:31px}.panel-head p{color:#99909f;margin:6px 0 0}.nav{display:flex;gap:8px;overflow:auto;padding:14px 5%;background:#0b080e;border-bottom:1px solid #25152e}.nav button{white-space:nowrap;background:#151019;color:#ccc;border:1px solid #362341;padding:10px 14px;border-radius:10px;font-weight:700}.body{max-width:1150px;margin:auto;padding:32px 5% 70px}.section{display:none}.section.active{display:block}.box{background:#110d15;border:1px solid #2c1b35;border-radius:17px;padding:24px;max-width:720px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.content{background:#120e16;border:1px solid #2a1933;border-radius:16px;overflow:hidden}.media{height:190px;background:#09070b;display:flex;align-items:center;justify-content:center;color:#777}.media img,.media video{width:100%;height:100%;object-fit:cover}.info{padding:15px}.info h3{margin:0 0 5px}.info p{color:#999;font-size:13px;margin:0}
 
@@ -333,21 +333,64 @@ function openRecover(){closeAll();clearMessage("recoverMsg");openModal("recoverM
 function openContent(){if(!currentUser){openLogin();return}clearMessage("contentMsg");openModal("contentModal")}
 
 function supabaseReady(){
- if(SUPABASE_URL.includes("COLE_AQUI")||SUPABASE_PUBLISHABLE_KEY.includes("COLE_AQUI")){
+ if(!window.supabase){
+   console.error("Biblioteca Supabase não carregou.");
    return false;
  }
- if(!sb)sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+ if(!SUPABASE_URL || SUPABASE_URL.includes("COLE_AQUI") ||
+    !SUPABASE_PUBLISHABLE_KEY || SUPABASE_PUBLISHABLE_KEY.includes("COLE_AQUI")){
+   return false;
+ }
+ if(!sb){
+   sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+ }
  return true;
 }
 
 async function login(){
- if(!supabaseReady()){message("loginMsg","O formulário está funcionando, mas falta configurar o Supabase neste arquivo.","error");return}
- const email=el("loginEmail").value.trim(),password=el("loginPassword").value;
- if(!email||!password){message("loginMsg","Digite seu e-mail e sua senha.","error");return}
+ if(!supabaseReady()){
+   message("loginMsg","O formulário está pronto, mas o Supabase não foi carregado/configurado.","error");
+   return;
+ }
+
+ const email=el("loginEmail").value.trim();
+ const password=el("loginPassword").value;
+
+ if(!email||!password){
+   message("loginMsg","Digite seu e-mail e sua senha.","error");
+   return;
+ }
+
+ const btn=el("btnEntrar");
+ if(btn){btn.disabled=true;btn.textContent="Entrando...";}
  message("loginMsg","Entrando...");
- const {error}=await sb.auth.signInWithPassword({email,password});
- if(error){message("loginMsg",error.message,"error");return}
- closeModal("loginModal");await loadUser();showPanel();
+
+ try{
+   const result=await Promise.race([
+     sb.auth.signInWithPassword({email,password}),
+     new Promise((_,reject)=>setTimeout(()=>reject(new Error("A conexão demorou demais. Atualize a página e tente novamente.")),15000))
+   ]);
+
+   if(result.error){
+     message("loginMsg",result.error.message||"Não foi possível entrar.","error");
+     return;
+   }
+
+   const ok=await loadUser();
+   if(!ok){
+     message("loginMsg","Login realizado, mas não foi possível carregar seu perfil. Atualize a página e tente novamente.","error");
+     return;
+   }
+
+   closeModal("loginModal");
+   showPanel();
+
+ }catch(err){
+   console.error("Erro no login:",err);
+   message("loginMsg",err?.message||"Não foi possível entrar. Verifique sua conexão.","error");
+ }finally{
+   if(btn){btn.disabled=false;btn.textContent="Entrar";}
+ }
 }
 
 async function register(){
@@ -384,18 +427,46 @@ async function newPassword(){
 }
 
 async function loadUser(){
- if(!sb)return;
+ if(!sb)return false;
  const {data,error}=await sb.auth.getUser();
- if(error||!data.user){currentUser=null;return}
+ if(error||!data.user){currentUser=null;return false}
  currentUser=data.user;
- const nome=currentUser.user_metadata?.nome||currentUser.email.split("@")[0];
- if(el("nomePainel"))el("nomePainel").textContent=nome;if(el("profileName"))el("profileName").value=nome;if(el("profileEmail"))el("profileEmail").value=currentUser.email;const prof=await sb.from("profiles").select("bio").eq("id",currentUser.id).maybeSingle();if(el("profileBio"))el("profileBio").value=prof.data?.bio||"";if(el("profileDisplayBio"))el("profileDisplayBio").textContent=prof.data?.bio||"Seu perfil de criador no Secretyon.";updateDashboardProfile();
- await sb.from("profiles").upsert({id:currentUser.id,nome,email:currentUser.email,bio},{onConflict:"id"});
+
+ const email=currentUser.email||"";
+ const metadata=currentUser.user_metadata||{};
+ const nome=metadata.nome||email.split("@")[0]||"Usuário";
+ const bio=metadata.bio||"";
+
+ if(el("nomePainel")) el("nomePainel").textContent=nome;
+ if(el("profileName")) el("profileName").value=nome;
+ if(el("profileEmail")) el("profileEmail").value=email;
+ if(el("profileBio")) el("profileBio").value=bio;
+ if(el("profileDisplayBio")) el("profileDisplayBio").textContent=bio||"Seu perfil de criador no Secretyon.";
+
+ updateDashboardProfile();
+
+ // Mantém a tabela profiles compatível mesmo se ela não tiver coluna "bio".
+ // Nome e e-mail são gravados na tabela; a bio fica no metadata do usuário.
+ try{
+   const {error:profileError}=await sb.from("profiles").upsert(
+     {id:currentUser.id,nome: nome,email: email},
+     {onConflict:"id"}
+   );
+   if(profileError) console.warn("Perfil não foi sincronizado na tabela profiles:",profileError.message);
+ }catch(e){
+   console.warn("Sincronização de perfil ignorada:",e);
+ }
+ return true;
 }
 
 function showPanel(){
- closeAll();el("home").classList.add("hidden");el("header").classList.add("hidden");el("footer").classList.add("hidden");el("painel").classList.remove("hidden");
- showSection("perfil");loadContents();
+ closeAll();
+ el("home").classList.add("hidden");
+ el("header").classList.add("hidden");
+ el("footer").classList.add("hidden");
+ el("painel").classList.remove("hidden");
+ showAppPage("inicio");
+ loadContents();
 }
 
 function showHome(){
@@ -409,11 +480,36 @@ function showSection(id){
 
 async function saveProfile(){
  if(!currentUser||!supabaseReady())return;
- const nome=el("profileName").value.trim();const bio=el("profileBio")?el("profileBio").value.trim():"";if(!nome){message("profileMsg","Digite seu nome.","error");return}
- const {error}=await sb.from("profiles").upsert({id:currentUser.id,nome,email:currentUser.email,bio},{onConflict:"id"});
- if(error){message("profileMsg",error.message,"error");return}
- await sb.auth.updateUser({data:{nome}});
- el("nomePainel").textContent=nome;currentUser.user_metadata={...(currentUser.user_metadata||{}),nome};updateDashboardProfile();if(el("profileDisplayBio"))el("profileDisplayBio").textContent=bio||"Seu perfil de criador no Secretyon.";message("profileMsg","Perfil salvo!","success");
+
+ const nome=el("profileName").value.trim();
+ const bio=el("profileBio")?el("profileBio").value.trim():"";
+
+ if(!nome){
+   message("profileMsg","Digite seu nome.","error");
+   return;
+ }
+
+ const {error}=await sb.auth.updateUser({data:{nome,bio}});
+ if(error){
+   message("profileMsg",error.message,"error");
+   return;
+ }
+
+ currentUser.user_metadata={...(currentUser.user_metadata||{}),nome,bio};
+
+ try{
+   const {error:profileError}=await sb.from("profiles").upsert(
+     {id:currentUser.id,nome,email:currentUser.email},
+     {onConflict:"id"}
+   );
+   if(profileError) console.warn("Perfil salvo no Auth, mas não na tabela profiles:",profileError.message);
+ }catch(e){
+   console.warn("Sincronização da tabela profiles ignorada:",e);
+ }
+
+ updateDashboardProfile();
+ if(el("profileDisplayBio"))el("profileDisplayBio").textContent=bio||"Seu perfil de criador no Secretyon.";
+ message("profileMsg","Perfil salvo!","success");
 }
 
 async function publish(){
@@ -459,9 +555,19 @@ function escapeAttr(v){return escapeHtml(v)}
 
 
 async function quickLogin(){
-  const email=el("quickEmail").value.trim(), password=el("quickPassword").value;
-  el("loginEmail").value=email; el("loginPassword").value=password;
-  if(!email || !password){ openLogin(); return; }
+  const email=el("quickEmail").value.trim();
+  const password=el("quickPassword").value;
+
+  if(!email || !password){
+    openLogin();
+    if(email) el("loginEmail").value=email;
+    if(password) el("loginPassword").value=password;
+    return;
+  }
+
+  el("loginEmail").value=email;
+  el("loginPassword").value=password;
+  openLogin();
   await login();
 }
 
@@ -473,7 +579,9 @@ function showAppPage(id){
  const titles={inicio:'Início',explorar:'Explorar',mensagens:'Mensagens',notificacoes:'Notificações',perfil:'Meu perfil',conteudo:'Meu conteúdo',assinaturas:'Assinaturas',carteira:'Carteira',config:'Configurações'};
  el('pageTitle').textContent=titles[id]||'Secretyon';
  if(id==='conteudo') loadContents();
- if(id==='perfil') loadUser();
+ if(id==='perfil' && currentUser) loadUser();
+ // Fecha o menu lateral no celular depois de navegar.
+ if(window.innerWidth<=700) el('sidebar')?.classList.remove('open');
 }
 function updateDashboardProfile(){
  if(!currentUser)return;
